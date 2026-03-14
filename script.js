@@ -1,4 +1,4 @@
-﻿/* ==============================================
+/* ==============================================
    SONU ZAISWAL PORTFOLIO - JAVASCRIPT ENGINE
    ============================================== */
 
@@ -244,9 +244,9 @@ function initScrollReveal() {
       }
     });
   }, { threshold: 0.15 });
-  
+
   elements.forEach(el => observer.observe(el));
-  
+
   // Initial trigger for active security tab if in view
   const activeSecurityFills = document.querySelectorAll('#tab-security .skill-fill');
   activeSecurityFills.forEach((fill, i) => {
@@ -258,7 +258,7 @@ function initScrollReveal() {
 const Games = {
   snake: {
     title: 'Snake Game',
-    icon: 'ðŸ',
+    icon: 'Snake',
     init: (container) => {
       container.innerHTML = `
         <div class="game-ui">
@@ -275,7 +275,7 @@ const Games = {
       const ctx = canvas.getContext('2d');
       const scoreEl = document.getElementById('snake-score');
       const resetBtn = document.getElementById('snake-reset');
-      
+
       let score = 0;
       let grid = 20;
       let count = 0;
@@ -290,23 +290,23 @@ const Games = {
         requestAnimationFrame(loop);
         if (++count < 6) return; // Speed control
         count = 0;
-        ctx.clearRect(0,0,canvas.width,canvas.height);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         snake.x += snake.dx;
         snake.y += snake.dy;
         if (snake.x < 0) snake.x = canvas.width - grid;
         else if (snake.x >= canvas.width) snake.x = 0;
         if (snake.y < 0) snake.y = canvas.height - grid;
         else if (snake.y >= canvas.height) snake.y = 0;
-        snake.cells.unshift({x: snake.x, y: snake.y});
+        snake.cells.unshift({ x: snake.x, y: snake.y });
         if (snake.cells.length > snake.maxCells) snake.cells.pop();
-        
+
         ctx.fillStyle = '#ff4757'; // Apple
-        ctx.fillRect(apple.x, apple.y, grid-1, grid-1);
-        
+        ctx.fillRect(apple.x, apple.y, grid - 1, grid - 1);
+
         ctx.fillStyle = '#00d4ff'; // Snake head
         snake.cells.forEach((cell, index) => {
           if (index > 0) ctx.fillStyle = '#0099bb'; // Tail
-          ctx.fillRect(cell.x, cell.y, grid-1, grid-1);
+          ctx.fillRect(cell.x, cell.y, grid - 1, grid - 1);
           if (cell.x === apple.x && cell.y === apple.y) {
             snake.maxCells++;
             score += 10;
@@ -320,19 +320,19 @@ const Games = {
               ctx.fillStyle = 'white';
               ctx.font = '30px Outfit';
               ctx.textAlign = 'center';
-              ctx.fillText('GAME OVER', canvas.width/2, canvas.height/2);
+              ctx.fillText('GAME OVER', canvas.width / 2, canvas.height / 2);
             }
           }
         });
       }
-      
+
       document.addEventListener('keydown', (e) => {
         if (e.which === 37 && snake.dx === 0) { snake.dx = -grid; snake.dy = 0; }
         else if (e.which === 38 && snake.dy === 0) { snake.dy = -grid; snake.dx = 0; }
         else if (e.which === 39 && snake.dx === 0) { snake.dx = grid; snake.dy = 0; }
         else if (e.which === 40 && snake.dy === 0) { snake.dy = grid; snake.dx = 0; }
       });
-      
+
       resetBtn.onclick = () => {
         score = 0; scoreEl.textContent = 0;
         snake = { x: 160, y: 160, dx: grid, dy: 0, cells: [], maxCells: 4 };
@@ -345,7 +345,7 @@ const Games = {
   },
   tictactoe: {
     title: 'Tic-Tac-Toe vs AI',
-    icon: 'âœ•â—‹',
+    icon: 'Tic Tac Toe',
     init: (container) => {
       container.innerHTML = `
         <div class="ttt-wrapper">
@@ -371,29 +371,29 @@ const Games = {
       const cells = board.querySelectorAll('.ttt-cell');
       const status = document.getElementById('ttt-status');
       const resetBtn = document.getElementById('ttt-reset');
-      
+
       let state = Array(9).fill(null);
       let pScore = 0, aiScore = 0, draws = 0;
       let gameActive = true;
 
       function checkWinner(boardState) {
-        const wins = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
-        for (let [a,b,c] of wins) {
-          if (boardState[a] && boardState[a] === boardState[b] && boardState[a] === boardState[c]) return {winner: boardState[a], lines: [a,b,c]};
+        const wins = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
+        for (let [a, b, c] of wins) {
+          if (boardState[a] && boardState[a] === boardState[b] && boardState[a] === boardState[c]) return { winner: boardState[a], lines: [a, b, c] };
         }
-        return boardState.includes(null) ? null : {winner: 'draw'};
+        return boardState.includes(null) ? null : { winner: 'draw' };
       }
 
       function minimax(newBoard, player) {
         const availSpots = newBoard.map((v, i) => v === null ? i : null).filter(v => v !== null);
         const win = checkWinner(newBoard);
-        if (win && win.winner === 'X') return {score: -10};
-        if (win && win.winner === 'O') return {score: 10};
-        if (win && win.winner === 'draw') return {score: 0};
+        if (win && win.winner === 'X') return { score: -10 };
+        if (win && win.winner === 'O') return { score: 10 };
+        if (win && win.winner === 'draw') return { score: 0 };
 
         const moves = [];
         for (let i = 0; i < availSpots.length; i++) {
-          let move = {index: availSpots[i]};
+          let move = { index: availSpots[i] };
           newBoard[availSpots[i]] = player;
           move.score = minimax(newBoard, player === 'O' ? 'X' : 'O').score;
           newBoard[availSpots[i]] = null;
@@ -463,9 +463,9 @@ const Games = {
   },
   memory: {
     title: 'Memory Card Game',
-    icon: 'ðŸƒ',
+    icon: 'Memory',
     init: (container) => {
-      const icons = ['ðŸ›¡ï¸', 'ðŸ’»', 'ðŸ”', 'ðŸš€', 'ðŸ§ ', 'ðŸŒ', 'ðŸ›¡ï¸', 'ðŸ’»', 'ðŸ”', 'ðŸš€', 'ðŸ§ ', 'ðŸŒ'];
+      const icons = ['🛡️', '💻', '🔍', '🚀', '🧠', '🌐', '🛡️', '💻', '🔍', '🚀', '🧠', '🌐'];
       let shuffled = icons.sort(() => 0.5 - Math.random());
       container.innerHTML = `
         <div class="memory-wrapper">
@@ -488,7 +488,7 @@ const Games = {
       const cards = grid.querySelectorAll('.mem-card');
       const movesEl = document.getElementById('mem-moves');
       const resetBtn = document.getElementById('mem-reset');
-      
+
       let flippedCards = [];
       let moves = 0;
       let matches = 0;
@@ -517,7 +517,7 @@ const Games = {
 const Apps = {
   passguard: {
     title: 'PassGuard Pro',
-    icon: 'ðŸ›¡ï¸',
+    icon: '🛡️',
     init: (container) => {
       container.innerHTML = `
         <div class="passguard-wrapper">
@@ -545,9 +545,9 @@ const Apps = {
 
       function generate() {
         const length = lengthInput.value;
-        const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" + 
-                        (document.getElementById('inc-numbers').checked ? "0123456789" : "") + 
-                        (document.getElementById('inc-symbols').checked ? "!@#$%^&*()_+~`|}{[]:;?><,./-=" : "");
+        const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" +
+          (document.getElementById('inc-numbers').checked ? "0123456789" : "") +
+          (document.getElementById('inc-symbols').checked ? "!@#$%^&*()_+~`|}{[]:;?><,./-=" : "");
         let retVal = "";
         for (let i = 0; i < length; ++i) retVal += charset.charAt(Math.floor(Math.random() * charset.length));
         output.textContent = retVal;
@@ -566,13 +566,13 @@ const Apps = {
 
       lengthInput.oninput = () => { lenVal.textContent = lengthInput.value; generate(); };
       genBtn.onclick = generate;
-      copyBtn.onclick = () => { navigator.clipboard.writeText(output.textContent); copyBtn.innerHTML = '<i class="fas fa-check"></i>'; setTimeout(()=>copyBtn.innerHTML='<i class="fas fa-copy"></i>', 2000); };
+      copyBtn.onclick = () => { navigator.clipboard.writeText(output.textContent); copyBtn.innerHTML = '<i class="fas fa-check"></i>'; setTimeout(() => copyBtn.innerHTML = '<i class="fas fa-copy"></i>', 2000); };
       generate();
     }
   },
   weather: {
     title: 'WeatherPulse Dashboard',
-    icon: 'ðŸŒ¤ï¸',
+    icon: '🌥️',
     init: (container) => {
       container.innerHTML = `
         <div class="weather-wrapper">
@@ -585,7 +585,7 @@ const Apps = {
               <h2 class="weather-city" id="w-city">Loading...</h2>
               <p class="weather-date" id="w-date"></p>
             </div>
-            <div class="weather-temp-main"><span id="w-temp">--</span><span class="temp-unit">Â°C</span></div>
+            <div class="weather-temp-main"><span id="w-temp">--</span><span class="temp-unit">°C</span></div>
             <p class="weather-desc" id="w-desc">--</p>
             <div class="weather-details">
               <div class="weather-detail-card"><div class="detail-label">Humidity</div><div class="detail-value" id="w-hum">--</div></div>
@@ -596,33 +596,33 @@ const Apps = {
           </div>
         </div>
       `;
-      
+
       const apiKey = 'e3dd481359b44192b3b84939261303';
       const searchIn = document.getElementById('weather-search');
       const searchBtn = document.getElementById('weather-btn');
-      
+
       async function fetchWeather(city = 'Kathmandu') {
         const cityName = city.trim() || 'Kathmandu';
         document.getElementById('w-city').textContent = 'Fetching...';
-        
+
         try {
           const res = await fetch(`https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${encodeURIComponent(cityName)}&aqi=no`);
-          
+
           if (!res.ok) {
             const errorText = await res.text();
             let errorMessage = 'City not found or API error';
             try {
               const errorData = JSON.parse(errorText);
               errorMessage = errorData.error.message;
-            } catch(e) {}
+            } catch (e) { }
             throw new Error(errorMessage);
           }
-          
+
           const data = await res.json();
           if (!data || !data.location) throw new Error('Invalid data received');
-          
+
           document.getElementById('w-city').textContent = `${data.location.name}, ${data.location.country}`;
-          document.getElementById('w-date').textContent = new Date().toLocaleDateString(undefined, {weekday:'long', month:'long', day:'numeric'});
+          document.getElementById('w-date').textContent = new Date().toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' });
           document.getElementById('w-temp').textContent = Math.round(data.current.temp_c);
           document.getElementById('w-desc').textContent = data.current.condition.text;
           document.getElementById('w-hum').textContent = `${data.current.humidity}%`;
@@ -640,13 +640,13 @@ const Apps = {
         if (searchIn.value.trim()) fetchWeather(searchIn.value);
         else alert('Please enter a city name');
       };
-      searchIn.onkeypress = (e) => { if(e.key === 'Enter') fetchWeather(searchIn.value); };
+      searchIn.onkeypress = (e) => { if (e.key === 'Enter') fetchWeather(searchIn.value); };
       fetchWeather();
     }
   },
   tasks: {
     title: 'TaskMatrix Board',
-    icon: 'ðŸ“‹',
+    icon: '📋',
     init: (container) => {
       container.innerHTML = `
         <div class="tasks-wrapper">
@@ -679,8 +679,8 @@ const Apps = {
 
       window.toggleTask = (i) => { tasks[i].done = !tasks[i].done; render(); };
       window.deleteTask = (i) => { tasks.splice(i, 1); render(); };
-      addBtn.onclick = () => { if(input.value.trim()){ tasks.push({text: input.value, done: false}); input.value = ''; render(); } };
-      input.onkeypress = (e) => { if(e.key === 'Enter') addBtn.click(); };
+      addBtn.onclick = () => { if (input.value.trim()) { tasks.push({ text: input.value, done: false }); input.value = ''; render(); } };
+      input.onkeypress = (e) => { if (e.key === 'Enter') addBtn.click(); };
       render();
     }
   }
@@ -695,9 +695,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initSkillTabs();
   initProjectFilters();
   initScrollReveal();
-  
+
   const typewriterEl = document.getElementById('typewriter');
-  if (typewriterEl) new Typewriter(typewriterEl, ['Penetration Testing','Ethical Hacking','Web Development','Graphic Design','AI &amp; Machine Learning','Network Engineering']);
+  if (typewriterEl) new Typewriter(typewriterEl, ['Penetration Testing', 'Ethical Hacking', 'Web Development', 'Graphic Design', 'AI & Machine Learning', 'Network Engineering']);
 
   // Modal logic
   const modal = document.getElementById('game-modal');
@@ -706,7 +706,7 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.onclick = () => {
       const gameKey = btn.dataset.game;
       const appKey = btn.dataset.app;
-      
+
       if (gameKey && Games[gameKey]) {
         document.getElementById('game-modal-title').textContent = Games[gameKey].title;
         document.getElementById('game-modal-icon').textContent = Games[gameKey].icon;
