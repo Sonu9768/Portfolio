@@ -251,6 +251,80 @@ document.addEventListener('DOMContentLoaded', () => {
           > Last Login: 2026-04-23<br><br>
           > type 'help' for system commands.
         </div>
+      `,
+      blog: `
+        <div id="blog-list">
+          <div style="margin-bottom:25px;">
+            <h2 style="font-size:1.6rem;font-weight:900;letter-spacing:2px;">📰 BLOG_DIR <span style="color:var(--accent);font-size:1rem;font-family:monospace;">// FIELD_NOTES</span></h2>
+            <p style="color:#666;font-size:12px;margin-top:6px;font-family:monospace;">Click any post to read. Also visit <a href="blog/" target="_blank" style="color:var(--accent);">kumarsonu.com.np/blog/</a> for full articles.</p>
+          </div>
+          <div class="project-grid">
+            <div class="proj-card" onclick="openBlog('websurfer')" style="cursor:pointer;border-left:3px solid #00ff9d;">
+              <span style="color:#00ff9d;font-family:monospace;font-size:10px;">SEPT–DEC 2025 · NETWORKING</span>
+              <h4 style="margin:8px 0;">🌐 L2 Network Engineer at WebSurfer Nepal</h4>
+              <p style="color:#888;font-size:12px;">BGP incidents, fiber outages, MikroTik, Zabbix — ISP life from inside.</p>
+              <span style="color:#00ff9d;font-size:11px;font-family:monospace;">READ →</span>
+            </div>
+            <div class="proj-card" onclick="openBlog('skyline')" style="cursor:pointer;border-left:3px solid #7a00ff;">
+              <span style="color:#7a00ff;font-family:monospace;font-size:10px;">2021–2024 · DESIGN</span>
+              <h4 style="margin:8px 0;">🎨 Senior Graphic Designer at Skyline Tours</h4>
+              <p style="color:#888;font-size:12px;">Brand identity, tourism campaigns, motion graphics and 3 years of creativity.</p>
+              <span style="color:#7a00ff;font-size:11px;font-family:monospace;">READ →</span>
+            </div>
+            <div class="proj-card" onclick="openBlog('islington')" style="cursor:pointer;border-left:3px solid #00d2ff;">
+              <span style="color:#00d2ff;font-family:monospace;font-size:10px;">2022–PRESENT · EDUCATION</span>
+              <h4 style="margin:8px 0;">🎓 Inside Islington College Kathmandu</h4>
+              <p style="color:#888;font-size:12px;">Honest review of Nepal's top IT college — BSc Computing at London Met.</p>
+              <span style="color:#00d2ff;font-size:11px;font-family:monospace;">READ →</span>
+            </div>
+            <div class="proj-card" onclick="openBlog('cybersec')" style="cursor:pointer;border-left:3px solid #ff5f56;">
+              <span style="color:#ff5f56;font-family:monospace;font-size:10px;">2022–PRESENT · SECURITY</span>
+              <h4 style="margin:8px 0;">🔐 My Cybersecurity Journey — Nepal to Red Team</h4>
+              <p style="color:#888;font-size:12px;">From a MITM demo in class to TryHackMe Top 1% and offensive security.</p>
+              <span style="color:#ff5f56;font-size:11px;font-family:monospace;">READ →</span>
+            </div>
+            <div class="proj-card" onclick="openBlog('tryhackme')" style="cursor:pointer;border-left:3px solid #ffbd2e;">
+              <span style="color:#ffbd2e;font-family:monospace;font-size:10px;">2022–2024 · ACHIEVEMENT</span>
+              <h4 style="margin:8px 0;">🏆 Reaching TryHackMe Top 1% from Nepal</h4>
+              <p style="color:#888;font-size:12px;">The rooms, paths and daily discipline that got me into the global top 1%.</p>
+              <span style="color:#ffbd2e;font-size:11px;font-family:monospace;">READ →</span>
+            </div>
+            <div class="proj-card" onclick="openBlog('graphicdesign')" style="cursor:pointer;border-left:3px solid #ff9d00;">
+              <span style="color:#ff9d00;font-family:monospace;font-size:10px;">2021–2025 · CREATIVE</span>
+              <h4 style="margin:8px 0;">✏️ 4 Years of Graphic Design in Nepal</h4>
+              <p style="color:#888;font-size:12px;">Skyline, Sama Publications, UHS Holdings — lessons from 4 years of design.</p>
+              <span style="color:#ff9d00;font-size:11px;font-family:monospace;">READ →</span>
+            </div>
+            <div class="proj-card" onclick="window.open('blog/sonu-kumar-aws-cloud-security-nepal.html','_blank')" style="cursor:pointer;border-left:3px solid #00c6ff;">
+              <span style="color:#00c6ff;font-family:monospace;font-size:10px;">2024 · CLOUD</span>
+              <h4 style="margin:8px 0;">☁️ AWS Cloud Security from Nepal</h4>
+              <p style="color:#888;font-size:12px;">IAM attacks, S3 misconfigs, EC2 metadata, cloud-native attack surfaces.</p>
+              <span style="color:#00c6ff;font-size:11px;font-family:monospace;">READ →</span>
+            </div>
+            <div class="proj-card" onclick="window.open('blog/sonu-kumar-red-team-offensive-security-nepal.html','_blank')" style="cursor:pointer;border-left:3px solid #ff3366;">
+              <span style="color:#ff3366;font-family:monospace;font-size:10px;">2024 · RED TEAM</span>
+              <h4 style="margin:8px 0;">🛡️ Red Team Operations Methodology</h4>
+              <p style="color:#888;font-size:12px;">MITRE ATT&CK, adversary simulation, OPSEC, social engineering.</p>
+              <span style="color:#ff3366;font-size:11px;font-family:monospace;">READ →</span>
+            </div>
+            <div class="proj-card" onclick="window.open('blog/sonu-kumar-sama-publications-designer-kathmandu.html','_blank')" style="cursor:pointer;border-left:3px solid #b400ff;">
+              <span style="color:#b400ff;font-family:monospace;font-size:10px;">NOV 2024–MAR 2025 · PUBLISHING</span>
+              <h4 style="margin:8px 0;">📰 Design at Sama Publications</h4>
+              <p style="color:#888;font-size:12px;">Typography obsession, book covers, editorial grid systems in Kathmandu.</p>
+              <span style="color:#b400ff;font-size:11px;font-family:monospace;">READ →</span>
+            </div>
+            <div class="proj-card" onclick="window.open('blog/sonu-kumar-uhs-holdings-web-developer-nepal.html','_blank')" style="cursor:pointer;border-left:3px solid #00ff6a;">
+              <span style="color:#00ff6a;font-family:monospace;font-size:10px;">MAY–AUG 2025 · WEB DEV</span>
+              <h4 style="margin:8px 0;">💻 Web Developer at UHS Holdings Nepal</h4>
+              <p style="color:#888;font-size:12px;">Design meets code — React, component systems, DevSecOps in production.</p>
+              <span style="color:#00ff6a;font-size:11px;font-family:monospace;">READ →</span>
+            </div>
+          </div>
+        </div>
+        <div id="blog-reader" style="display:none;">
+          <button onclick="closeBlog()" style="margin-bottom:20px;background:linear-gradient(90deg,#00ff9d22,#00ff9d11);border:1px solid var(--accent);color:var(--accent);padding:8px 20px;border-radius:6px;font-family:monospace;cursor:pointer;font-size:12px;">← BACK TO BLOG_DIR</button>
+          <div id="blog-content"></div>
+        </div>
       `
     };
     return data[id] || "Initializing...";
@@ -723,6 +797,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.openBlog = (id) => {
     const post = blogPosts[id];
+    if (!post) { post = blogPosts['cybersec']; } // fallback
     if (!post) return;
     const list = document.getElementById('blog-list');
     const reader = document.getElementById('blog-reader');
