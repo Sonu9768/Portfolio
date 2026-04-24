@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AWS Cloud Security from Nepal — My Learning Journey | Sonu Kumar</title>
+<meta name="description" content="Sonu Kumar's AWS cloud security learning journey from Nepal. Covers AWS Academy training, IAM privilege escalation, S3 misconfigurations, cloud-native attacks, shared responsibility model, and defensive best practices.">
+<meta name="keywords" content="AWS cloud security Nepal, Sonu Kumar AWS, cloud security Kathmandu, AWS Academy Nepal, IAM security Nepal, S3 misconfiguration, cloud penetration testing Nepal">
+<meta name="author" content="Sonu Kumar">
+<meta property="og:title" content="AWS Cloud Security from Nepal — My Learning Journey | Sonu Kumar">
+<meta property="og:description" content="How Sonu Kumar learned AWS cloud security from Kathmandu, Nepal — IAM attacks, S3 misconfigs, EC2 metadata exploitation, and cloud-native security architecture.">
+<meta property="og:image" content="https://www.kumarsonu.com.np/sonu-kumar-cybersecurity-nepal.gif">
+<meta property="og:url" content="https://www.kumarsonu.com.np/blog/sonu-kumar-aws-cloud-security-nepal.html">
+<link rel="canonical" href="https://www.kumarsonu.com.np/blog/sonu-kumar-aws-cloud-security-nepal.html">
+<link rel="stylesheet" href="blog.css">
+</head>
+<body>
+<nav>
+  <span class="nav-logo">&gt; SONU_KUMAR.BLOG</span>
+  <a href="https://www.kumarsonu.com.np/">← Portfolio</a>
+  <a href="https://www.kumarsonu.com.np/blog/">All Posts</a>
+</nav>
+<div class="container">
+<article>
+<div class="hero">
+  <span class="cat" style="background:#00c6ff;color:#000">CLOUD SECURITY · LEARNING LOG</span>
+  <h1>AWS Cloud Security from a Nepali Developer's Perspective — What the Cloud Changed About Security</h1>
+  <div class="meta">
+    <span>By <strong>Sonu Kumar</strong></span>
+    <span>2024</span>
+    <span>AWS Academy Certified</span>
+    <span>Kathmandu, Nepal</span>
+  </div>
+</div>
+
+<p>There is a common misconception about cloud computing and security that I want to address directly at the outset: the belief that moving to the cloud inherently makes systems more secure. This misconception is dangerous. The cloud changes the nature of security responsibilities, dramatically expands the attack surface in certain dimensions, and introduces entirely new categories of vulnerabilities — primarily centred on misconfiguration rather than exploitation. When I began my AWS Academy training in 2024, I had a reasonably solid foundation in traditional network and application security. The cloud training revealed how many of my mental models needed to be extended, revised, or completely replaced to accurately represent the security landscape of modern cloud-hosted systems. This article documents what I learned, what surprised me most, and why cloud security is one of the most critical skill areas for any security practitioner in 2025.</p>
+
+<h2>Why AWS and Why Nepal</h2>
+<p>Amazon Web Services dominates the global cloud infrastructure market, and its presence in Nepal's technology ecosystem is significant and growing. Many of Nepal's technology companies — from fintech startups to telecommunications providers — host at least portions of their infrastructure on AWS. For a security practitioner operating in Nepal, understanding AWS security is therefore not an academic exercise but a direct professional requirement. AWS Academy provided a structured, vendor-supported pathway to that understanding, and I found it one of the most well-organised technical educational programmes I have worked through. The combination of video instruction, hands-on labs in real AWS environments (not simulations), and assessment mechanisms created a learning experience that I found more effective than most online learning I have done outside of practise-focused platforms like TryHackMe.</p>
+
+<h2>The Shared Responsibility Model — The Most Important Concept</h2>
+<p>The foundational concept of cloud security is the shared responsibility model, and understanding it precisely is essential for anyone who works with cloud infrastructure in any capacity. AWS is responsible for the security of the cloud — the physical datacentre infrastructure, the hypervisor layer, the networking infrastructure that underpins AWS services, and the security of the managed services AWS provides. The customer is responsible for security in the cloud — everything they build and deploy on top of AWS's infrastructure: the configuration of their AWS resources, the access control policies they implement, the security of their applications and data, and the monitoring and incident response capabilities they establish. The boundary of this division shifts depending on which AWS services are used: for an EC2 instance, the customer is responsible for the operating system, application code, and instance configuration; for a managed service like RDS, AWS handles operating system patching and database software, but the customer remains responsible for database user access controls and network access policies. Misunderstanding this boundary — particularly assuming that AWS is responsible for security decisions that are actually the customer's responsibility — is at the root of many significant cloud security failures.</p>
+
+<h2>IAM — The Most Consequential Attack Surface</h2>
+<p>AWS Identity and Access Management (IAM) is simultaneously the most powerful security tool in AWS and the most consequential attack surface when poorly configured. IAM governs every action that every principal — users, roles, services, and applications — can perform across every AWS service and resource. The principle of least privilege requires that each principal has access to exactly the resources and actions it needs for its legitimate function, and no more. In practice, achieving least privilege at AWS scale is genuinely difficult. The AWS permission model is extremely granular — there are thousands of individual permissions across hundreds of services — and the operational pressure to get systems working quickly often leads to overly permissive IAM policies that are never subsequently tightened. From an offensive perspective, an IAM role with excessive permissions is a force multiplier: initial access to an EC2 instance with an overly permissive instance role can allow an attacker to enumerate the entire AWS environment, read sensitive data from S3 buckets, launch additional infrastructure, or exfiltrate credentials for further lateral movement. I practised IAM privilege escalation extensively in controlled lab environments, working through documented escalation paths including policy creation/attachment, AssumeRole abuse, and EC2 instance profile manipulation. Understanding the attack paths is essential for building defences against them.</p>
+
+<h2>S3 Misconfigurations — The Most Common Catastrophic Failure</h2>
+<p>Amazon S3 (Simple Storage Service) has been the source of some of the most significant data breaches of the past decade, and the root cause in most cases is embarrassingly simple: a bucket configured to allow public access that should have remained private. The S3 access control model is complex, involving bucket policies, ACLs, block public access settings, and IAM policies that can interact in non-obvious ways. This complexity creates conditions for well-intentioned configuration errors that expose sensitive data to the public internet. During my AWS security training, I encountered environments where production backups, customer personal data, application secrets including database credentials and API keys, and internal documentation were all accessible publicly due to S3 misconfiguration. In real-world assessments, automated tools can enumerate publicly accessible S3 buckets associated with a target organisation in minutes, and the data discovered in these buckets frequently enables far more consequential follow-on attacks. Defensive best practices include enabling S3 Block Public Access at the account level, using AWS Config rules to detect public bucket configurations, and regularly auditing S3 bucket policies with the AWS Access Analyser service.</p>
+
+<h2>EC2 Metadata Service Exploitation</h2>
+<p>Every EC2 instance in AWS has access to a metadata service at the non-routable IP address 169.254.169.254. This service provides instance-specific information including the IAM role credentials attached to the instance. When an application running on an EC2 instance has a Server-Side Request Forgery (SSRF) vulnerability — a vulnerability that allows an attacker to cause the application to make HTTP requests to arbitrary URLs — the attacker can use the SSRF to request the metadata endpoint and retrieve the IAM role credentials. These credentials can then be used directly from outside the AWS environment to perform any actions the instance role permits. AWS introduced IMDSv2 (Instance Metadata Service version 2) to mitigate this attack by requiring a session token that must be obtained through a PUT request before metadata can be accessed — a requirement that prevents simple SSRF exploits from working against the metadata service. However, many organisations have not enforced IMDSv2 across their fleet, leaving a significant number of production instances vulnerable. Requiring IMDSv2 at the account level through an AWS Organisation SCP (Service Control Policy) is one of the highest-impact, lowest-effort security improvements available.</p>
+
+<h2>VPC Security Architecture and Network-Level Controls</h2>
+<p>AWS Virtual Private Cloud (VPC) provides the network isolation layer for AWS resources, and its correct configuration is fundamental to cloud security architecture. Security Groups — stateful firewalls attached to individual resources — and Network ACLs — stateless firewall rules applied at the subnet level — are the primary mechanisms for controlling network access in AWS. Common misconfigurations include Security Groups that permit ingress from 0.0.0.0/0 (any IP address) on administrative ports such as SSH (22) and RDP (3389), overly permissive rules that allow all traffic between subnets within a VPC rather than enforcing micro-segmentation, and the placement of sensitive resources in public subnets when they should be in private subnets accessible only through load balancers or VPN connections. Understanding VPC architecture — the design of public and private subnet tiers, the role of NAT Gateways and Internet Gateways, the appropriate use of VPC Endpoints for service access without traversing the public internet — is essential for both building and assessing cloud environments securely.</p>
+
+<h2>CloudTrail, GuardDuty, and Detection</h2>
+<p>Offensive security skills are only valuable in a professional context when paired with defensive understanding — knowing what attacks look like from the defender's perspective, and what detection capabilities exist. AWS CloudTrail logs API calls made against an AWS account, providing an audit trail of all management actions. AWS GuardDuty uses machine learning and threat intelligence to identify suspicious activity patterns in CloudTrail logs, VPC Flow Logs, and DNS logs — detecting behaviours like API calls from known malicious IP addresses, credential exfiltration patterns, and unusual cross-region activity. Understanding what defenders can see in these logs informs both offensive assessment work and defensive architecture recommendations. An assessment finding that an organisation's CloudTrail logs are not being actively monitored or are stored in a bucket accessible to compromised IAM principals is as significant as finding the underlying misconfiguration that enabled initial access.</p>
+
+<h2>The Future of Cloud Security in Nepal</h2>
+<p>Nepal's cloud adoption is accelerating, and the security skills to match that adoption are not developing at the same pace. This gap represents both a risk and an opportunity. The risk is that Nepali organisations will deploy cloud infrastructure without adequate security oversight, creating the conditions for significant breaches. The opportunity is that security practitioners in Nepal who invest in genuine cloud security expertise now will be extraordinarily well-positioned as demand for those skills intensifies. I plan to pursue AWS security certifications — particularly the AWS Certified Security Specialty — as a formal validation of the cloud security knowledge I have developed. More importantly, I want to apply that knowledge practically in the context of Nepali organisations' actual cloud environments, helping to build the security maturity of Nepal's digital infrastructure from the ground up.</p>
+
+</article>
+<div class="author-box">
+  <h3>&gt; ABOUT SONU KUMAR</h3>
+  <p style="margin-top:10px">Sonu Kumar is a cybersecurity specialist from Kathmandu, Nepal. AWS Academy trained. TryHackMe Top 1% globally. BSc (Hons) Computing at Islington College. Professional experience in ISP engineering and offensive security research.</p>
+  <p style="margin-top:10px"><a href="https://www.kumarsonu.com.np">Visit Portfolio →</a></p>
+</div>
+<div class="related">
+  <h3>&gt; RELATED POSTS</h3>
+  <div class="related-list">
+    <a href="sonu-kumar-cybersecurity-journey-red-team-nepal.html">🔐 My Full Cybersecurity Journey</a>
+    <a href="sonu-kumar-red-team-offensive-security-nepal.html">🛡️ Red Team Operations Methodology</a>
+    <a href="sonu-kumar-tryhackme-top-1-percent-nepal.html">🏆 TryHackMe Top 1% from Nepal</a>
+    <a href="sonu-kumar-websurfer-l2-network-support-nepal.html">🌐 Life as L2 Engineer at WebSurfer</a>
+  </div>
+</div>
+</div>
+<footer>© 2025 Sonu Kumar · <a href="https://www.kumarsonu.com.np">kumarsonu.com.np</a> · Kathmandu, Nepal</footer>
+</body>
+</html>

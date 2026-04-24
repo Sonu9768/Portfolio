@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Red Team Operations & Offensive Security Methodology | Sonu Kumar Nepal</title>
+<meta name="description" content="Sonu Kumar explains red team operations and offensive security methodology from Nepal. Covers engagement lifecycle, adversary simulation, MITRE ATT&CK, tooling, and how red teaming differs from penetration testing.">
+<meta name="keywords" content="red team Nepal, offensive security Nepal, Sonu Kumar red team, penetration testing methodology Nepal, MITRE ATT&CK Nepal, adversary simulation Nepal, ethical hacking Nepal">
+<meta name="author" content="Sonu Kumar">
+<meta property="og:title" content="Red Team Operations & Offensive Security Methodology | Sonu Kumar Nepal">
+<meta property="og:description" content="Sonu Kumar's deep dive into red team operations — engagement planning, adversary simulation, MITRE ATT&CK, and what separates red teaming from standard penetration testing.">
+<meta property="og:image" content="https://www.kumarsonu.com.np/sonu-kumar-cybersecurity-nepal.gif">
+<meta property="og:url" content="https://www.kumarsonu.com.np/blog/sonu-kumar-red-team-offensive-security-nepal.html">
+<link rel="canonical" href="https://www.kumarsonu.com.np/blog/sonu-kumar-red-team-offensive-security-nepal.html">
+<link rel="stylesheet" href="blog.css">
+</head>
+<body>
+<nav>
+  <span class="nav-logo">&gt; SONU_KUMAR.BLOG</span>
+  <a href="https://www.kumarsonu.com.np/">← Portfolio</a>
+  <a href="https://www.kumarsonu.com.np/blog/">All Posts</a>
+</nav>
+<div class="container">
+<article>
+<div class="hero">
+  <span class="cat" style="background:#ff3366">RED TEAM · METHODOLOGY</span>
+  <h1>Red Team Operations — What Adversary Simulation Really Means and How I Approach It</h1>
+  <div class="meta">
+    <span>By <strong>Sonu Kumar</strong></span>
+    <span>2024 – Present</span>
+    <span>Offensive Security Research</span>
+    <span>Kathmandu, Nepal</span>
+  </div>
+</div>
+
+<p>The term "red team" has become popular enough in cybersecurity conversations that it risks losing its precise meaning. It is used interchangeably — and incorrectly — with penetration testing, vulnerability assessment, and occasionally even basic security auditing. This imprecision matters because what separates genuine red team operations from other security assessment activities is substantive and significant. Red teaming, properly understood, is the sustained simulation of a realistic adversary — conducted against a target organisation's full people, processes, and technology stack — over an extended period, with the objective of testing the organisation's detection and response capabilities rather than simply identifying technical vulnerabilities. Understanding this distinction is fundamental to understanding both the value and the practice of red teaming, and it informs every aspect of how I approach offensive security work.</p>
+
+<h2>Red Team vs Penetration Test — The Critical Distinction</h2>
+<p>A penetration test has a defined scope, a defined timeframe (typically one to two weeks), and an objective of identifying and documenting as many technical vulnerabilities as possible within that scope. The test is known to the security team, and its purpose is vulnerability discovery and documentation. A red team engagement has a defined objective (typically something like "obtain access to the HR database" or "demonstrate the ability to exfiltrate customer data") rather than a defined scope. It operates over a much longer timeframe (weeks to months), it is typically unknown to the defending security team (the blue team), and its primary objective is testing detection and response capabilities — whether the organisation would detect and respond to a real attacker performing the same actions. The deliverable of a penetration test is a list of vulnerabilities. The deliverable of a red team engagement is an assessment of whether the organisation's security program would detect and contain a real adversary, which is a fundamentally more valuable and more difficult question to answer.</p>
+
+<h2>The MITRE ATT&CK Framework — The Adversary's Playbook Made Explicit</h2>
+<p>The MITRE ATT&CK (Adversarial Tactics, Techniques, and Common Knowledge) framework is the most important conceptual contribution to offensive security thinking of the past decade. ATT&CK provides a structured taxonomy of adversary behaviours — organised by tactics (the high-level objectives an adversary pursues at each stage of an attack) and techniques (the specific methods used to achieve those objectives). The tactics in the enterprise ATT&CK matrix span the full attack lifecycle: Reconnaissance, Resource Development, Initial Access, Execution, Persistence, Privilege Escalation, Defence Evasion, Credential Access, Discovery, Lateral Movement, Collection, Command and Control, Exfiltration, and Impact. Each tactic contains multiple specific techniques — for example, under Initial Access, techniques include Phishing (with sub-techniques for spearphishing attachments, links, and via service), Exploit Public-Facing Application, Valid Accounts, and others. ATT&CK enables red team practitioners to plan operations that simulate specific known threat actor behaviours, enables defenders to map their detection coverage against the framework, and provides a common language for discussing adversary behaviours that bridges the gap between technical practitioners and organisational leadership.</p>
+
+<h2>The Red Team Engagement Lifecycle</h2>
+<p>A structured red team engagement follows a consistent lifecycle. The planning phase involves defining objectives, rules of engagement, out-of-scope systems, emergency contact procedures, and the threat actor profile to be simulated. Selecting a realistic threat actor profile — whether a financially motivated cybercriminal group, a nation-state sponsored espionage actor, or an insider threat — determines the techniques, tools, and operational security posture appropriate for the engagement. The reconnaissance phase involves extensive passive information gathering before any active engagement with the target: DNS enumeration, employee LinkedIn profiling, public code repository analysis, document metadata extraction, and job posting analysis (which frequently reveals technology stack details). Active reconnaissance begins carefully, prioritising detection-avoidance at every step. Initial access typically involves either technical exploitation (web application vulnerabilities, exposed services with known CVEs, credential stuffing against internet-facing authentication) or social engineering (phishing campaigns, pretexting calls). Once initial access is achieved, the engagement focus shifts to maintaining persistence, escalating privileges, and moving laterally toward the defined objective — all while actively avoiding the detection controls the organisation has deployed.</p>
+
+<h2>Operational Security — Thinking Like an Adversary</h2>
+<p>One of the most important and least discussed aspects of red team operations is operational security — the discipline of avoiding detection throughout the engagement. A real adversary is patient, methodical, and acutely aware that every action they take generates logs, alerts, and potential detection signals. A skilled red team practitioner must maintain the same awareness. This means using living-off-the-land techniques — abusing legitimate system tools and features rather than introducing custom malware that endpoint detection solutions might flag. It means timing activities to blend with normal business hours traffic rather than generating suspicious overnight activity spikes. It means using the target organisation's own infrastructure and credentials where possible. It means being acutely conscious of network egress points and traffic patterns, ensuring that command-and-control communications blend with legitimate traffic profiles. Operational security in red team engagements is both a practical discipline and a mindset — the constant discipline of asking "would a real adversary with persistence goals do this, or does this create unnecessary risk of detection?"</p>
+
+<h2>Social Engineering — The Human Attack Surface</h2>
+<p>Technical controls — firewalls, endpoint detection, intrusion prevention systems — are increasingly sophisticated and difficult to bypass without significant investment of time and expertise. The human attack surface remains significantly more accessible. Social engineering — manipulating people into performing actions or disclosing information that compromises security — is the initial access vector of choice for most sophisticated adversaries, and with good reason: it is effective, frequently undetected, and operates entirely outside the control surface of technical security tools. My social engineering practice within red team contexts encompasses phishing (both generic mass phishing and highly targeted spearphishing), vishing (voice-based pretexting to extract credentials or bypass authentication), and physical security testing (attempting to gain unauthorised physical access to facilities through tailgating, pretexting, or credential cloning). Effective social engineering requires genuine understanding of human psychology — the cognitive biases and social dynamics that make people susceptible to manipulation — and the ability to construct convincing pretexts that exploit those vulnerabilities without triggering suspicion.</p>
+
+<h2>Post-Exploitation — From Foothold to Objective</h2>
+<p>Initial access to a system is rarely sufficient to achieve a red team engagement's defined objective. Post-exploitation is the phase where the adversary simulation becomes most complex and most valuable: the process of moving from an initial foothold — perhaps a compromised workstation belonging to a junior employee — to the sensitive system or data that constitutes the engagement's target. This phase encompasses privilege escalation (gaining administrator or root access on the compromised system), credential harvesting (extracting stored credentials from memory, configuration files, or credential managers), lateral movement (using harvested credentials or stolen session tokens to access additional systems), persistence (establishing mechanisms to survive rebooting and defensive responses), and data exfiltration (removing the target data from the environment). Each of these activities must be performed in a way that evades the specific detection controls the target organisation has deployed — which requires extensive pre-engagement reconnaissance of the organisation's security stack and real-time adaptation based on what detection signals are observed during the engagement.</p>
+
+<h2>Reporting — Where Value is Delivered</h2>
+<p>The technical excellence of a red team engagement is ultimately meaningless if the findings are not communicated in a way that enables the organisation to make better security investment and architecture decisions. Red team reporting requires translating the full complexity of a multi-week adversary simulation into clear, prioritised, actionable findings accessible to audiences ranging from technical security engineers to board-level executives. My reporting approach structures findings in three tiers: a brief executive summary that conveys the overall security posture assessment and the most critical findings in non-technical language; a strategic findings section that maps observed gaps to business risk and recommends prioritised remediation investments; and a technical appendix that provides full forensic detail of every action taken during the engagement, enabling the blue team to improve their detection rules based on what they failed to detect. The executive summary is often the most difficult section to write well, because it requires translating genuinely complex technical realities into language that informs decision-making without either trivialising the risk or creating panic disproportionate to the actual threat.</p>
+
+<h2>Building Red Team Capability in Nepal</h2>
+<p>Red team capability in Nepal is nascent. The penetration testing market is developing, but genuine red team operations — multi-week, objectives-based, detection-testing adversary simulations — are rare. This is partially a market maturity issue: organisations must first implement and mature their defensive security programs to a point where red team testing provides meaningful feedback. An organisation with no SIEM, no EDR, and no incident response capability will not learn anything actionable from a red team engagement other than "you would not detect or respond to an attack." However, as Nepali organisations — particularly in the financial sector, telecommunications, and government — mature their security programs, the demand for red team services will follow. I am positioning myself to contribute to that emerging capability, developing both the technical skills required for effective adversary simulation and the communication skills required to translate red team findings into meaningful strategic guidance for organisational leadership.</p>
+
+</article>
+<div class="author-box">
+  <h3>&gt; ABOUT SONU KUMAR</h3>
+  <p style="margin-top:10px">Sonu Kumar is an offensive security practitioner from Kathmandu, Nepal. TryHackMe Top 1% globally. AWS Academy trained. BSc (Hons) Computing at Islington College. Developing Nepal's red team and offensive security capabilities.</p>
+  <p style="margin-top:10px"><a href="https://www.kumarsonu.com.np">Visit Portfolio →</a></p>
+</div>
+<div class="related">
+  <h3>&gt; RELATED POSTS</h3>
+  <div class="related-list">
+    <a href="sonu-kumar-cybersecurity-journey-red-team-nepal.html">🔐 My Full Cybersecurity Journey</a>
+    <a href="sonu-kumar-tryhackme-top-1-percent-nepal.html">🏆 TryHackMe Top 1% from Nepal</a>
+    <a href="sonu-kumar-aws-cloud-security-nepal.html">☁️ AWS Cloud Security from Nepal</a>
+    <a href="sonu-kumar-websurfer-l2-network-support-nepal.html">🌐 Life as L2 Engineer at WebSurfer</a>
+  </div>
+</div>
+</div>
+<footer>© 2025 Sonu Kumar · <a href="https://www.kumarsonu.com.np">kumarsonu.com.np</a> · Kathmandu, Nepal</footer>
+</body>
+</html>
