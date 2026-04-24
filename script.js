@@ -14,9 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
   function drawM() {
     ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'; ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = '#00ff9d'; ctx.font = fontSize + 'px monospace';
-    for(let i=0; i<drops.length; i++) {
-      ctx.fillText(chars.charAt(Math.floor(Math.random()*chars.length)), i*fontSize, drops[i]*fontSize);
-      if(drops[i]*fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+    for (let i = 0; i < drops.length; i++) {
+      ctx.fillText(chars.charAt(Math.floor(Math.random() * chars.length)), i * fontSize, drops[i] * fontSize);
+      if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
       drops[i]++;
     }
   }
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 2. OS Setup
   setTimeout(() => gsap.to('#boot-screen', { opacity: 0, pointerEvents: 'none', duration: 1 }), 1000);
-  function clock() { document.getElementById('os-clock').innerText = new Date().toLocaleTimeString([], {hour12:false}); setTimeout(clock, 1000); }
+  function clock() { document.getElementById('os-clock').innerText = new Date().toLocaleTimeString([], { hour12: false }); setTimeout(clock, 1000); }
   clock();
 
   // 3. Custom OS Alert
@@ -58,8 +58,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 5. Window Manager
   let openWins = {}; let gInt = null;
-  window.openWin = function(id) {
-    if(openWins[id]) { focusWin(id); return; }
+  window.openWin = function (id) {
+    if (openWins[id]) { focusWin(id); return; }
     const win = document.createElement('div'); win.className = 'os-window'; win.id = `win-${id}`;
     win.style.left = (120 + Object.keys(openWins).length * 40) + 'px';
     win.style.top = (100 + Object.keys(openWins).length * 40) + 'px';
@@ -74,31 +74,31 @@ document.addEventListener('DOMContentLoaded', () => {
     openWins[id] = { state: 'open' }; updateTaskbar(); focusWin(id);
   };
 
-  window.closeWin = (id) => { if(gInt) clearInterval(gInt); document.getElementById(`win-${id}`).remove(); delete openWins[id]; updateTaskbar(); };
+  window.closeWin = (id) => { if (gInt) clearInterval(gInt); document.getElementById(`win-${id}`).remove(); delete openWins[id]; updateTaskbar(); };
   window.minWin = (id) => { document.getElementById(`win-${id}`).classList.toggle('minimized'); updateTaskbar(); };
   window.maxWin = (id) => { document.getElementById(`win-${id}`).classList.toggle('maximized'); };
   window.focusWin = (id) => {
     document.querySelectorAll('.os-window').forEach(w => w.style.zIndex = 100);
-    const win = document.getElementById(`win-${id}`); if(win) { win.style.zIndex = 1000; win.classList.remove('minimized'); }
+    const win = document.getElementById(`win-${id}`); if (win) { win.style.zIndex = 1000; win.classList.remove('minimized'); }
     updateTaskbar();
   };
 
-  window.updateTaskbar = function() {
+  window.updateTaskbar = function () {
     const bar = document.getElementById('active-apps'); bar.innerHTML = '';
     Object.keys(openWins).forEach(id => {
       const p = document.createElement('div'); p.className = 'app-pill';
-      const win = document.getElementById(`win-${id}`); if(win && win.style.zIndex == 1000) p.classList.add('active');
-      const icons = {device:'fa-laptop-code', performance:'fa-gauge-high', projects:'fa-folder-tree', experience:'fa-briefcase', creds:'fa-certificate', hobbies:'fa-palette', games:'fa-gamepad', tools:'fa-toolbox', terminal:'fa-terminal'};
+      const win = document.getElementById(`win-${id}`); if (win && win.style.zIndex == 1000) p.classList.add('active');
+      const icons = { device: 'fa-laptop-code', performance: 'fa-gauge-high', projects: 'fa-folder-tree', experience: 'fa-briefcase', creds: 'fa-certificate', hobbies: 'fa-palette', games: 'fa-gamepad', tools: 'fa-toolbox', terminal: 'fa-terminal' };
       p.innerHTML = `<i class="fas ${icons[id] || 'fa-window-maximize'}"></i>`;
       p.onclick = () => focusWin(id); bar.appendChild(p);
     });
   };
 
   window.dragWinStart = (e, id) => {
-    if(e.target.className !== 'window-header') return;
+    if (e.target.className !== 'window-header') return;
     const w = document.getElementById(`win-${id}`);
-    const off = { x: e.clientX-w.offsetLeft, y: e.clientY-w.offsetTop };
-    document.onmousemove = (me) => { w.style.left = (me.clientX-off.x)+'px'; w.style.top = (me.clientY-off.y)+'px'; };
+    const off = { x: e.clientX - w.offsetLeft, y: e.clientY - w.offsetTop };
+    document.onmousemove = (me) => { w.style.left = (me.clientX - off.x) + 'px'; w.style.top = (me.clientY - off.y) + 'px'; };
     document.onmouseup = () => { document.onmousemove = null; };
     focusWin(id);
   };
@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const data = {
       device: `
         <div style="display:flex; gap:40px; align-items:flex-start;">
-          <img src="profile.png" style="width:150px; border-radius:15px; border:2px solid var(--accent); box-shadow:0 0 20px rgba(0,255,157,0.2);">
+          <img src="sonu.gif" style="width:150px; border-radius:15px; border:2px solid var(--accent); box-shadow:0 0 20px rgba(0,255,157,0.2);">
           <div>
             <h2 style="font-size:2.5rem; margin-bottom:5px; font-weight:900;">Sonu Kumar</h2>
             <p style="color:var(--accent); font-family:monospace; margin-bottom:20px; font-size:12px;">OFFENSIVE_SECURITY_SPECIALIST // RED_TEAM_OPS</p>
@@ -267,14 +267,14 @@ document.addEventListener('DOMContentLoaded', () => {
     vp.innerHTML = `<div class="arcade-header"><span>${id.toUpperCase()}</span><div style="display:flex; gap:10px;"><button class="btn-sys" onclick="initG('${id}')">RESTART</button><button class="btn-sys" onclick="quitG()" style="background:#ff5f56 !important;">CLOSE</button></div></div><div id="p-area"></div>`;
     initG(id);
   };
-  window.quitG = () => { if(gInt) clearInterval(gInt); window.onkeydown = null; document.getElementById('g-vp').style.display='none'; document.getElementById('g-menu').style.display='block'; };
+  window.quitG = () => { if (gInt) clearInterval(gInt); window.onkeydown = null; document.getElementById('g-vp').style.display = 'none'; document.getElementById('g-menu').style.display = 'block'; };
   window.initG = (id) => {
-    if(gInt) clearInterval(gInt); const area = document.getElementById('p-area');
-    if(id==='snake') { area.innerHTML='<canvas id="sc" width="300" height="300" style="background:#000; border:2px solid #222;"></canvas>'; startSnake(); }
-    else if(id==='ttt') { area.innerHTML='<div id="tttb" style="display:grid; grid-template-columns:repeat(3,100px); gap:10px;"></div>'; startTTT(); }
-    else if(id==='2048') { area.innerHTML='<div id="g2048" style="display:grid; grid-template-columns:repeat(4,60px); gap:5px;"></div>'; start2048(); }
-    else if(id==='mem') { area.innerHTML='<div id="memb" style="display:grid; grid-template-columns:repeat(4,60px); gap:5px;"></div>'; startMem(); }
-    else if(id==='mine') { area.innerHTML='<div id="minb" style="display:grid; grid-template-columns:repeat(5,40px); gap:2px;"></div>'; startMine(); }
+    if (gInt) clearInterval(gInt); const area = document.getElementById('p-area');
+    if (id === 'snake') { area.innerHTML = '<canvas id="sc" width="300" height="300" style="background:#000; border:2px solid #222;"></canvas>'; startSnake(); }
+    else if (id === 'ttt') { area.innerHTML = '<div id="tttb" style="display:grid; grid-template-columns:repeat(3,100px); gap:10px;"></div>'; startTTT(); }
+    else if (id === '2048') { area.innerHTML = '<div id="g2048" style="display:grid; grid-template-columns:repeat(4,60px); gap:5px;"></div>'; start2048(); }
+    else if (id === 'mem') { area.innerHTML = '<div id="memb" style="display:grid; grid-template-columns:repeat(4,60px); gap:5px;"></div>'; startMem(); }
+    else if (id === 'mine') { area.innerHTML = '<div id="minb" style="display:grid; grid-template-columns:repeat(5,40px); gap:2px;"></div>'; startMine(); }
   };
 
 
@@ -282,7 +282,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function startSnake() {
     const c = document.getElementById('sc'); const ctx = c.getContext('2d');
-    let s = [{x:10, y:10}], f = {x:5, y:5}, dx = 0, dy = 0, sc = 0;
+    let s = [{ x: 10, y: 10 }], f = { x: 5, y: 5 }, dx = 0, dy = 0, sc = 0;
     const area = document.getElementById('p-area');
     const scoreUI = document.createElement('div');
     scoreUI.style = "color:#00ff9d; font-family:monospace; margin-bottom:10px;";
@@ -290,63 +290,63 @@ document.addEventListener('DOMContentLoaded', () => {
     area.prepend(scoreUI);
 
     window.onkeydown = (e) => {
-      if(e.key==='ArrowUp'&&dy===0){dx=0;dy=-1;} if(e.key==='ArrowDown'&&dy===0){dx=0;dy=1;}
-      if(e.key==='ArrowLeft'&&dx===0){dx=-1;dy=0;} if(e.key==='ArrowRight'&&dx===0){dx=1;dy=0;}
+      if (e.key === 'ArrowUp' && dy === 0) { dx = 0; dy = -1; } if (e.key === 'ArrowDown' && dy === 0) { dx = 0; dy = 1; }
+      if (e.key === 'ArrowLeft' && dx === 0) { dx = -1; dy = 0; } if (e.key === 'ArrowRight' && dx === 0) { dx = 1; dy = 0; }
     };
 
     gInt = setInterval(() => {
-      if(dx===0 && dy===0) return;
-      let h = {x: s[0].x+dx, y: s[0].y+dy};
-      if(h.x<0||h.x>19||h.y<0||h.y>19||s.some(p=>p.x===h.x&&p.y===h.y)){ 
-        clearInterval(gInt); showOSAlert(`GAME_OVER | SCORE: ${sc}`); return; 
+      if (dx === 0 && dy === 0) return;
+      let h = { x: s[0].x + dx, y: s[0].y + dy };
+      if (h.x < 0 || h.x > 19 || h.y < 0 || h.y > 19 || s.some(p => p.x === h.x && p.y === h.y)) {
+        clearInterval(gInt); showOSAlert(`GAME_OVER | SCORE: ${sc}`); return;
       }
       s.unshift(h);
-      if(h.x===f.x && h.y===f.y) { 
+      if (h.x === f.x && h.y === f.y) {
         sc += 10; document.getElementById('snake-sc').innerText = sc;
-        f = {x:Math.floor(Math.random()*20), y:Math.floor(Math.random()*20)}; 
+        f = { x: Math.floor(Math.random() * 20), y: Math.floor(Math.random() * 20) };
       } else { s.pop(); }
-      
-      ctx.fillStyle = '#000'; ctx.fillRect(0,0,400,400);
-      ctx.fillStyle = '#00ff9d'; s.forEach(p => ctx.fillRect(p.x*15, p.y*15, 14, 14));
-      ctx.fillStyle = '#ff5f56'; ctx.fillRect(f.x*15, f.y*15, 14, 14);
+
+      ctx.fillStyle = '#000'; ctx.fillRect(0, 0, 400, 400);
+      ctx.fillStyle = '#00ff9d'; s.forEach(p => ctx.fillRect(p.x * 15, p.y * 15, 14, 14));
+      ctx.fillStyle = '#ff5f56'; ctx.fillRect(f.x * 15, f.y * 15, 14, 14);
     }, 100);
   }
 
   function startTTT() {
     const b = document.getElementById('tttb'); let st = Array(9).fill(null), over = false;
-    const checkW = (board, p) => [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]].some(w => w.every(i => board[i] === p));
-    
+    const checkW = (board, p) => [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]].some(w => w.every(i => board[i] === p));
+
     const minimax = (board, p) => {
-      const avail = board.map((v,i)=>v===null?i:null).filter(v=>v!==null);
-      if(checkW(board, 'X')) return {score: -10}; if(checkW(board, 'O')) return {score: 10}; if(avail.length === 0) return {score: 0};
+      const avail = board.map((v, i) => v === null ? i : null).filter(v => v !== null);
+      if (checkW(board, 'X')) return { score: -10 }; if (checkW(board, 'O')) return { score: 10 }; if (avail.length === 0) return { score: 0 };
       let moves = [];
-      for(let i=0; i<avail.length; i++) {
-        let move = {index: avail[i]}; board[avail[i]] = p;
+      for (let i = 0; i < avail.length; i++) {
+        let move = { index: avail[i] }; board[avail[i]] = p;
         move.score = minimax(board, p === 'O' ? 'X' : 'O').score;
         board[avail[i]] = null; moves.push(move);
       }
       let best;
-      if(p === 'O') { let bestS = -10000; for(let i=0; i<moves.length; i++) if(moves[i].score > bestS) { bestS = moves[i].score; best = i; } }
-      else { let bestS = 10000; for(let i=0; i<moves.length; i++) if(moves[i].score < bestS) { bestS = moves[i].score; best = i; } }
+      if (p === 'O') { let bestS = -10000; for (let i = 0; i < moves.length; i++) if (moves[i].score > bestS) { bestS = moves[i].score; best = i; } }
+      else { let bestS = 10000; for (let i = 0; i < moves.length; i++) if (moves[i].score < bestS) { bestS = moves[i].score; best = i; } }
       return moves[best];
     };
 
     b.innerHTML = '';
-    for(let i=0; i<9; i++) {
-      const c = document.createElement('div'); 
+    for (let i = 0; i < 9; i++) {
+      const c = document.createElement('div');
       c.style = "width:100px; height:100px; background:#111; border:1px solid #333; display:flex; align-items:center; justify-content:center; font-size:3rem; cursor:pointer; transition:0.2s;";
       c.onclick = () => {
-        if(!st[i] && !over) {
+        if (!st[i] && !over) {
           st[i] = 'X'; c.innerText = 'X'; c.style.color = '#00ff9d';
-          if(checkW(st, 'X')) { over=true; showOSAlert("HUMAN_WINS (GLITCH?)"); return; }
-          if(!st.includes(null)) { over=true; showOSAlert("DRAW_MATCH"); return; }
-          
+          if (checkW(st, 'X')) { over = true; showOSAlert("HUMAN_WINS (GLITCH?)"); return; }
+          if (!st.includes(null)) { over = true; showOSAlert("DRAW_MATCH"); return; }
+
           c.style.pointerEvents = 'none';
           setTimeout(() => {
-            const best = minimax(st, 'O').index; st[best] = 'O'; 
+            const best = minimax(st, 'O').index; st[best] = 'O';
             b.children[best].innerText = 'O'; b.children[best].style.color = '#ff5f56';
-            if(checkW(st, 'O')) { over=true; showOSAlert("AI_WINS | SYSTEM_STABLE"); }
-            else if(!st.includes(null)) { over=true; showOSAlert("DRAW_MATCH"); }
+            if (checkW(st, 'O')) { over = true; showOSAlert("AI_WINS | SYSTEM_STABLE"); }
+            else if (!st.includes(null)) { over = true; showOSAlert("DRAW_MATCH"); }
           }, 400);
         }
       };
@@ -361,46 +361,46 @@ document.addEventListener('DOMContentLoaded', () => {
       board.forEach(v => {
         const d = document.createElement('div');
         let color = v === 0 ? '#1a1a1a' : (v < 128 ? '#00ff9d' : '#ff5f56');
-        d.style = `width:65px; height:65px; background:${color}; color:${v?'#000':'#333'}; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:20px; border-radius:4px; transition:0.1s;`;
+        d.style = `width:65px; height:65px; background:${color}; color:${v ? '#000' : '#333'}; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:20px; border-radius:4px; transition:0.1s;`;
         d.innerText = v || ''; b.appendChild(d);
       });
     };
     const slide = (row) => {
       let arr = row.filter(v => v);
-      for(let i=0; i<arr.length-1; i++) if(arr[i]===arr[i+1]){ arr[i]*=2; sc+=arr[i]; arr.splice(i+1,1); }
-      while(arr.length<4) arr.push(0); return arr;
+      for (let i = 0; i < arr.length - 1; i++) if (arr[i] === arr[i + 1]) { arr[i] *= 2; sc += arr[i]; arr.splice(i + 1, 1); }
+      while (arr.length < 4) arr.push(0); return arr;
     };
     const move = (dir) => {
       let old = [...board];
-      for(let i=0; i<4; i++) {
+      for (let i = 0; i < 4; i++) {
         let row = [];
-        if(dir==='L') row = [board[i*4], board[i*4+1], board[i*4+2], board[i*4+3]];
-        if(dir==='R') row = [board[i*4+3], board[i*4+2], board[i*4+1], board[i*4]];
-        if(dir==='U') row = [board[i], board[i+4], board[i+8], board[i+12]];
-        if(dir==='D') row = [board[i+12], board[i+8], board[i+4], board[i]];
+        if (dir === 'L') row = [board[i * 4], board[i * 4 + 1], board[i * 4 + 2], board[i * 4 + 3]];
+        if (dir === 'R') row = [board[i * 4 + 3], board[i * 4 + 2], board[i * 4 + 1], board[i * 4]];
+        if (dir === 'U') row = [board[i], board[i + 4], board[i + 8], board[i + 12]];
+        if (dir === 'D') row = [board[i + 12], board[i + 8], board[i + 4], board[i]];
         let res = slide(row);
-        for(let j=0; j<4; j++) {
-          if(dir==='L') board[i*4+j] = res[j]; if(dir==='R') board[i*4+3-j] = res[j];
-          if(dir==='U') board[i+j*4] = res[j]; if(dir==='D') board[i+(3-j)*4] = res[j];
+        for (let j = 0; j < 4; j++) {
+          if (dir === 'L') board[i * 4 + j] = res[j]; if (dir === 'R') board[i * 4 + 3 - j] = res[j];
+          if (dir === 'U') board[i + j * 4] = res[j]; if (dir === 'D') board[i + (3 - j) * 4] = res[j];
         }
       }
-      if(JSON.stringify(old)!==JSON.stringify(board)) add();
+      if (JSON.stringify(old) !== JSON.stringify(board)) add();
     };
-    const add = () => { 
-      let e = board.map((v,i)=>v===0?i:null).filter(v=>v!==null); 
-      if(e.length) board[e[Math.floor(Math.random()*e.length)]] = Math.random()>0.9?4:2; 
-      render(); 
+    const add = () => {
+      let e = board.map((v, i) => v === 0 ? i : null).filter(v => v !== null);
+      if (e.length) board[e[Math.floor(Math.random() * e.length)]] = Math.random() > 0.9 ? 4 : 2;
+      render();
     };
     window.onkeydown = (e) => {
-      if(e.key==='ArrowLeft') move('L'); if(e.key==='ArrowRight') move('R');
-      if(e.key==='ArrowUp') move('U'); if(e.key==='ArrowDown') move('D');
+      if (e.key === 'ArrowLeft') move('L'); if (e.key === 'ArrowRight') move('R');
+      if (e.key === 'ArrowUp') move('U'); if (e.key === 'ArrowDown') move('D');
     };
     add(); add();
   }
 
   function startMem() {
-    const b = document.getElementById('memb'); 
-    let syms = ['🛡️','🛡️','💻','💻','🤖','🤖','🚀','🚀','🔥','🔥','⚡','⚡'].sort(()=>Math.random()-0.5);
+    const b = document.getElementById('memb');
+    let syms = ['🛡️', '🛡️', '💻', '💻', '🤖', '🤖', '🚀', '🚀', '🔥', '🔥', '⚡', '⚡'].sort(() => Math.random() - 0.5);
     let sel = [], solved = 0;
     b.innerHTML = '';
     syms.forEach((v, i) => {
@@ -408,11 +408,11 @@ document.addEventListener('DOMContentLoaded', () => {
       c.style = "width:60px; height:60px; background:#111; border:1px solid #00ff9d; display:flex; align-items:center; justify-content:center; font-size:1.5rem; cursor:pointer; transition:0.3s; color:transparent;";
       c.innerText = v;
       c.onclick = () => {
-        if(sel.length < 2 && !sel.includes(c) && c.style.color === 'transparent') {
+        if (sel.length < 2 && !sel.includes(c) && c.style.color === 'transparent') {
           c.style.color = '#fff'; c.style.background = '#00ff9d'; sel.push(c);
-          if(sel.length === 2) {
-            if(sel[0].innerText === sel[1].innerText) { solved += 2; sel = []; if(solved === syms.length) showOSAlert("MEMORY_OPTIMIZED!"); }
-            else { setTimeout(() => { sel.forEach(x=>{x.style.color='transparent'; x.style.background='#111';}); sel=[]; }, 500); }
+          if (sel.length === 2) {
+            if (sel[0].innerText === sel[1].innerText) { solved += 2; sel = []; if (solved === syms.length) showOSAlert("MEMORY_OPTIMIZED!"); }
+            else { setTimeout(() => { sel.forEach(x => { x.style.color = 'transparent'; x.style.background = '#111'; }); sel = []; }, 500); }
           }
         }
       };
@@ -422,24 +422,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function startMine() {
     const b = document.getElementById('minb'); let mines = Array(25).fill(false), revealed = 0;
-    for(let i=0; i<5; i++) { let r = Math.floor(Math.random()*25); if(!mines[r]) mines[r]=true; else i--; }
+    for (let i = 0; i < 5; i++) { let r = Math.floor(Math.random() * 25); if (!mines[r]) mines[r] = true; else i--; }
     b.innerHTML = '';
-    for(let i=0; i<25; i++) {
+    for (let i = 0; i < 25; i++) {
       const c = document.createElement('div'); c.style = "width:45px; height:45px; background:#111; border:1px solid #333; display:flex; align-items:center; justify-content:center; cursor:pointer; font-weight:900;";
       c.onclick = () => {
-        if(c.style.background === 'rgb(0, 255, 157)') return;
-        if(mines[i]) { 
-          b.children.forEach((x,j)=>{ if(mines[j]) {x.style.background='#ff5f56'; x.innerText='💣';} });
-          showOSAlert("SYSTEM_BREACHED!"); 
+        if (c.style.background === 'rgb(0, 255, 157)') return;
+        if (mines[i]) {
+          b.children.forEach((x, j) => { if (mines[j]) { x.style.background = '#ff5f56'; x.innerText = '💣'; } });
+          showOSAlert("SYSTEM_BREACHED!");
         } else {
           let count = 0;
-          let x = i%5, y = Math.floor(i/5);
-          for(let dy=-1; dy<=1; dy++) for(let dx=-1; dx<=1; dx++) {
-            let nx = x+dx, ny = y+dy;
-            if(nx>=0&&nx<5&&ny>=0&&ny<5 && mines[ny*5+nx]) count++;
+          let x = i % 5, y = Math.floor(i / 5);
+          for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
+            let nx = x + dx, ny = y + dy;
+            if (nx >= 0 && nx < 5 && ny >= 0 && ny < 5 && mines[ny * 5 + nx]) count++;
           }
           c.style.background = '#00ff9d'; c.style.color = '#000'; c.innerText = count || ''; revealed++;
-          if(revealed === 20) showOSAlert("ZONE_SECURED!");
+          if (revealed === 20) showOSAlert("ZONE_SECURED!");
         }
       };
       b.appendChild(c);
@@ -451,17 +451,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const vp = document.getElementById('t-vp'); const menu = document.getElementById('t-menu');
     menu.style.display = 'none'; vp.style.display = 'block';
     vp.innerHTML = `<div class="arcade-header"><span>${id.toUpperCase()}_TOOL</span><div style="display:flex; gap:10px;"><button class="btn-sys" onclick="quitTool()" style="background:#ff5f56 !important;">CLOSE</button></div></div><div id="t-area" style="padding:20px; width:100%;"></div>`;
-    
+
     const area = document.getElementById('t-area');
-    if(id === 'pass') initPassTool(area);
-    if(id === 'geo') initGeoTool(area);
-    if(id === 'sql') initSqlTool(area);
-    if(id === 'xss') initXssTool(area);
+    if (id === 'pass') initPassTool(area);
+    if (id === 'geo') initGeoTool(area);
+    if (id === 'sql') initSqlTool(area);
+    if (id === 'xss') initXssTool(area);
   };
 
   window.quitTool = () => {
-    document.getElementById('t-vp').style.display='none';
-    document.getElementById('t-menu').style.display='block';
+    document.getElementById('t-vp').style.display = 'none';
+    document.getElementById('t-menu').style.display = 'block';
   };
 
   function initPassTool(area) {
@@ -494,32 +494,32 @@ document.addEventListener('DOMContentLoaded', () => {
       
       <button class="btn-sys" onclick="generatePass()" style="width:100%; padding:15px; font-size:16px; border-radius:100px; background:linear-gradient(90deg, #00d2ff, #7a00ff) !important; color:#fff !important; border:none !important; font-weight:700; cursor:pointer;">Generate Secure Password</button>
     `;
-    
+
     document.getElementById('pass-input').onkeyup = (e) => {
       let val = e.target.value; let score = 0;
-      if(val.length > 8) score += 25;
-      if(val.length > 15) score += 10;
-      if(val.match(/[A-Z]/)) score += 20;
-      if(val.match(/[0-9]/)) score += 20;
-      if(val.match(/[^A-Za-z0-9]/)) score += 25;
+      if (val.length > 8) score += 25;
+      if (val.length > 15) score += 10;
+      if (val.match(/[A-Z]/)) score += 20;
+      if (val.match(/[0-9]/)) score += 20;
+      if (val.match(/[^A-Za-z0-9]/)) score += 25;
       score = Math.min(score, 100);
       let color = score < 50 ? '#ff5f56' : (score < 90 ? '#ffbd2e' : '#00ff9d');
       document.getElementById('pass-fill').style.width = score + '%';
       document.getElementById('pass-fill').style.background = color;
     };
-    
+
     window.generatePass = () => {
       const len = parseInt(document.getElementById('pass-len').value);
       const incSym = document.getElementById('pass-sym').checked;
       const incNum = document.getElementById('pass-num').checked;
-      
+
       let chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-      if(incNum) chars += "0123456789";
-      if(incSym) chars += "!@#$%^&*()_+~`|}{[]:;?><,./-=";
-      
-      let pass = ""; 
-      for(let i=0; i<len; i++) pass += chars.charAt(Math.floor(Math.random() * chars.length));
-      
+      if (incNum) chars += "0123456789";
+      if (incSym) chars += "!@#$%^&*()_+~`|}{[]:;?><,./-=";
+
+      let pass = "";
+      for (let i = 0; i < len; i++) pass += chars.charAt(Math.floor(Math.random() * chars.length));
+
       document.getElementById('pass-input').value = pass;
       document.getElementById('pass-input').dispatchEvent(new Event('keyup'));
     };
@@ -538,7 +538,7 @@ document.addEventListener('DOMContentLoaded', () => {
         > AWAITING_TARGET_IP...
       </div>
     `;
-    
+
     window.locateIP = async () => {
       const ip = document.getElementById('ip-input').value || '8.8.8.8';
       const resDiv = document.getElementById('geo-res');
@@ -546,7 +546,7 @@ document.addEventListener('DOMContentLoaded', () => {
       try {
         const res = await fetch(`https://ipapi.co/${ip}/json/`);
         const data = await res.json();
-        if(data.error) throw new Error("Invalid IP");
+        if (data.error) throw new Error("Invalid IP");
         resDiv.innerHTML = `
           <span style="color:#00ff9d">TARGET_ACQUIRED:</span><br>
           IP: ${data.ip}<br>
@@ -556,7 +556,7 @@ document.addEventListener('DOMContentLoaded', () => {
           ISP: ${data.org}<br>
           LAT/LON: ${data.latitude}, ${data.longitude}
         `;
-      } catch(e) {
+      } catch (e) {
         resDiv.innerHTML = `<span style="color:#ff5f56">> ERROR: TRACE_FAILED (INVALID_TARGET_OR_RATE_LIMIT)</span>`;
       }
     };
