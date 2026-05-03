@@ -56,6 +56,14 @@
     gtag('js', new Date());
     gtag('config', 'G-XXXXXXXXXX');
   </script>
+
+  <!-- Force Clean URLs -->
+  <script>
+    if (window.location.pathname.endsWith('index.html')) {
+      var newUrl = window.location.href.replace(/index\.html/i, '');
+      window.history.replaceState({}, document.title, newUrl);
+    }
+  </script>
 </head>
 
 <body>
