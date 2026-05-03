@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sonu Kumar | Security Expert</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+<body>
+  
+  <div class="scanlines"></div>
+  <canvas id="matrix-canvas"></canvas>
+
+  <nav class="navbar">
+    <div class="logo">root@sonu:~#</div>
+    <div class="menu-toggle" id="mobile-menu">
+      <i class="fas fa-bars"></i>
+    </div>
+    <div class="nav-links" id="nav-links">
+      <a href="#terminal">./profile.sh</a>
+      <a href="#skills">./skills.sh</a>
+      <a href="#projects">./projects.sh</a>
+      <a href="#experience">./experience.sh</a>
+      <a href="../" class="btn-sys" style="margin-left: 20px;">EXIT</a>
+    </div>
+  </nav>
+
+  <!-- Live Terminal Block -->
+  <section class="terminal-section section" id="terminal">
+    <div class="profile-layout">
+      <div class="profile-img-container">
+        <img src="../sonu-kumar-cybersecurity-nepal.gif" alt="Sonu Kumar Cyber Profile">
+        <div class="img-glitch-overlay"></div>
+      </div>
+      
+      <div class="terminal-window">
+        <div class="terminal-header">
+          <div class="btn-red"></div>
+          <div class="btn-yellow"></div>
+          <div class="btn-green"></div>
+          <span>bash - root@sonu: ~</span>
+        </div>
+        <div class="terminal-body" id="typewriter">
+          <span class="prompt">root@sonu:~#</span> cat profile.txt<br>
+          <br>
+          NAME: Sonu Kumar<br>
+          ROLE: Offensive Security Specialist / Red Team Ops<br>
+          LOC : Kathmandu, Nepal<br>
+          <br>
+          > Highly motivated cybersecurity professional specializing in identifying vulnerabilities and securing infrastructure.<br>
+          > Currently analyzing network packets and breaking systems legally.<br>
+          <br>
+          <span class="prompt">root@sonu:~#</span> _
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Animated Skill Bars -->
+  <section class="skills section" id="skills">
+    <h2 class="section-title">> SYSTEM_METRICS</h2>
+    <div class="metrics-container">
+      
+      <div class="skill-wrap">
+        <div class="skill-label"><span>VULNERABILITY_ASSESSMENT</span><span>[95%]</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="95%"></div></div>
+      </div>
+      
+      <div class="skill-wrap">
+        <div class="skill-label"><span>NETWORKING (VLAN, OSPF, BGP)</span><span>[92%]</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="92%"></div></div>
+      </div>
+
+      <div class="skill-wrap">
+        <div class="skill-label"><span>OSINT_&_RECONNAISSANCE</span><span>[88%]</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="88%"></div></div>
+      </div>
+
+      <div class="skill-wrap">
+        <div class="skill-label"><span>PYTHON_AUTOMATION</span><span>[90%]</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="90%"></div></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Project Cards -->
+  <section class="projects section" id="projects">
+    <h2 class="section-title">> EXPLOITS_&_TOOLS</h2>
+    <div class="project-grid">
+      
+      <div class="proj-card">
+        <h3>WHOIS Threat Analyzer</h3>
+        <p>Cybersecurity OSINT tool for automated domain risk scoring and footprinting.</p>
+        <div class="links">
+          <a href="#" class="btn-sys">[GITHUB]</a>
+          <a href="#" class="btn-sys">[EXECUTE]</a>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <h3>AI Traffic Monitoring</h3>
+        <p>YOLO & OpenCV based violation detection system operating in real-time.</p>
+        <div class="links">
+          <a href="#" class="btn-sys">[GITHUB]</a>
+          <a href="#" class="btn-sys">[DEMO]</a>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <h3>Network Mapper Automation</h3>
+        <p>Python script leveraging Nmap for rapid sub-network discovery and vulnerability tagging.</p>
+        <div class="links">
+          <a href="#" class="btn-sys">[GITHUB]</a>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <h3>Custom XSS Payload Generator</h3>
+        <p>Dynamic tool to generate polymorphic XSS vectors for WAF bypass testing.</p>
+        <div class="links">
+          <a href="#" class="btn-sys">[GITHUB]</a>
+          <a href="#" class="btn-sys">[EXECUTE]</a>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <h3>Fire Fighting Robot</h3>
+        <p>Embedded Arduino system with infrared thermal response and autonomous navigation.</p>
+        <div class="links">
+          <a href="#" class="btn-sys">[GITHUB]</a>
+          <a href="#" class="btn-sys">[DEMO]</a>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <h3>Form Auto-Filler</h3>
+        <p>Bulk document automation written in Python, interfacing with Excel datasets.</p>
+        <div class="links">
+          <a href="#" class="btn-sys">[GITHUB]</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Detailed Experience -->
+  <section class="experience section" id="experience">
+    <h2 class="section-title">> OPERATION_LOGS</h2>
+    
+    <div class="log-entry">
+      <div class="log-time">[2025-09 TO 2025-12]</div>
+      <h3>L2 Network Support Engineer @ WebSurfer</h3>
+      <p>Handled escalated network incidents for one of Nepal's largest ISPs. Resolved complex routing anomalies, DHCP exhaustion events, and fiber outages.</p>
+      <div class="incident-block">
+        <strong>INCIDENT_REPORT #BGP-442:</strong> Diagnosed a flapping BGP peering session that caused intermittent connectivity for a major hospital group. Coordinated with the NOC to apply dampening policies, restoring stability within 22 minutes.
+      </div>
+    </div>
+
+    <div class="log-entry">
+      <div class="log-time">[2022-01 TO PRESENT]</div>
+      <h3>Offensive Security Researcher</h3>
+      <p>Independent vulnerability research and CTF participation. Ranked in the Top 1% globally on TryHackMe.</p>
+      <div class="incident-block">
+        <strong>FOCUS_AREAS:</strong> Active Directory exploitation, Privilege Escalation, Web Application Security, and Cloud-native attack surfaces (AWS IAM, S3 misconfigs).
+      </div>
+    </div>
+  </section>
+
+  <!-- Certificates -->
+  <section class="certs section">
+    <h2 class="section-title">> CERTIFICATES.DAT</h2>
+    <ul class="cert-list">
+      <li><i class="fas fa-check-circle"></i> AWS Academy Cloud Security</li>
+      <li><i class="fas fa-check-circle"></i> TryHackMe Top 1% Global Rank</li>
+      <li><i class="fas fa-check-circle"></i> Intro to PenTesting & Offensive Security</li>
+      <li><i class="fas fa-check-circle"></i> BSc (Hons) Computer Networking & IT Security</li>
+    </ul>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact section">
+    <h2 class="section-title">> INITIATE_HANDSHAKE</h2>
+    <div class="terminal-window form-window">
+      <div class="terminal-header">
+        <div class="btn-red"></div>
+        <div class="btn-yellow"></div>
+        <div class="btn-green"></div>
+        <span>secure_channel.sh</span>
+      </div>
+      <div class="terminal-body">
+        <p style="color: var(--green); margin-bottom: 20px;">> Secure communications channel open. Awaiting payload...</p>
+        
+        <form class="cyber-form" action="https://formsubmit.co/sonuzaiswal@gmail.com" method="POST">
+          <div class="form-row">
+            <span class="prompt">NAME=</span>
+            <input type="text" name="name" required>
+          </div>
+          <div class="form-row">
+            <span class="prompt">EMAIL=</span>
+            <input type="email" name="email" required>
+          </div>
+          <div class="form-row" style="align-items: flex-start;">
+            <span class="prompt">MSG=</span>
+            <textarea name="message" rows="4" required></textarea>
+          </div>
+          
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="table">
+          
+          <div class="form-actions" style="margin-top: 20px;">
+            <button type="submit" class="btn-sys">[ TRANSMIT_PAYLOAD ]</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    > SYSTEM SHUTDOWN PENDING... (c) 2026 SONU_KUMAR
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

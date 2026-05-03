@@ -1,0 +1,154 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body { 
+  overflow: hidden; 
+  background: #0a0a0a; 
+  cursor: none; /* Custom cursor */
+}
+
+a { text-decoration: none; }
+
+#custom-cursor {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: white;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  transition: background-color 0.3s, transform 0.1s;
+  mix-blend-mode: difference;
+}
+
+#matrix-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0; /* Hidden by default, shown on right hover */
+  transition: opacity 0.5s;
+}
+
+.split-container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+}
+
+.split-panel {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: flex 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  z-index: 2;
+  overflow: hidden;
+}
+
+.split-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  transition: opacity 0.6s, transform 0.6s;
+}
+
+.panel-content {
+  text-align: center;
+  opacity: 0.8;
+  transition: opacity 0.4s, transform 0.4s;
+  padding: 0 20px;
+}
+
+.split-panel:hover {
+  flex: 1.5;
+}
+
+.split-panel:hover .panel-content {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+/* Design Panel (Left) */
+.design-panel {
+  background: #fff8f0;
+  color: #c95d3c; /* Burnt orange */
+}
+
+.design-panel h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.design-panel p {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  color: #4a3b32;
+}
+
+.design-panel .enter-btn {
+  display: inline-block;
+  padding: 12px 30px;
+  border: 1px solid #c95d3c;
+  color: #c95d3c;
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 2px;
+  transition: 0.3s;
+}
+
+.design-panel:hover .enter-btn {
+  background: #c95d3c;
+  color: #fff8f0;
+}
+
+/* Security Panel (Right) */
+.security-panel {
+  background: #050505;
+  color: #00ff9d;
+  border-left: 2px solid #111;
+}
+
+.security-panel h2 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-shadow: 0 0 10px rgba(0,255,157,0.4);
+}
+
+.security-panel p {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1rem;
+  margin-bottom: 30px;
+  color: #888;
+}
+
+.security-panel .enter-btn {
+  display: inline-block;
+  padding: 12px 30px;
+  border: 1px solid #00ff9d;
+  color: #00ff9d;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 2px;
+  transition: 0.3s;
+  box-shadow: 0 0 15px rgba(0,255,157,0.2);
+}
+
+.security-panel:hover .enter-btn {
+  background: #00ff9d;
+  color: #000;
+  box-shadow: 0 0 30px rgba(0,255,157,0.6);
+}
+
+@media (max-width: 800px) {
+  .split-container {
+    flex-direction: column;
+  }
+  .security-panel { border-left: none; border-top: 2px solid #111; }
+  .design-panel h2, .security-panel h2 { font-size: 2.5rem; }
+}

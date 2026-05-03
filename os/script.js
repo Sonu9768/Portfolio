@@ -23,7 +23,11 @@ document.addEventListener('DOMContentLoaded', () => {
   setInterval(drawM, 50);
 
   // 2. OS Setup
-  setTimeout(() => gsap.to('#boot-screen', { opacity: 0, pointerEvents: 'none', duration: 1 }), 1000);
+  let bootTimeout = setTimeout(() => gsap.to('#boot-screen', { opacity: 0, pointerEvents: 'none', duration: 1 }), 2500);
+  document.getElementById('skip-boot-btn').onclick = () => {
+    clearTimeout(bootTimeout);
+    gsap.to('#boot-screen', { opacity: 0, pointerEvents: 'none', duration: 0.3 });
+  };
   function clock() { document.getElementById('os-clock').innerText = new Date().toLocaleTimeString([], { hour12: false }); setTimeout(clock, 1000); }
   clock();
 
@@ -42,13 +46,16 @@ document.addEventListener('DOMContentLoaded', () => {
   window.showOSAlert = (msg) => { document.getElementById('os-alert-msg').innerText = msg; alertContainer.style.display = 'flex'; };
   window.closeOSAlert = () => { alertContainer.style.display = 'none'; };
 
-  // 4. Desktop Logic (Strict Horizontal Row)
+  // 4. Desktop Logic (Grid Layout)
   function arrangeIcons() {
     const icons = document.querySelectorAll('.os-icon');
+    const cols = Math.max(1, Math.floor((window.innerWidth - 40) / 110));
     icons.forEach((icon, i) => {
       icon.style.position = 'absolute';
-      icon.style.left = (50 + (i * 125)) + 'px';
-      icon.style.top = '30px';
+      const row = Math.floor(i / cols);
+      const col = i % cols;
+      icon.style.left = (30 + (col * 110)) + 'px';
+      icon.style.top = (30 + (row * 110)) + 'px';
       icon.style.transition = 'all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
     });
   }
@@ -115,7 +122,6 @@ document.addEventListener('DOMContentLoaded', () => {
             <div style="font-size:13px; line-height:1.8; color:#ccc;">
               <p><i class="fas fa-map-marker-alt" style="color:var(--accent); width:20px;"></i> Koteshwor-32, Kathmandu, Nepal</p>
               <p><i class="fas fa-envelope" style="color:var(--accent); width:20px;"></i> sonuzaiswal@gmail.com</p>
-              <p><i class="fas fa-phone" style="color:var(--accent); width:20px;"></i> 9824288958</p>
             </div>
             <p style="margin-top:20px; font-size:14px; line-height:1.6;">highly motivated and technically skilled cybersecurity professional specializing in Offensive Security and Red Team operations. Equipped with hands-on experience in identifying vulnerabilities and securing digital infrastructure.</p>
           </div>
@@ -143,23 +149,23 @@ document.addEventListener('DOMContentLoaded', () => {
         <h3>Technical Performance Metrics</h3>
         <div style="margin-top:30px;">
           <div class="skill-bar-wrap">
-            <div class="skill-label"><span>VULNERABILITY_ASSESSMENT (Nmap, Burp, Nessus)</span><span>95%</span></div>
+            <div class="skill-label"><span>VULNERABILITY_ASSESSMENT (Nmap, Burp, Nessus)</span><span>Advanced</span></div>
             <div class="skill-bar"><div class="skill-fill" style="width:95%"></div></div>
           </div>
           <div class="skill-bar-wrap">
-            <div class="skill-label"><span>NETWORKING (VLAN, OSPF, NAT, ACL)</span><span>92%</span></div>
+            <div class="skill-label"><span>NETWORKING (VLAN, OSPF, NAT, ACL)</span><span>Advanced</span></div>
             <div class="skill-bar"><div class="skill-fill" style="width:92%"></div></div>
           </div>
           <div class="skill-bar-wrap">
-            <div class="skill-label"><span>AI_&_COMPUTER_VISION (YOLO, OpenCV)</span><span>90%</span></div>
+            <div class="skill-label"><span>AI_&_COMPUTER_VISION (YOLO, OpenCV)</span><span>Intermediate</span></div>
             <div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div>
           </div>
           <div class="skill-bar-wrap">
-            <div class="skill-label"><span>PROGRAMMING (Python, Java, HTML/CSS)</span><span>88%</span></div>
+            <div class="skill-label"><span>PROGRAMMING (Python, Java, HTML/CSS)</span><span>Intermediate</span></div>
             <div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div>
           </div>
           <div class="skill-bar-wrap">
-            <div class="skill-label"><span>MULTIMEDIA_TOOLS (Ps, Ai, Pr)</span><span>94%</span></div>
+            <div class="skill-label"><span>MULTIMEDIA_TOOLS (Ps, Ai, Pr)</span><span>Advanced</span></div>
             <div class="skill-bar"><div class="skill-fill" style="width:94%"></div></div>
           </div>
         </div>
@@ -173,27 +179,27 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="project-grid" style="margin-top:20px;">
           <div class="proj-card" onclick="runLive('traffic')">
              <h4>AI Traffic Monitoring</h4>
-             <p>YOLO & OpenCV based violation detection system (Real-time).</p>
+             <p>YOLO & OpenCV based violation detection system (Real-time). <br><a href="#" onclick="event.stopPropagation()" style="color:var(--accent); font-size:11px;">[GitHub]</a> <a href="#" onclick="event.stopPropagation()" style="color:var(--accent); font-size:11px;">[Live Demo]</a></p>
           </div>
           <div class="proj-card" onclick="runLive('whois')">
              <h4>WHOIS Threat Analyzer</h4>
-             <p>Cybersecurity OSINT tool for domain risk scoring.</p>
+             <p>Cybersecurity OSINT tool for domain risk scoring. <br><a href="#" onclick="event.stopPropagation()" style="color:var(--accent); font-size:11px;">[GitHub]</a> <a href="#" onclick="event.stopPropagation()" style="color:var(--accent); font-size:11px;">[Live Demo]</a></p>
           </div>
           <div class="proj-card" onclick="runLive('fire')">
              <h4>Fire Fighting Robot</h4>
-             <p>Embedded Arduino system with infrared thermal response.</p>
+             <p>Embedded Arduino system with infrared thermal response. <br><a href="#" onclick="event.stopPropagation()" style="color:var(--accent); font-size:11px;">[GitHub]</a> <a href="#" onclick="event.stopPropagation()" style="color:var(--accent); font-size:11px;">[Demo Video]</a></p>
           </div>
           <div class="proj-card" onclick="runLive('rental')">
              <h4>Land Rental System</h4>
-             <p>Python-based transaction automation & record manager.</p>
+             <p>Python-based transaction automation & record manager. <br><a href="#" onclick="event.stopPropagation()" style="color:var(--accent); font-size:11px;">[GitHub]</a></p>
           </div>
           <div class="proj-card" onclick="runLive('ecommerce')">
              <h4>Printer E-Commerce</h4>
-             <p>High-end frontend architecture for digital retail.</p>
+             <p>High-end frontend architecture for digital retail. <br><a href="#" onclick="event.stopPropagation()" style="color:var(--accent); font-size:11px;">[GitHub]</a> <a href="#" onclick="event.stopPropagation()" style="color:var(--accent); font-size:11px;">[Live Demo]</a></p>
           </div>
           <div class="proj-card" onclick="runLive('autofill')">
              <h4>Form Auto-Filler</h4>
-             <p>Bulk document automation (Python + Excel).</p>
+             <p>Bulk document automation (Python + Excel). <br><a href="#" onclick="event.stopPropagation()" style="color:var(--accent); font-size:11px;">[GitHub]</a></p>
           </div>
         </div>
         <div id="live-area" style="margin-top:30px;"></div>
