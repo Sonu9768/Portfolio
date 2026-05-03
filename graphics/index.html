@@ -60,9 +60,7 @@
   </nav>
 
   <!-- Hero Section -->
-  <header class="hero section" style="position: relative;">
-    <!-- Large transparent background image -->
-    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('../sonu-background.png'); background-size: cover; background-position: center 20%; opacity: 0.15; z-index: -2;"></div>
+  <header class="hero section">
     
     <div class="hero-content reveal">
       <p class="subtitle">Art Direction & Visual Storytelling</p>
@@ -71,7 +69,10 @@
       <a href="#work" class="btn-primary">View Featured Work</a>
     </div>
     <div class="hero-image reveal" style="position: relative; display: flex; justify-content: center; align-items: flex-end; min-height: 500px;">
-      <img src="../sonu-suit.png" alt="Sonu Kumar Portrait" style="width: 100%; max-width: 380px; display: block; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.25)); z-index: 1;">
+      <!-- Background Image specifically behind the portrait -->
+      <div style="position: absolute; bottom: 0; width: 100%; height: 100%; max-width: 500px; background-image: url('../sonu-background.png'); background-size: contain; background-repeat: no-repeat; background-position: center bottom; opacity: 0.25; z-index: 0;"></div>
+      
+      <img src="../sonu-suit.png" alt="Sonu Kumar Portrait" style="position: relative; width: 100%; max-width: 380px; display: block; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.25)); z-index: 1;">
     </div>
   </header>
 
