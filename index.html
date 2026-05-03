@@ -3,16 +3,53 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sonu Kumar | Choose Your Experience</title>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <title>Freelance Security Expert & Graphic Designer | Sonu Kumar</title>
+  <meta name="description" content="Professional interactive portfolio of Sonu Kumar. Explore my expertise in Offensive Security, Red Team operations, Vulnerability Assessment, and Graphic Design.">
+  <meta name="keywords" content="Security Expert, Graphic Designer, Penetration Testing, UI/UX Design, Nepal, Web Developer, Cybersecurity">
+  <meta name="author" content="Sonu Kumar">
+  <link rel="canonical" href="https://kumarsonu.com.np/">
+  <link rel="icon" href="/sonu-kumar-cybersecurity-nepal.gif" type="image/gif">
+  
+  <!-- Preload fonts to eliminate render-blocking -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="chooser.css">
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Sonu Kumar",
+    "url": "https://kumarsonu.com.np",
+    "jobTitle": "Security Expert & Graphic Designer",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Kathmandu",
+      "addressCountry": "Nepal"
+    },
+    "sameAs": [
+      "https://github.com/Sonu9768"
+    ]
+  }
+  </script>
+
+  <!-- Google Analytics Placeholder -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
 </head>
 <body>
   <div id="custom-cursor"></div>
   <canvas id="matrix-canvas"></canvas>
   
   <div class="split-container">
-    <a href="graphics/index.html" class="split-panel design-panel" onmouseenter="changeCursor('design')" onmouseleave="resetCursor()">
+    <a href="graphics/" class="split-panel design-panel" onmouseenter="changeCursor('design')" onmouseleave="resetCursor()">
       <div class="panel-content">
         <h2>Graphic Designer</h2>
         <p>Explore editorial layouts, brand identities, and visual storytelling.</p>
@@ -20,7 +57,7 @@
       </div>
     </a>
     
-    <a href="security/index.html" class="split-panel security-panel" onmouseenter="changeCursor('security')" onmouseleave="resetCursor()">
+    <a href="security/" class="split-panel security-panel" onmouseenter="changeCursor('security')" onmouseleave="resetCursor()">
       <div class="panel-content">
         <h2>Security Expert</h2>
         <p>Explore offensive security, red team ops, and terminal environments.</p>
