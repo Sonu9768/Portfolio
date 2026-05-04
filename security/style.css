@@ -152,7 +152,10 @@ body {
 .form-row input, .form-row textarea { flex: 1; background: transparent; border: none; color: #fff; font-family: var(--font-mono); font-size: 1rem; outline: none; }
 .form-row textarea { resize: vertical; padding-top: 2px; }
 
-footer { text-align: center; padding: 40px; color: #444; font-size: 0.8rem; border-top: 1px solid #111; margin-top: 50px; }
+/* Writeups section reuses project grid */
+.writeups { padding-top: 80px; }
+
+footer { text-align: center; padding: 40px; color: #444; font-size: 0.85rem; border-top: 1px solid #111; margin-top: 50px; }
 
 /* Responsive Design */
 @media (max-width: 1024px) {
