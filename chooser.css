@@ -138,11 +138,11 @@ a { text-decoration: none; }
 }
 
 .tagline-text {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.82rem;
-  font-weight: 500;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem;
+  font-weight: 400;
   letter-spacing: 0.5px;
-  line-height: 1.8;
+  line-height: 1.6;
   color: #dddddd;
   display: block;
   text-align: center;
