@@ -32,42 +32,45 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Typewriter effect for terminal
   const terminalBody = document.getElementById('typewriter');
-  const text = terminalBody.innerHTML;
-  terminalBody.innerHTML = '';
-  
-  let i = 0;
-  let isTag = false;
-  let currentHTML = "";
+  if (terminalBody) {
+    const text = terminalBody.innerHTML;
+    terminalBody.innerHTML = '';
+    
+    let i = 0;
+    let isTag = false;
+    let currentHTML = "";
 
-  function typeWriter() {
-    if (i < text.length) {
-      if (text.charAt(i) === '<') isTag = true;
-      currentHTML += text.charAt(i);
-      if (text.charAt(i) === '>') isTag = false;
+    function typeWriter() {
+      if (i < text.length) {
+        if (text.charAt(i) === '<') isTag = true;
+        currentHTML += text.charAt(i);
+        if (text.charAt(i) === '>') isTag = false;
 
-      terminalBody.innerHTML = currentHTML + (i % 2 === 0 ? '_' : '');
-      
-      i++;
-      let speed = isTag ? 0 : Math.random() * 20 + 10;
-      setTimeout(typeWriter, speed);
-    } else {
-      terminalBody.innerHTML = currentHTML;
-      // Add blinking cursor
-      setInterval(() => {
-        if (terminalBody.innerHTML.endsWith('_')) {
-          terminalBody.innerHTML = terminalBody.innerHTML.slice(0, -1);
-        } else {
-          terminalBody.innerHTML += '_';
-        }
-      }, 500);
-      
-      // Initialize scroll animations NOW that the DOM height is finalized!
-      initScrollAnimations();
+        terminalBody.innerHTML = currentHTML + (i % 2 === 0 ? '_' : '');
+        
+        i++;
+        // Speed up considerably: tags are instant, text is fast
+        let speed = isTag ? 0 : 5; 
+        setTimeout(typeWriter, speed);
+      } else {
+        terminalBody.innerHTML = currentHTML;
+        // Add blinking cursor
+        setInterval(() => {
+          if (terminalBody.innerHTML.endsWith('_')) {
+            terminalBody.innerHTML = terminalBody.innerHTML.slice(0, -1);
+          } else {
+            terminalBody.innerHTML += '_';
+          }
+        }, 500);
+      }
     }
+    
+    // Start typewriter
+    setTimeout(typeWriter, 300);
   }
   
-  // Start typewriter after a short delay
-  setTimeout(typeWriter, 500);
+  // Initialize scroll animations immediately so metrics fill when visible
+  initScrollAnimations();
 
   function initScrollAnimations() {
     // Skill Bars Fill on Scroll
