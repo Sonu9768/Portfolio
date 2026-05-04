@@ -44,7 +44,8 @@ a { text-decoration: none; }
   flex-direction: column;
   align-items: center;
   gap: 6px;
-  color: rgba(255,255,255,0.4);
+  color: #fff;
+  mix-blend-mode: difference; /* Ensures visibility on both light and dark backgrounds */
   font-family: 'Inter', sans-serif;
   font-size: 0.7rem;
   letter-spacing: 2px;
@@ -52,7 +53,7 @@ a { text-decoration: none; }
   animation: bounce 2s infinite;
   pointer-events: none;
 }
-.scroll-hint svg { width: 20px; height: 20px; opacity: 0.5; }
+.scroll-hint svg { width: 20px; height: 20px; opacity: 1; }
 @keyframes bounce {
   0%, 100% { transform: translateX(-50%) translateY(0); }
   50% { transform: translateX(-50%) translateY(8px); }
@@ -106,11 +107,7 @@ a { text-decoration: none; }
   transition: opacity 0.5s;
 }
 
-/* Fade badge when a panel is expanded */
-.split-container:has(.design-panel:hover) .tagline-badge,
-.split-container:has(.security-panel:hover) .tagline-badge {
-  opacity: 0;
-}
+
 
 .tagline-name {
   font-family: 'Inter', sans-serif;
