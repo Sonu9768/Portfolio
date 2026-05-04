@@ -14,8 +14,25 @@
   </url>
   <url>
     <loc>https://kumarsonu.com.np/security/</loc>
-    <lastmod>2026-05-03</lastmod>
+    <lastmod>2026-05-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://kumarsonu.com.np/blog/</loc>
+    <lastmod>2026-05-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url><loc>https://kumarsonu.com.np/blog/how-to-secure-home-network-nepal-2026.html</loc><lastmod>2026-05-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://kumarsonu.com.np/blog/sonu-kumar-aws-cloud-security-nepal.html</loc><lastmod>2026-05-04</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kumarsonu.com.np/blog/sonu-kumar-cybersecurity-journey-red-team-nepal.html</loc><lastmod>2026-05-04</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kumarsonu.com.np/blog/sonu-kumar-graphic-design-4-years-nepal.html</loc><lastmod>2026-05-04</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kumarsonu.com.np/blog/sonu-kumar-islington-college-bsc-computing-kathmandu.html</loc><lastmod>2026-05-04</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kumarsonu.com.np/blog/sonu-kumar-red-team-offensive-security-nepal.html</loc><lastmod>2026-05-04</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kumarsonu.com.np/blog/sonu-kumar-sama-publications-designer-kathmandu.html</loc><lastmod>2026-05-04</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kumarsonu.com.np/blog/sonu-kumar-skyline-tours-graphic-designer-nepal.html</loc><lastmod>2026-05-04</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kumarsonu.com.np/blog/sonu-kumar-tryhackme-top-1-percent-nepal.html</loc><lastmod>2026-05-04</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kumarsonu.com.np/blog/sonu-kumar-uhs-holdings-web-developer-nepal.html</loc><lastmod>2026-05-04</lastmod><priority>0.6</priority></url>
+  <url><loc>https://kumarsonu.com.np/blog/sonu-kumar-websurfer-l2-network-support-nepal.html</loc><lastmod>2026-05-04</lastmod><priority>0.6</priority></url>
 </urlset>
