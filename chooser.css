@@ -91,82 +91,42 @@ a { text-decoration: none; }
   height: 100vh;
 }
 
-/* ── Tagline Badge ───────────────────────────── */
-.tagline-badge {
+/* ── Split Tagline Boxes ───────────────────────────── */
+.tagline-box {
   position: absolute;
-  top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
   z-index: 20;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
+  padding: 12px 24px;
+  border-radius: 4px;
   text-align: center;
   pointer-events: none;
-  transition: opacity 0.5s;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  white-space: nowrap;
 }
 
-
-
-.tagline-name {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.5);
-}
-
-.tagline-divider {
-  display: block;
-  width: 1px;
-  height: 28px;
-  background: linear-gradient(to bottom, var(--orange), var(--green));
-  opacity: 0.6;
-}
-
-.tagline-pill {
-  padding: 14px 28px;
-  border-radius: 6px;
-  background: #111111; /* Solid dark background to fix split screen overlap */
-  border: 1px solid rgba(255,255,255,0.08);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-}
-
-.tagline-text {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.05rem;
-  font-weight: 400;
-  letter-spacing: 0.5px;
-  line-height: 1.6;
-  color: #dddddd;
-  display: block;
-  text-align: center;
-}
-
-.highlight-design {
+.design-tagline {
+  top: 10%;
+  background: var(--light-bg);
   color: var(--orange);
-  font-weight: 600;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  border: 1px solid rgba(201, 93, 60, 0.2);
 }
 
-.highlight-security {
+.security-tagline {
+  bottom: 15%; /* Above the scroll hint */
+  background: #0a0a0a;
   color: var(--green);
-  font-weight: 600;
-}
-
-/* Wrapper pill for the dark background */
-.tagline-text-wrap {
-  padding: 10px 20px;
-  border-radius: 4px;
-  background: rgba(0,0,0,0.45);
-  border: 1px solid rgba(255,255,255,0.08);
-  box-shadow: 0 4px 24px rgba(0,0,0,0.6);
-  backdrop-filter: blur(8px);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: 1px solid rgba(0, 255, 157, 0.3);
 }
 
 @media (max-width: 800px) {
-  .tagline-badge { display: none; }
+  .tagline-box { display: none; }
 }
 
 .split-panel {
