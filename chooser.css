@@ -115,7 +115,7 @@ a { text-decoration: none; }
 }
 
 .security-tagline {
-  bottom: 15%; /* Above the scroll hint */
+  top: 10%;
   background: #0a0a0a;
   color: var(--green);
   font-family: 'JetBrains Mono', monospace;
