@@ -63,7 +63,7 @@ body {
   box-shadow: 0 0 30px rgba(0, 255, 157, 0.1);
 }
 .profile-img-container img {
-  width: 100%; display: block; filter: contrast(1.2) sepia(1) hue-rotate(90deg) saturate(3);
+  width: 100%; height: auto; object-fit: cover; display: block; filter: contrast(1.2) sepia(1) hue-rotate(90deg) saturate(3);
 }
 .profile-img-container::before {
   content: 'ID: SONU_KUMAR'; position: absolute; top: -10px; left: 10px; background: var(--bg); color: var(--green); font-size: 0.7rem; padding: 0 5px;
