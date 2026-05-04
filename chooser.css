@@ -106,7 +106,7 @@ a { text-decoration: none; }
 }
 
 .design-tagline {
-  top: 10%;
+  bottom: 15%;
   background: var(--light-bg);
   color: var(--orange);
   font-family: 'Playfair Display', serif;
@@ -115,7 +115,7 @@ a { text-decoration: none; }
 }
 
 .security-tagline {
-  top: 10%;
+  bottom: 15%;
   background: #0a0a0a;
   color: var(--green);
   font-family: 'JetBrains Mono', monospace;
