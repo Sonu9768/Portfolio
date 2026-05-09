@@ -51,16 +51,26 @@ document.addEventListener('DOMContentLoaded', () => {
     return src.replace('posters/', '').replace(/\.[^/.]+$/, "").replace(/[^a-zA-Z0-9_-]/g, "_");
   }
 
+  function getBaseLikes(id) {
+    let hash = 0;
+    for (let i = 0; i < id.length; i++) {
+      hash = id.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    const positiveHash = Math.abs(hash);
+    return 100 + (positiveHash % 401); 
+  }
+
   function createPosterElement(src) {
     const posterId = getPosterId(src);
+    const baseLikes = getBaseLikes(posterId);
     return `
       <div class="poster-item" data-src="${src}">
         <img src="${src}" alt="Design Poster" loading="lazy">
         <div class="poster-overlay">
           <div class="overlay-content">
             <span class="view-text">View Full</span>
-            <button class="like-btn" data-id="${posterId}">
-              <i class="fas fa-heart"></i> <span class="like-count">0</span>
+            <button class="like-btn" data-id="${posterId}" data-base="${baseLikes}">
+              <i class="fas fa-heart"></i> <span class="like-count">${baseLikes}</span>
             </button>
           </div>
         </div>
@@ -90,13 +100,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const likeBtns = document.querySelectorAll('.like-btn');
     likeBtns.forEach(btn => {
       const posterId = btn.getAttribute('data-id');
+      const baseLikes = parseInt(btn.getAttribute('data-base'), 10);
       const countSpan = btn.querySelector('.like-count');
       
-      // Fetch initial count
+      // Fetch actual upvotes
       fetch(`https://api.counterapi.dev/v1/sonu-portfolio-designs/${posterId}`)
-        .then(res => res.json())
+        .then(res => {
+          if (!res.ok) return null;
+          return res.json();
+        })
         .then(data => {
-          if(data && data.count) countSpan.textContent = data.count;
+          let realCount = 0;
+          if(data && data.count) realCount = data.count;
+          countSpan.textContent = baseLikes + realCount;
         })
         .catch(err => console.error('Failed to fetch likes:', err));
 
@@ -116,9 +132,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Increment on API
         fetch(`https://api.counterapi.dev/v1/sonu-portfolio-designs/${posterId}/up`)
-          .then(res => res.json())
+          .then(res => {
+            if (!res.ok) return null;
+            return res.json();
+          })
           .then(data => {
-            if(data && data.count) countSpan.textContent = data.count;
+            if(data && data.count) countSpan.textContent = baseLikes + data.count;
           })
           .catch(err => console.error('Failed to increment likes:', err));
       });
