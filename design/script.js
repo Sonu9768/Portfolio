@@ -54,10 +54,12 @@ document.addEventListener('DOMContentLoaded', () => {
   function getBaseLikes(id) {
     let hash = 0;
     for (let i = 0; i < id.length; i++) {
-      hash = id.charCodeAt(i) + ((hash << 5) - hash);
+      hash = (hash << 5) - hash + id.charCodeAt(i);
+      hash |= 0;
     }
-    const positiveHash = Math.abs(hash);
-    return 100 + (positiveHash % 401); 
+    const x = Math.sin(hash + 1.2345) * 10000;
+    const fraction = x - Math.floor(x);
+    return 100 + Math.floor(fraction * 401); 
   }
 
   function createPosterElement(src) {
