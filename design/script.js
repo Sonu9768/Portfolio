@@ -242,6 +242,14 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   async function loadPosters() {
+    // Display the loading GIF inside the grid while checking for images
+    grid.innerHTML = `
+      <div style="grid-column: 1 / -1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 4rem 0;">
+        <img src="../loading.gif" alt="Loading Designs..." style="max-width: 80px; height: auto; margin-bottom: 1rem;">
+        <p style="color: var(--text-secondary); font-family: var(--font-body); font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase;">Loading designs...</p>
+      </div>
+    `;
+
     let htmlContent = '';
     
     // First, load from custom array if user added any
