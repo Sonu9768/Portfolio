@@ -18,7 +18,7 @@ body {
   font-family: 'Inter', sans-serif;
 }
 
-a { text-decoration: none; }
+a, button { text-decoration: none; cursor: none; }
 
 /* Visually Hidden but SEO Friendly */
 .sr-only {
@@ -62,15 +62,28 @@ a { text-decoration: none; }
 /* ── Custom Cursor ───────────────────────────── */
 #custom-cursor {
   position: fixed;
-  width: 20px;
-  height: 20px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background-color: white;
   pointer-events: none;
   transform: translate(-50%, -50%);
   z-index: 9999;
-  transition: background-color 0.3s, transform 0.1s;
+  transition: width 0.3s, height 0.3s, background-color 0.3s, transform 0.3s;
   mix-blend-mode: difference;
+}
+
+#custom-cursor.hover-design {
+  background-color: var(--orange);
+}
+
+#custom-cursor.hover-security {
+  background-color: var(--green);
+}
+
+#custom-cursor.hover-link {
+  transform: translate(-50%, -50%) scale(3);
+  background-color: white;
 }
 
 /* ── Matrix Canvas ───────────────────────────── */

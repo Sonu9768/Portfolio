@@ -20,6 +20,10 @@ body {
   font-family: var(--font-body);
   overflow-x: hidden;
   line-height: 1.6;
+  cursor: none;
+}
+a, button, .poster-item, .close-btn {
+  cursor: none !important;
 }
 
 /* Custom Cursor */
@@ -27,15 +31,19 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  width: 20px;
-  height: 20px;
+  width: 8px;
+  height: 8px;
   background: var(--accent);
   border-radius: 50%;
   pointer-events: none;
   transform: translate(-50%, -50%);
   z-index: 9999;
   mix-blend-mode: difference;
-  transition: width 0.2s, height 0.2s;
+  transition: width 0.2s, height 0.2s, transform 0.2s;
+}
+
+#custom-cursor.hover-link {
+  transform: translate(-50%, -50%) scale(3);
 }
 
 /* Navbar */

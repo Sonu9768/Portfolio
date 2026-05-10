@@ -1,18 +1,110 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Custom Cursor
-  const cursor = document.getElementById('custom-cursor');
+  // Custom Cursor with Smoke Effect
+  const cursorDot = document.getElementById('custom-cursor');
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+
+  // Smoke Canvas Setup
+  const smokeCanvas = document.createElement('canvas');
+  smokeCanvas.id = 'smoke-canvas';
+  smokeCanvas.style.position = 'fixed';
+  smokeCanvas.style.top = '0';
+  smokeCanvas.style.left = '0';
+  smokeCanvas.style.width = '100vw';
+  smokeCanvas.style.height = '100vh';
+  smokeCanvas.style.pointerEvents = 'none';
+  smokeCanvas.style.zIndex = '9998';
+  document.body.appendChild(smokeCanvas);
+
+  const smokeCtx = smokeCanvas.getContext('2d');
+  let width, height;
+
+  function resizeSmoke() {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    smokeCanvas.width = width;
+    smokeCanvas.height = height;
+  }
+  window.addEventListener('resize', resizeSmoke);
+  resizeSmoke();
+
+  function createSmokeParticleTexture(colorRGB) {
+    const c = document.createElement('canvas');
+    c.width = 64;
+    c.height = 64;
+    const ctx = c.getContext('2d');
+    const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+    gradient.addColorStop(0, `rgba(${colorRGB}, 0.2)`);
+    gradient.addColorStop(1, `rgba(${colorRGB}, 0)`);
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, 64, 64);
+    return c;
+  }
+
+  const textureOrange = createSmokeParticleTexture('255, 74, 0');
+  let smokeParticles = [];
+
+  class SmokeParticle {
+    constructor(x, y, texture) {
+      this.x = x;
+      this.y = y;
+      this.size = Math.random() * 20 + 20;
+      this.texture = texture;
+      this.alpha = 0.6;
+      this.vx = (Math.random() - 0.5) * 1.5;
+      this.vy = (Math.random() - 0.5) * 1.5 - 0.5;
+      this.growth = Math.random() * 0.8 + 0.2;
+      this.decay = Math.random() * 0.015 + 0.005;
+    }
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+      this.size += this.growth;
+      this.alpha -= this.decay;
+    }
+    draw(ctx) {
+      ctx.globalAlpha = this.alpha;
+      const half = this.size / 2;
+      ctx.drawImage(this.texture, this.x - half, this.y - half, this.size, this.size);
+    }
+  }
+
   document.addEventListener('mousemove', (e) => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    cursorDot.style.left = mouseX + 'px';
+    cursorDot.style.top = mouseY + 'px';
+    
+    // Spawn smoke particles
+    for (let i = 0; i < 2; i++) {
+      smokeParticles.push(new SmokeParticle(mouseX, mouseY, textureOrange));
+    }
   });
+
+  function animateCursor() {
+    smokeCtx.clearRect(0, 0, width, height);
+    for (let i = 0; i < smokeParticles.length; i++) {
+      smokeParticles[i].update();
+      smokeParticles[i].draw(smokeCtx);
+      if (smokeParticles[i].alpha <= 0) {
+        smokeParticles.splice(i, 1);
+        i--;
+      }
+    }
+    requestAnimationFrame(animateCursor);
+  }
+  animateCursor();
 
   const interactiveElements = document.querySelectorAll('a, .poster-item, .close-btn');
   interactiveElements.forEach(el => {
     el.addEventListener('mouseenter', () => {
-      cursor.style.transform = 'translate(-50%, -50%) scale(2)';
+      cursorDot.classList.add('hover-link');
+      for(let i=0; i<5; i++) {
+        smokeParticles.push(new SmokeParticle(mouseX, mouseY, textureOrange));
+      }
     });
     el.addEventListener('mouseleave', () => {
-      cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+      cursorDot.classList.remove('hover-link');
     });
   });
 
@@ -91,10 +183,13 @@ document.addEventListener('DOMContentLoaded', () => {
       });
       // Add cursor interaction to dynamically added items
       item.addEventListener('mouseenter', () => {
-        cursor.style.transform = 'translate(-50%, -50%) scale(2)';
+        cursorDot.classList.add('hover-link');
+        for(let i=0; i<5; i++) {
+          smokeParticles.push(new SmokeParticle(mouseX, mouseY, textureOrange));
+        }
       });
       item.addEventListener('mouseleave', () => {
-        cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+        cursorDot.classList.remove('hover-link');
       });
     });
 

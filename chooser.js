@@ -1,27 +1,136 @@
-// Custom Cursor
-const cursor = document.getElementById('custom-cursor');
+// Custom Cursor & Smoke Effect
+const cursorDot = document.getElementById('custom-cursor');
+let mouseX = window.innerWidth / 2;
+let mouseY = window.innerHeight / 2;
+
+// Smoke Canvas Setup
+const smokeCanvas = document.createElement('canvas');
+smokeCanvas.id = 'smoke-canvas';
+smokeCanvas.style.position = 'fixed';
+smokeCanvas.style.top = '0';
+smokeCanvas.style.left = '0';
+smokeCanvas.style.width = '100vw';
+smokeCanvas.style.height = '100vh';
+smokeCanvas.style.pointerEvents = 'none';
+smokeCanvas.style.zIndex = '9998';
+document.body.appendChild(smokeCanvas);
+
+const smokeCtx = smokeCanvas.getContext('2d');
+let width, height;
+
+function resizeSmoke() {
+  width = window.innerWidth;
+  height = window.innerHeight;
+  smokeCanvas.width = width;
+  smokeCanvas.height = height;
+}
+window.addEventListener('resize', resizeSmoke);
+resizeSmoke();
+
+function createSmokeParticleTexture(colorRGB) {
+  const c = document.createElement('canvas');
+  c.width = 64;
+  c.height = 64;
+  const ctx = c.getContext('2d');
+  const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+  gradient.addColorStop(0, `rgba(${colorRGB}, 0.15)`);
+  gradient.addColorStop(1, `rgba(${colorRGB}, 0)`);
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, 64, 64);
+  return c;
+}
+
+const textures = {
+  white: createSmokeParticleTexture('255, 255, 255'),
+  orange: createSmokeParticleTexture('201, 93, 60'),
+  green: createSmokeParticleTexture('0, 255, 157')
+};
+
+let currentTexture = textures.white;
+let smokeParticles = [];
+
+class SmokeParticle {
+  constructor(x, y, texture) {
+    this.x = x;
+    this.y = y;
+    this.size = Math.random() * 20 + 20;
+    this.texture = texture;
+    this.alpha = 0.6;
+    this.vx = (Math.random() - 0.5) * 1.5;
+    this.vy = (Math.random() - 0.5) * 1.5 - 0.5; // slight upward drift
+    this.growth = Math.random() * 0.8 + 0.2;
+    this.decay = Math.random() * 0.015 + 0.005;
+  }
+  update() {
+    this.x += this.vx;
+    this.y += this.vy;
+    this.size += this.growth;
+    this.alpha -= this.decay;
+  }
+  draw(ctx) {
+    ctx.globalAlpha = this.alpha;
+    const half = this.size / 2;
+    ctx.drawImage(this.texture, this.x - half, this.y - half, this.size, this.size);
+  }
+}
 
 document.addEventListener('mousemove', e => {
-  cursor.style.left = e.clientX + 'px';
-  cursor.style.top = e.clientY + 'px';
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+  cursorDot.style.left = mouseX + 'px';
+  cursorDot.style.top = mouseY + 'px';
+  
+  // Spawn smoke particles on move
+  for (let i = 0; i < 2; i++) {
+    smokeParticles.push(new SmokeParticle(mouseX, mouseY, currentTexture));
+  }
 });
+
+function animateCursor() {
+  smokeCtx.clearRect(0, 0, width, height);
+  for (let i = 0; i < smokeParticles.length; i++) {
+    smokeParticles[i].update();
+    smokeParticles[i].draw(smokeCtx);
+    if (smokeParticles[i].alpha <= 0) {
+      smokeParticles.splice(i, 1);
+      i--;
+    }
+  }
+  requestAnimationFrame(animateCursor);
+}
+animateCursor();
 
 function changeCursor(type) {
   if (type === 'design') {
-    cursor.style.backgroundColor = '#c95d3c';
-    cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+    cursorDot.classList.add('hover-design');
+    currentTexture = textures.orange;
   } else if (type === 'security') {
-    cursor.style.backgroundColor = '#00ff9d';
-    cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+    cursorDot.classList.add('hover-security');
+    currentTexture = textures.green;
     document.getElementById('matrix-canvas').style.opacity = '0.3';
   }
 }
 
 function resetCursor() {
-  cursor.style.backgroundColor = 'white';
-  cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+  cursorDot.className = '';
+  currentTexture = textures.white;
   document.getElementById('matrix-canvas').style.opacity = '0';
 }
+
+document.querySelectorAll('a, button, .cta-btn, .social-link').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    if (!el.classList.contains('split-panel')) {
+      cursorDot.classList.add('hover-link');
+      // When hovering over a link, spawn a small burst of smoke
+      for(let i=0; i<5; i++) {
+        smokeParticles.push(new SmokeParticle(mouseX, mouseY, currentTexture));
+      }
+    }
+  });
+  el.addEventListener('mouseleave', () => {
+    cursorDot.classList.remove('hover-link');
+  });
+});
 
 // Matrix Background
 const canvas = document.getElementById('matrix-canvas');
