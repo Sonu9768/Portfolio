@@ -122,13 +122,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const lightboxImg = document.getElementById('lightbox-img');
   const closeBtn = document.getElementById('close-lightbox');
 
-  // We check up to 50 numerical filenames to make it easy for you to just drag and drop
-  const maxPostersToCheck = 50; 
+  // We check up to 150 numerical filenames to make it easy for you to just drag and drop
+  const maxPostersToCheck = 150; 
   let loadedCount = 0;
 
   // USER: If you have specific names, add them to this array:
-  // Example: const customPosters = ['my-poster.jpg', 'event-flyer.png'];
-  const customPosters = []; 
+  // We have pre-populated this with your non-numeric image names.
+  const customPosters = [
+    '3moj.jpg', 'Untitled design.jpg', 'e.jpg', 'ij.jpg', 'jn.jpg', 'km.jpg', 
+    'mk.jpg', 'mki.jpg', 'ms.jpg', 'ni.jpg', 'nij.jpg', 'nj.jpg', 'nje.jpg', 
+    'njk.jpg', 'njkc.jpg', 'o.jpg', 'p.jpg', 'w.jpg'
+  ]; 
 
   async function checkImageExists(url) {
     return new Promise((resolve) => {
@@ -258,22 +262,29 @@ document.addEventListener('DOMContentLoaded', () => {
       loadedCount++;
     }
 
-    // Then, sequentially check 1.jpg, 2.jpg...
+    // Then, sequentially check 1.jpg, 2.jpg... but using Promise.all for speed
+    const checks = [];
     for (let i = 1; i <= maxPostersToCheck; i++) {
-      const exts = ['.jpg', '.png', '.webp', '.jpeg'];
-      let found = false;
-      
-      for (const ext of exts) {
-        const url = `posters/${i}${ext}`;
-        const exists = await checkImageExists(url);
-        if (exists) {
-          htmlContent += createPosterElement(url);
-          loadedCount++;
-          found = true;
-          break; // move to next number once found
+      checks.push((async () => {
+        const exts = ['.jpg', '.png', '.webp', '.jpeg'];
+        for (const ext of exts) {
+          const url = `posters/${i}${ext}`;
+          const exists = await checkImageExists(url);
+          if (exists) return { url, i };
         }
+        return null;
+      })());
+    }
+
+    const results = await Promise.all(checks);
+    const validResults = results.filter(r => r !== null).sort((a, b) => a.i - b.i);
+
+    for (const res of validResults) {
+      // Avoid duplicate if someone added a numeric file to customPosters
+      if (!htmlContent.includes(res.url)) {
+        htmlContent += createPosterElement(res.url);
+        loadedCount++;
       }
-      // If we didn't find the image, we just keep going just in case they skipped a number.
     }
 
     if (loadedCount === 0) {
