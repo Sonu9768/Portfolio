@@ -129,9 +129,20 @@ document.addEventListener('DOMContentLoaded', () => {
   // USER: If you have specific names, add them to this array:
   // We have pre-populated this with your non-numeric image names.
   const customPosters = [
-    '3moj.jpg', 'Untitled design.jpg', 'e.jpg', 'ij.jpg', 'jn.jpg', 'km.jpg', 
-    'mk.jpg', 'mki.jpg', 'ms.jpg', 'ni.jpg', 'nij.jpg', 'nj.jpg', 'nje.jpg', 
-    'njk.jpg', 'njkc.jpg', 'o.jpg', 'p.jpg', 'w.jpg'
+    // Named posters
+    '3moj.jpg', 'Untitled design.jpg', 'e.jpg', 'ij.jpg', 'jn.jpg', 'km.jpg',
+    'mk.jpg', 'mki.jpg', 'ms.jpg', 'ni.jpg', 'nij.jpg', 'nj.jpg', 'nje.jpg',
+    'njk.jpg', 'njkc.jpg', 'o.jpg', 'p.jpg', 'w.jpg',
+    // WhatsApp / dated exports
+    'IMG-20241123-WA0004.jpg', 'IMG-20241123-WA0008.jpg', 'IMG-20241123-WA0010.jpg',
+    'IMG-20250211-WA0004.jpg', 'IMG-20250211-WA0005.jpg',
+    'IMG-20251127-WA0002.jpg',
+    'IMG-20260525-WA0013.jpg', 'IMG-20260526-WA0005.jpg',
+    // Sonu Kumar / Sonu Zaiswal named
+    'sonu kumar.jpg', 'sonu kumar 9.jpg',
+    'sonu zaiswal.jpeg', 'sonu zaiswal 1.jpeg', 'sonu zaiswal 2.jpeg',
+    'sonu zaiswal 3.jpeg', 'sonu zaiswal 5.jpeg', 'sonu zaiswal 6.jpeg',
+    'sonu zaiswal 7.jpeg', 'sonu zaiswal 9.jpeg', 'sonu zaiswal  8.jpeg'
   ]; 
 
   async function checkImageExists(url) {
