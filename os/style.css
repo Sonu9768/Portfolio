@@ -1,0 +1,620 @@
+
+:root {
+  --accent: #00ff9d;
+  --bg: #000;
+  --surface: rgba(10, 15, 20, 0.9);
+  --border: rgba(0, 255, 157, 0.15);
+  --text: #ffffff;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #000; font-family: 'Outfit', sans-serif; height: 100vh; overflow: hidden; }
+
+#matrix-canvas { position: fixed; inset: 0; z-index: -1; opacity: 0.2; }
+
+#boot-screen { position: fixed; inset: 0; background: #000; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: 'JetBrains Mono'; color: var(--accent); }
+#skip-boot-btn { margin-top: 20px; background: transparent; border: 1px solid var(--accent); color: var(--accent); padding: 8px 16px; font-family: 'JetBrains Mono'; cursor: pointer; transition: 0.3s; }
+#skip-boot-btn:hover { background: var(--accent); color: #000; }
+
+#mobile-notice { display: none; position: fixed; inset: 0; background: #000; z-index: 100000; color: var(--accent); font-family: 'JetBrains Mono'; align-items: center; justify-content: center; text-align: center; padding: 20px; }
+.notice-content { border: 1px solid var(--accent); padding: 30px; max-width: 400px; }
+.notice-content i { font-size: 3rem; margin-bottom: 20px; }
+.notice-content h2 { margin-bottom: 15px; }
+.notice-content p { color: #fff; line-height: 1.6; margin-bottom: 20px; }
+.notice-content button { background: var(--accent); color: #000; border: none; padding: 10px 20px; font-weight: bold; cursor: pointer; }
+
+@media (max-width: 800px) {
+  #mobile-notice { display: flex; }
+}
+
+/* Desktop & Icons */
+#desktop { height: calc(100vh - 50px); padding: 50px; position: relative; }
+.icons-grid { position: relative; width: 100%; height: 100%; }
+.os-icon { display: flex; flex-direction: column; align-items: center; gap: 12px; cursor: pointer; padding: 15px; border-radius: 12px; transition: background 0.3s; position: relative; z-index: 10; }
+.os-icon:hover { background: rgba(0, 255, 157, 0.08); }
+.os-icon i { font-size: 3rem; color: var(--accent); filter: drop-shadow(0 0 15px rgba(0,255,157,0.4)); }
+.os-icon span { font-size: 11px; font-family: 'JetBrains Mono'; text-align: center; color: #fff; font-weight: 700; text-shadow: 0 2px 4px #000; }
+
+/* Windows */
+.os-window {
+  position: absolute; width: 850px; height: 550px;
+  background: var(--surface); backdrop-filter: blur(40px);
+  border: 1px solid var(--border); border-radius: 12px;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.8);
+  display: flex; flex-direction: column; overflow: hidden;
+  z-index: 100; transition: transform 0.3s, opacity 0.3s, width 0.3s, height 0.3s;
+}
+
+.window-header {
+  background: rgba(255, 255, 255, 0.03); padding: 12px 25px;
+  display: flex; justify-content: space-between; align-items: center;
+  cursor: move; border-bottom: 1px solid var(--border);
+}
+.header-title { font-family: 'JetBrains Mono'; font-size: 11px; color: var(--accent); letter-spacing: 1px; font-weight: 800; }
+.header-controls { display: flex; gap: 12px; }
+.header-controls span { width: 14px; height: 14px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 8px; color: rgba(0,0,0,0.5); }
+.close-btn { background: #ff5f56; } .close-btn:hover:after { content: '×'; }
+.min-btn { background: #ffbd2e; } .min-btn:hover:after { content: '−'; }
+.max-btn { background: #27c93f; } .max-btn:hover:after { content: '□'; }
+
+.window-body { flex: 1; padding: 40px; overflow-y: auto; color: #fff; }
+
+/* Window States */
+.os-window.maximized { width: 100% !important; height: 100% !important; top: 0 !important; left: 0 !important; border-radius: 0; }
+.os-window.minimized { transform: scale(0.5); opacity: 0; pointer-events: none; }
+
+/* Taskbar */
+#taskbar { position: fixed; bottom: 0; width: 100%; height: 50px; background: rgba(0,0,0,0.95); border-top: 1px solid var(--border); display: flex; align-items: center; padding: 0 20px; z-index: 2000; }
+.start-btn { background: var(--accent); color: #000; font-weight: 900; font-size: 11px; padding: 8px 18px; border-radius: 4px; cursor: pointer; display: flex; gap: 10px; align-items: center; }
+#active-apps { flex: 1; margin: 0 20px; display: flex; gap: 10px; }
+.app-pill { background: rgba(255,255,255,0.03); padding: 6px 15px; border-radius: 4px; font-size: 10px; cursor: pointer; border: 1px solid var(--border); color: #888; font-family: 'JetBrains Mono'; }
+.app-pill.active { border-color: var(--accent); color: var(--accent); background: rgba(0,255,157,0.05); }
+
+/* App Specifics */
+.skill-bar-wrap { margin-bottom: 25px; }
+.skill-label { font-size: 12px; color: var(--text-dim); margin-bottom: 8px; display: flex; justify-content: space-between; }
+.skill-bar { height: 6px; background: #222; border-radius: 10px; overflow: hidden; }
+.skill-fill { height: 100%; background: var(--accent); box-shadow: 0 0 10px var(--accent); }
+
+.project-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.proj-card { background: rgba(255,255,255,0.02); border: 1px solid var(--border); padding: 25px; border-radius: 12px; cursor: pointer; transition: 0.3s; }
+.proj-card:hover { border-color: var(--accent); background: rgba(0,255,157,0.05); }
+.proj-card h4 { font-size: 14px; color: var(--accent); margin-bottom: 10px; }
+.proj-card p { font-size: 12px; color: #888; line-height: 1.4; }
+
+#start-menu { position: fixed; bottom: 60px; left: 20px; width: 360px; background: rgba(5, 5, 5, 0.98); backdrop-filter: blur(50px); border: 1px solid var(--border); border-radius: 12px; display: none; flex-direction: column; padding: 25px; z-index: 2001; }
+.menu-header { display: flex; gap: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+.menu-header img { width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--accent); }
+
+@media (max-width: 800px) {
+  .os-window { width: 95vw !important; left: 2.5vw !important; top: 5vh !important; }
+  .project-grid { grid-template-columns: 1fr; }
+}
+
+/* Game Suite Styles */
+.game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; }
+.game-card { background: rgba(255,255,255,0.02); border: 1px solid var(--border); padding: 15px; border-radius: 10px; text-align: center; cursor: pointer; transition: 0.3s; }
+.game-card:hover { border-color: var(--accent); background: rgba(0,255,157,0.05); transform: translateY(-3px); }
+.game-card i { font-size: 1.5rem; color: var(--accent); margin-bottom: 10px; }
+.game-card h5 { font-size: 10px; font-weight: 700; }
+
+.game-viewport { background: #000; border: 2px solid #222; border-radius: 8px; position: relative; margin-top: 20px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.game-canvas { background: #000; }
+
+/* Elite Taskbar (Centered) */
+#taskbar {
+  justify-content: space-between;
+  background: rgba(0,0,0,0.8);
+  backdrop-filter: blur(20px);
+}
+#active-apps {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+.app-pill {
+  width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 8px; font-size: 14px;
+}
+.app-pill.active::after {
+  content: ''; position: absolute; bottom: -8px; width: 4px; height: 4px; background: var(--accent); border-radius: 50%;
+}
+
+/* Miniaturized Icons */
+.os-icon { width: 90px; height: 90px; padding: 10px; }
+.os-icon i { font-size: 2rem; }
+.os-icon span { font-size: 10px; opacity: 0.8; }
+
+/* Context Menu */
+#ctx-menu {
+  position: fixed; width: 180px; background: rgba(10,10,10,0.95);
+  backdrop-filter: blur(20px); border: 1px solid var(--border);
+  border-radius: 8px; display: none; flex-direction: column; padding: 5px; z-index: 5000;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+.ctx-item {
+  padding: 10px 15px; font-size: 11px; color: #ccc; cursor: pointer; border-radius: 4px;
+}
+.ctx-item:hover { background: var(--accent); color: #000; }
+
+/* Cyber Arcade GUI */
+.game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 15px; margin-top: 20px; }
+.game-card {
+  background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+  border-radius: 12px; padding: 20px; text-align: center; cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative; overflow: hidden;
+}
+.game-card:hover {
+  transform: scale(1.05); border-color: var(--accent);
+  background: rgba(0,255,157,0.1); box-shadow: 0 0 20px rgba(0,255,157,0.2);
+}
+.game-card i { font-size: 2rem; color: var(--accent); margin-bottom: 10px; display: block; }
+.game-card h5 { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
+.game-card::after {
+  content: 'LAUNCH'; position: absolute; bottom: -20px; left: 0; width: 100%;
+  background: var(--accent); color: #000; font-size: 9px; font-weight: 900;
+  padding: 2px 0; transition: 0.3s;
+}
+.game-card:hover::after { bottom: 0; }
+
+#game-vp {
+  background: #000; border: 2px solid #222; border-radius: 15px;
+  min-height: 450px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  position: relative; box-shadow: inset 0 0 50px rgba(0,0,0,1);
+}
+.arcade-header { width: 100%; padding: 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222; }
+
+/* Platinum Arcade GUI */
+.game-card {
+  background: linear-gradient(135deg, rgba(20,20,20,0.9), rgba(0,0,0,0.8));
+  border: 1px solid #333; box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+.game-card i { text-shadow: 0 0 15px var(--accent); }
+.game-card h5 { color: #fff; text-shadow: 0 0 5px rgba(255,255,255,0.3); }
+
+#game-vp {
+  background: radial-gradient(circle at center, #0a110a 0%, #000 100%);
+  border: 2px solid var(--accent); box-shadow: 0 0 40px rgba(0,255,157,0.1);
+  overflow: hidden;
+}
+
+/* CRT Scanline Effect */
+#game-vp::before {
+  content: " "; display: block; position: absolute; top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  z-index: 2; background-size: 100% 2px, 3px 100%; pointer-events: none;
+}
+
+.arcade-header {
+  background: rgba(0,255,157,0.05); border-bottom: 1px solid var(--accent);
+  color: var(--accent); font-family: 'JetBrains Mono'; font-size: 12px;
+}
+
+/* Elite Aesthetic Overhaul */
+:root {
+  --neon-glow: 0 0 15px rgba(0, 255, 157, 0.4);
+  --glass: rgba(255, 255, 255, 0.03);
+}
+
+.btn-sys {
+  background: linear-gradient(135deg, rgba(0, 255, 157, 0.1), rgba(0, 255, 157, 0.05)) !important;
+  border: 1px solid var(--accent) !important;
+  color: var(--accent) !important;
+  text-transform: uppercase;
+  font-family: 'JetBrains Mono';
+  font-weight: 800;
+  letter-spacing: 1px;
+  border-radius: 4px;
+  box-shadow: var(--neon-glow);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.btn-sys:hover {
+  background: var(--accent) !important;
+  color: #000 !important;
+  box-shadow: 0 0 30px var(--accent);
+  transform: translateY(-2px);
+}
+
+/* Custom OS Alert */
+#os-alert-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.8);
+  backdrop-filter: blur(10px); z-index: 10000;
+  display: none; align-items: center; justify-content: center;
+}
+.os-alert-box {
+  background: #050505; border: 2px solid var(--accent);
+  padding: 40px; border-radius: 12px; width: 450px;
+  text-align: center; box-shadow: 0 0 50px rgba(0,255,157,0.2);
+  animation: alertPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+@keyframes alertPop { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+.alert-msg { font-family: 'JetBrains Mono'; color: #fff; margin-bottom: 30px; line-height: 1.6; }
+
+/* Game Visuals */
+.t2048 { box-shadow: inset 0 0 10px rgba(0,0,0,0.5); }
+.mine-tile { 
+  background: rgba(255,255,255,0.02) !important; 
+  border: 1px solid rgba(0,255,157,0.1) !important; 
+  transition: 0.2s; 
+}
+.mine-tile:hover { background: rgba(0,255,157,0.05) !important; border-color: var(--accent) !important; }
+
+.arcade-header {
+  border-bottom: 2px solid var(--accent) !important;
+  background: linear-gradient(to right, rgba(0,255,157,0.1), transparent) !important;
+}
+
+/* Ultra Attractive OS Alert */
+#os-alert-overlay {
+  display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(15px); z-index: 10000; align-items: center; justify-content: center;
+}
+.os-alert-box {
+  background: #050505; border: 1px solid var(--accent);
+  padding: 50px; border-radius: 4px; width: 400px;
+  text-align: center; box-shadow: 0 0 100px rgba(0,255,157,0.1);
+  position: relative; overflow: hidden;
+  animation: glitchIn 0.3s ease-out;
+}
+@keyframes glitchIn {
+  0% { transform: scale(1.1); opacity: 0; filter: hue-rotate(90deg); }
+  50% { transform: scale(0.95); opacity: 0.8; filter: hue-rotate(-45deg); }
+  100% { transform: scale(1); opacity: 1; filter: hue-rotate(0); }
+}
+.os-alert-box::before {
+  content: ""; position: absolute; inset: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(0,255,157,0.03) 2px);
+  pointer-events: none;
+}
+.alert-title { font-size: 10px; color: var(--accent); letter-spacing: 3px; margin-bottom: 20px; font-weight: 900; }
+.alert-msg { font-size: 18px; color: #fff; margin-bottom: 30px; font-family: 'JetBrains Mono'; text-transform: uppercase; }
+
+/* Harder 2048 styling */
+.t2048 { transition: transform 0.1s, background 0.3s; }
+
+/* Premium Start Menu Overhaul */
+#start-menu {
+  background: rgba(5, 10, 15, 0.95) !important;
+  backdrop-filter: blur(50px) !important;
+  border: 1px solid rgba(0, 255, 157, 0.3) !important;
+  box-shadow: 0 30px 100px rgba(0,0,0,0.9), inset 0 0 20px rgba(0,255,157,0.05);
+  width: 400px !important;
+}
+
+.menu-header {
+  border-bottom: 1px solid rgba(255,255,255,0.05) !important;
+  padding-bottom: 25px !important;
+  margin-bottom: 20px !important;
+}
+
+.menu-header h2 { color: #fff !important; font-size: 22px !important; font-weight: 900 !important; }
+.menu-header p { color: var(--accent) !important; font-size: 11px !important; font-family: 'JetBrains Mono'; }
+
+.start-menu-list { list-style: none; padding: 0; }
+.start-menu-item {
+  display: flex; align-items: center; gap: 15px;
+  padding: 12px 20px; border-radius: 8px;
+  color: #eee !important; font-size: 14px;
+  transition: all 0.3s; cursor: pointer;
+}
+.start-menu-item:hover {
+  background: rgba(0, 255, 157, 0.1);
+  color: var(--accent) !important;
+  transform: translateX(5px);
+}
+.start-menu-item i { font-size: 18px; color: var(--accent); width: 25px; text-align: center; }
+
+.menu-footer {
+  margin-top: 25px; padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  display: flex; justify-content: space-between;
+}
+
+.menu-link {
+  color: var(--accent) !important; text-decoration: none !important;
+  font-size: 12px; font-weight: 700; display: flex; align-items: center; gap: 8px;
+  padding: 8px 15px; background: rgba(0,255,157,0.05); border-radius: 6px;
+  transition: 0.3s;
+}
+.menu-link:hover { background: var(--accent); color: #000 !important; }
+
+/* Fixed Start Button Glow */
+.start-btn {
+  box-shadow: 0 0 20px rgba(0, 255, 157, 0.3);
+  transition: 0.3s;
+}
+.start-btn:hover { box-shadow: 0 0 40px var(--accent); }
+
+/* AGGRESSIVE START MENU CONTRAST FIX */
+#start-menu {
+  background: rgba(5, 5, 5, 0.98) !important;
+  border: 1px solid #00ff9d !important;
+  color: #fff !important;
+  box-shadow: 0 0 40px rgba(0, 255, 157, 0.1) !important;
+}
+
+#start-menu .menu-header h4 {
+  color: #fff !important;
+  font-weight: 900 !important;
+  text-shadow: 0 0 10px rgba(0,255,157,0.3);
+}
+
+#start-menu .menu-header p {
+  color: #00ff9d !important;
+  font-family: 'JetBrains Mono';
+  font-weight: 700 !important;
+}
+
+#start-menu .menu-items .menu-item-link,
+#start-menu .menu-items a {
+  color: #ffffff !important; /* FORCE WHITE */
+  text-decoration: none !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 15px !important;
+  padding: 12px 20px !important;
+  font-family: 'JetBrains Mono' !important;
+  font-size: 14px !important;
+  transition: 0.3s !important;
+}
+
+#start-menu .menu-items i {
+  color: #00ff9d !important; /* FORCE NEON GREEN ICONS */
+  font-size: 18px !important;
+  width: 25px;
+  text-align: center;
+}
+
+#start-menu .menu-items .menu-item-link:hover,
+#start-menu .menu-items a:hover {
+  background: rgba(0, 255, 157, 0.15) !important;
+  color: #00ff9d !important;
+  padding-left: 30px !important;
+}
+
+#start-menu hr {
+  border: 0;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  margin: 10px 0;
+}
+
+/* Fix for the blue links */
+#start-menu a:link, #start-menu a:visited {
+  color: #ffffff !important;
+}
+
+/* SYSTEM TRAY CONTRAST FIX */
+.system-tray {
+  display: flex !important;
+  align-items: center !important;
+  gap: 15px !important;
+  color: #ffffff !important; /* FORCE WHITE TEXT */
+  font-family: 'JetBrains Mono', monospace !important;
+  font-weight: 700 !important;
+  padding-right: 20px !important;
+}
+
+.system-tray i {
+  color: #00ff9d !important; /* FORCE NEON GREEN ICONS */
+  font-size: 16px !important;
+  text-shadow: 0 0 10px rgba(0, 255, 157, 0.4) !important;
+}
+
+#os-clock {
+  color: #ffffff !important;
+  font-size: 14px !important;
+  letter-spacing: 1px !important;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Ensure Taskbar itself is dark enough */
+#taskbar {
+  background: rgba(0, 0, 0, 0.9) !important;
+  border-top: 1px solid rgba(0, 255, 157, 0.2) !important;
+}
+
+/* AUTO-SCALING FOR MAXIMIZED WINDOWS */
+.os-window.maximized #p-area {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: calc(100vh - 150px) !important;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  overflow: visible !important;
+}
+
+.os-window.maximized #sc {
+  image-rendering: pixelated; /* Keep snake sharp */
+}
+
+/* Ensure game boards stay centered and sharp */
+#p-area {
+  transition: transform 0.3s ease;
+  overflow: visible !important;
+}
+
+/* Fix for 2048 tiles in maximized mode */
+.os-window.maximized #g2048, 
+.os-window.maximized #memb, 
+.os-window.maximized #tttb, 
+.os-window.maximized #minb {
+  gap: 10px !important;
+}
+
+/* FIX FOR BUTTON CLICKS IN MAXIMIZED MODE */
+.arcade-header {
+  position: relative !important;
+  z-index: 1000 !important; /* Ensure buttons are ALWAYS on top */
+  pointer-events: auto !important;
+}
+
+.os-window.maximized #p-area {
+  z-index: 1 !important; /* Move game content below header */
+  margin-top: 20px !important; /* Push game down to clear buttons */
+}
+
+.btn-sys {
+  position: relative !important;
+  z-index: 2000 !important; /* Absolute top priority for clicks */
+}
+
+/* FORCE ABSOLUTE DESKTOP LAYOUT */
+#desktop {
+  position: relative !important;
+  width: 100vw;
+  height: calc(100vh - 60px);
+  overflow: hidden;
+}
+
+.icons-grid {
+  display: block !important; /* Disable flex/grid so absolute positioning works */
+  position: absolute;
+  inset: 0;
+  pointer-events: none; /* Allow clicks through to desktop for dropping */
+}
+
+.os-icon {
+  position: absolute !important;
+  pointer-events: auto !important;
+  z-index: 10;
+  width: 100px;
+  text-align: center;
+}
+
+/* CENTER GAMES IN ARCADE */
+#p-area {
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  min-height: 450px !important;
+  padding: 20px !important;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+/* Ensure Arcade Window fills height correctly */
+.os-window[id*="games"] .window-body {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 550px !important;
+  padding: 0 !important; /* Let p-area handle padding */
+}
+
+.arcade-header {
+  padding: 15px 25px !important;
+  background: rgba(0, 255, 157, 0.05);
+  border-bottom: 1px solid rgba(0, 255, 157, 0.1);
+}
+
+/* Make 2048 and other grids look premium */
+#g2048, #tttb, #memb, #minb {
+  box-shadow: 0 0 30px rgba(0,0,0,0.5);
+  border: 1px solid rgba(255,255,255,0.05);
+  padding: 10px;
+  background: #0a0a0a;
+  border-radius: 12px;
+}
+
+#sc {
+  border: 4px solid #111 !important;
+  box-shadow: 0 0 20px rgba(0,255,157,0.1);
+}
+
+/* ELITE ARCADE UI OVERHAUL */
+.os-window[id*="games"] {
+  width: 600px !important;
+  height: 650px !important;
+}
+
+.os-window[id*="games"] .window-body {
+  display: flex !important;
+  flex-direction: column !important;
+  padding: 0 !important;
+  overflow: hidden !important; /* NO SCROLLBARS */
+  height: calc(100% - 35px) !important;
+  max-height: none !important; /* OVERRIDE INLINE STYLE */
+}
+
+.arcade-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 12px 25px !important;
+  background: #050505 !important;
+  border-bottom: 1px solid rgba(0, 255, 157, 0.2) !important;
+}
+
+.arcade-header span {
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 11px !important;
+  color: #00ff9d !important;
+  letter-spacing: 2px !important;
+}
+
+#p-area {
+  flex: 1 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: radial-gradient(circle, rgba(0, 255, 157, 0.05) 0%, rgba(0,0,0,1) 100%) !important;
+  padding: 20px !important;
+  position: relative !important;
+}
+
+/* Control Buttons Spacing */
+.arcade-header .btn-sys {
+  padding: 6px 15px !important;
+  font-size: 10px !important;
+  margin-left: 8px !important;
+}
+
+/* Fix Game Grids */
+#g2048, #tttb, #memb, #minb {
+  margin: 0 !important;
+  transform: none !important; /* Prevent double scaling */
+  box-shadow: 0 20px 50px rgba(0,0,0,0.8) !important;
+}
+
+#sc {
+  max-width: 100% !important;
+  max-height: 100% !important;
+  border: 2px solid #00ff9d !important;
+}
+
+/* MAXIMIZED WINDOW FIX */
+.os-window.maximized {
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: calc(100vh - 45px) !important;
+  border-radius: 0 !important;
+  z-index: 9999 !important;
+}
+
+/* SCALE GAMES WHEN MAXIMIZED */
+.os-window.maximized #p-area > div, 
+.os-window.maximized #p-area > canvas {
+  transform: scale(1.5) !important;
+  transition: transform 0.3s ease !important;
+  transform-origin: center !important;
+}
+
+/* Ensure Snake stays centered when scaled */
+.os-window.maximized #sc {
+  transform-origin: center !important;
+}
+
+/* Adjust header spacing in maximized mode */
+.os-window.maximized .window-body {
+  height: calc(100% - 40px) !important;
+}

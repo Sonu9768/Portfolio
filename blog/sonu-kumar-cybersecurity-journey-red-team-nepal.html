@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>My Cybersecurity Journey from Nepal — Red Team & Offensive Security | Sonu Kumar</title>
+<meta name="description" content="Sonu Kumar's complete cybersecurity journey from Kathmandu, Nepal. From MITM demonstrations in class to TryHackMe Top 1%, penetration testing methodology, AWS cloud security, and red team operations.">
+<meta name="keywords" content="Sonu Kumar cybersecurity, red team Nepal, offensive security Nepal, penetration testing Nepal, Sonu Kumar ethical hacker, cybersecurity Kathmandu, Nepal cybersecurity specialist">
+<meta name="author" content="Sonu Kumar">
+<meta property="og:title" content="My Cybersecurity Journey from Nepal — Red Team & Offensive Security | Sonu Kumar">
+<meta property="og:description" content="How Sonu Kumar became a cybersecurity specialist and red team practitioner from Kathmandu, Nepal. The full story.">
+<meta property="og:image" content="https://www.kumarsonu.com.np/sonu-kumar-cybersecurity-nepal.gif">
+<meta property="og:url" content="https://www.kumarsonu.com.np/blog/sonu-kumar-cybersecurity-journey-red-team-nepal.html">
+<link rel="canonical" href="https://www.kumarsonu.com.np/blog/sonu-kumar-cybersecurity-journey-red-team-nepal.html">
+<link rel="stylesheet" href="blog.css">
+</head>
+<body>
+<nav>
+  <span class="nav-logo">&gt; SONU_KUMAR.BLOG</span>
+  <a href="https://www.kumarsonu.com.np/">← Portfolio</a>
+  <a href="https://www.kumarsonu.com.np/blog/">All Posts</a>
+</nav>
+<div class="container">
+<article>
+<div class="hero">
+  <span class="cat" style="background:#ff5f56">CYBERSECURITY · FIELD RESEARCH</span>
+  <h1>My Cybersecurity Journey from Nepal — From Curiosity to Red Team Operations</h1>
+  <div class="meta">
+    <span>By <strong>Sonu Kumar</strong></span>
+    <span>2022 – Present</span>
+    <span>Kathmandu, Nepal</span>
+    <span>Offensive Security Specialist</span>
+  </div>
+</div>
+
+<p>Every cybersecurity professional has an origin story — a specific, often visceral moment when the abstract concept of digital security became personally and urgently real. For me, that moment arrived during a networking module at Islington College in Kathmandu. My tutor, demonstrating the dangers of unencrypted protocols, launched a man-in-the-middle attack against the local lab network using a combination of ARP spoofing and packet capture tools. Within minutes, my own credentials — my username and password, transmitted in plaintext over HTTP — appeared on the projector screen at the front of the room for the entire class to see. I felt simultaneously violated, fascinated, and electrified. That feeling of electrification never went away. From that afternoon forward, cybersecurity was not a subject I was studying — it was a world I was determined to inhabit.</p>
+
+<h2>The First Steps — Linux and the Command Line</h2>
+<p>My entry point into serious security study was, like most practitioners', Linux. The command line is the native environment of security tooling, and becoming genuinely fluent in it is an inescapable prerequisite for any serious offensive security work. I installed Kali Linux as a dual-boot alongside my primary operating system and committed to using only the terminal for everything I could manage. This was deliberately uncomfortable at first — tasks that took seconds with a GUI required careful research and precise command construction. But the discomfort was the point: it forced me to understand what was actually happening at the system level rather than hiding that complexity behind graphical abstractions. Within a few months, the terminal felt natural. Within a year, it felt faster and more precise than any GUI for most tasks I needed to perform.</p>
+
+<h2>Discovering TryHackMe and Structured Learning</h2>
+<p>The challenge with cybersecurity self-education is that there is an almost overwhelming quantity of material available, most of it poorly structured and with no clear progression from beginner to practitioner. I discovered TryHackMe in early 2022 and recognised immediately that its gamified, guided approach to security learning was exactly the structured framework I needed. The platform divides its content into "rooms" — self-contained lab environments focused on specific vulnerabilities, tools, or techniques — and aggregates these into curated learning paths from complete beginner through to advanced practitioner. I worked through the beginner paths methodically: networking fundamentals, Linux privilege escalation, web application security basics, and introductory penetration testing. The dopamine feedback loop of completing rooms and earning points was engineered very effectively to maintain momentum through the inevitable difficult patches where progress feels slow. More importantly, TryHackMe provided something that reading alone cannot: hands-on experience attacking real (intentionally vulnerable) systems in a legal, sandboxed environment. The difference between understanding how a SQL injection works conceptually and actually exploiting one in a live target — seeing your injected payload return database contents in the browser — is profound.</p>
+
+<h2>Developing a Penetration Testing Methodology</h2>
+<p>As my practical skills developed, I recognised the need for a systematic methodology rather than ad hoc technique application. I studied established industry frameworks — particularly the Penetration Testing Execution Standard (PTES) and OWASP's testing guide for web applications — and synthesised these into my personal working methodology. The approach I developed follows a consistent lifecycle: reconnaissance (passive and active information gathering), enumeration (systematic service discovery and fingerprinting), vulnerability identification (combining automated scanning with manual analysis), exploitation (gaining initial access through identified vulnerabilities), post-exploitation (privilege escalation, lateral movement, persistence mechanisms), and reporting (structured, prioritised, actionable findings). Each phase has specific tools and techniques I apply consistently. For reconnaissance, I rely on OSINT gathering tools, DNS enumeration (dnsx, subfinder), and directory brute-forcing (ffuf, gobuster). For enumeration, Nmap with custom scripts forms the foundation, supplemented by service-specific tools. Burp Suite is my primary tool for web application testing. For privilege escalation, I have built familiarity with the common Linux and Windows escalation vectors through deliberate practice on dedicated lab machines. Importantly, my methodology emphasises manual analysis over automated scanning — automated tools generate false positives and miss logic vulnerabilities that only manual testing uncovers.</p>
+
+<h2>Advanced Techniques — Active Directory and Windows Environments</h2>
+<p>Enterprise environments in Nepal, as globally, are overwhelmingly Windows-based, and enterprise network security is fundamentally shaped by Active Directory. I invested significant time learning the architecture of AD environments and the attack techniques that target them — because understanding how an attacker compromises an enterprise network requires understanding the infrastructure that enterprise networks run on. I studied and practised techniques including AS-REP Roasting, Kerberoasting, Pass-the-Hash, Pass-the-Ticket, DCSync, and Golden/Silver Ticket attacks. I did this entirely within intentionally vulnerable lab environments — including dedicated platforms and self-built vulnerable domain controllers — which is the only ethical and legal way to develop these skills. Understanding the full attack chain from initial foothold through domain administrator compromise gave me an appreciation for why enterprise security architecture decisions matter so profoundly, and why partial defences are often far more dangerous than people assume.</p>
+
+<h2>Web Application Security and OWASP</h2>
+<p>Web application security became a particular focus area for me, driven both by the prevalence of web applications as attack targets and by my background in web development. I worked through the OWASP Top 10 systematically — not just reading about each vulnerability category but building and attacking intentionally vulnerable web applications to develop practical intuition. SQL injection, Cross-Site Scripting, Insecure Direct Object References, Server-Side Request Forgery, XML External Entities, and the full landscape of authentication and session management weaknesses became deeply familiar. I also studied more advanced web vulnerabilities including Server-Side Template Injection, HTTP Request Smuggling, and OAuth implementation flaws — vulnerabilities that require both technical understanding and creative thinking to identify and exploit. The SecureCyberGuard browser extension I built as my Islington College final year project drew directly on this knowledge: building an effective phishing and malicious URL detector required understanding attacker techniques for evading detection deeply enough to build defences against them.</p>
+
+<h2>AWS Cloud Security</h2>
+<p>Through my AWS Academy training, I developed a serious understanding of cloud security as a distinct discipline. The cloud has not eliminated traditional security concerns — it has transformed and in many cases amplified them. The most common and consequential cloud security failures are misconfigurations rather than zero-day exploits: an S3 bucket with public read access containing sensitive data, an IAM role with wildcard permissions granted to a development lambda function, an EC2 instance metadata service accessible from application code with SSRF vulnerabilities, or a security group rule that exposes administrative interfaces to the public internet. I learned to think about cloud security through the lens of the shared responsibility model — understanding precisely where AWS's security obligations end and the customer's begin — and to apply the principle of least privilege at cloud scale, where the number of principals, resources, and permission relationships quickly becomes too complex to manage manually without proper tooling and policies.</p>
+
+<h2>The Tools That Define My Security Practice</h2>
+<p>My security toolkit has evolved significantly over three years of active development. For reconnaissance: theHarvester, Shodan, Amass, subfinder, and OSINT frameworks. For scanning and enumeration: Nmap with NSE scripts, Nikto, Gobuster, FFuf, and WhatWeb. For exploitation: Metasploit Framework for known CVEs, SQLMap for SQL injection automation, and custom Python scripts for specific scenarios. For web application testing: Burp Suite Professional is my primary tool, used for intercepting and modifying HTTP traffic, fuzzing, and automated vulnerability scanning. For Active Directory attacks: BloodHound and SharpHound for attack path mapping, Impacket suite for protocol-level attacks, CrackMapExec for SMB enumeration. For post-exploitation: various privilege escalation scripts (LinPEAS, WinPEAS) and custom shellcode. All of these tools are used exclusively in authorised environments — either my own controlled lab infrastructure or commissioned assessment environments with explicit written permission.</p>
+
+<h2>Nepal's Cybersecurity Landscape</h2>
+<p>Nepal's cybersecurity ecosystem is at an interesting inflection point. Awareness of cybersecurity as a discipline is growing rapidly, driven by several high-profile incidents affecting Nepali organisations and the general global expansion of security consciousness. However, the supply of qualified practitioners remains far below the demand — particularly for offensive security skills, which are rarer and require a specific combination of technical depth, creative thinking, and ethical discipline that is difficult to develop quickly. I see this gap as both a personal opportunity and a professional responsibility. Nepal needs more qualified security practitioners, and those of us who are developing genuine expertise have a role to play in supporting the broader community: through knowledge sharing, mentorship, and advocacy for security education in Nepali academic institutions. My long-term goal is to contribute actively to Nepal's emerging cybersecurity community — not just to build a successful individual career but to help build the field itself.</p>
+
+<h2>Looking Forward — Goals and Aspirations</h2>
+<p>My immediate professional goals are focused and specific: achieving the OSCP (Offensive Security Certified Professional) certification, which requires completing a rigorous 24-hour practical examination against a network of intentionally vulnerable machines; deepening my expertise in malware analysis and reverse engineering; and contributing to open-source security tooling that benefits the broader practitioner community. Beyond these near-term targets, I aspire to work on red team engagements for organisations operating in Nepal and the broader South Asian region — helping enterprises understand their actual security posture through simulated adversarial attacks rather than theoretical risk assessments. I also want to engage more actively with Nepal's university-level cybersecurity education, sharing practical knowledge that academic curricula often fail to include. The field is enormous, the learning never ends, and I am deeply grateful that this is the work I get to do.</p>
+
+</article>
+<div class="author-box">
+  <h3>&gt; ABOUT SONU KUMAR</h3>
+  <p style="margin-top:10px">Sonu Kumar is a cybersecurity specialist based in Kathmandu, Nepal. TryHackMe Top 1% globally. BSc (Hons) Computing at Islington College. Professional experience in ISP networking (WebSurfer) and creative design (Skyline, Sama, UHS). Building Nepal's next generation of security practitioners.</p>
+  <p style="margin-top:10px"><a href="https://www.kumarsonu.com.np">Visit Portfolio →</a></p>
+</div>
+<div class="related">
+  <h3>&gt; RELATED POSTS</h3>
+  <div class="related-list">
+    <a href="sonu-kumar-tryhackme-top-1-percent-nepal.html">🏆 Reaching TryHackMe Top 1% from Kathmandu</a>
+    <a href="sonu-kumar-red-team-offensive-security-nepal.html">🛡️ Red Team Operations — Offensive Security Methodology</a>
+    <a href="sonu-kumar-aws-cloud-security-nepal.html">☁️ AWS Cloud Security from Nepal</a>
+    <a href="sonu-kumar-websurfer-l2-network-support-nepal.html">🌐 Life as L2 Engineer at WebSurfer Nepal</a>
+  </div>
+</div>
+</div>
+<footer>© 2025 Sonu Kumar · <a href="https://www.kumarsonu.com.np">kumarsonu.com.np</a> · Kathmandu, Nepal</footer>
+</body>
+</html>

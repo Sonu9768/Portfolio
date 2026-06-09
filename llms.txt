@@ -1,0 +1,31 @@
+# Sonu Zaiswal (Sonu Kumar)
+
+Sonu Zaiswal is a multi-disciplinary professional based in Kathmandu, Nepal, specializing in Offensive Security (Red Team Operations) and Graphic Design.
+
+## Expertise
+
+- **Cybersecurity**: Vulnerability Assessment, Network Security, Red Team Operations, OSINT, and Penetration Testing. Ranked in the Top 1% globally on TryHackMe. Published [The Ultimate Guide to Securing Your Home Network in Nepal (2026)](https://kumarsonu.com.np/blog/how-to-secure-home-network-nepal-2026.html).
+- **Graphic Design**: Brand Identity, Editorial Design, UI/UX, and Motion Graphics. Experienced in Adobe Creative Suite and Figma.
+
+## Professional Experience
+
+- **WebSurfer**: L2 Network Support Engineer.
+- **UHS Holdings**: Senior Graphic Designer & Web Developer.
+- **Sama Publications**: Senior Graphic Designer.
+
+## Projects
+
+- **WHOIS Threat Analyzer**: OSINT tool for domain risk scoring.
+- **AI Traffic Monitoring**: YOLO-based real-time detection system.
+- **Network Mapper Automation**: Python-based Nmap automation.
+
+## Contact & Socials
+
+- **Website**: https://kumarsonu.com.np
+- **GitHub**: https://github.com/Sonu9768
+- **Email**: sonuzaiswal@gmail.com
+- **LinkedIn**: [LinkedIn Profile](https://linkedin.com/in/sonuzaiswal)
+- **X (Twitter)**: [X Profile](https://x.com/sonuzaiswal)
+- **Instagram**: [Instagram Profile](https://instagram.com/sonuzaiswal)
+- **Facebook**: [Facebook Page](https://facebook.com/sonuzaiswal)
+- **YouTube**: [YouTube Channel](https://youtube.com/@sonuzaiswal)

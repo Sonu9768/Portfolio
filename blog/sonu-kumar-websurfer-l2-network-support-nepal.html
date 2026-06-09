@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Life as an L2 Network Support Engineer at WebSurfer Nepal | Sonu Kumar</title>
+<meta name="description" content="Sonu Kumar shares his first-hand experience as an L2 Network Support Engineer at WebSurfer Nepal. Covers BGP troubleshooting, fiber outages, Zabbix, MikroTik, Cisco IOS, MPLS, and ISP infrastructure in Kathmandu.">
+<meta name="keywords" content="Sonu Kumar WebSurfer, L2 network support Nepal, WebSurfer Nepal engineer, BGP troubleshooting Nepal, MikroTik Nepal, ISP support engineer Kathmandu, Sonu Kumar network engineer">
+<meta name="author" content="Sonu Kumar">
+<meta property="og:title" content="Life as an L2 Network Support Engineer at WebSurfer Nepal | Sonu Kumar">
+<meta property="og:description" content="An insider's account of working L2 network support at WebSurfer Nepal — BGP incidents, fiber cuts, NOC shifts, and what real ISP infrastructure looks like from the inside.">
+<meta property="og:image" content="https://www.kumarsonu.com.np/sonu-kumar-cybersecurity-nepal.gif">
+<meta property="og:url" content="https://www.kumarsonu.com.np/blog/sonu-kumar-websurfer-l2-network-support-nepal.html">
+<link rel="canonical" href="https://www.kumarsonu.com.np/blog/sonu-kumar-websurfer-l2-network-support-nepal.html">
+<link rel="stylesheet" href="blog.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Life as an L2 Network Support Engineer at WebSurfer Nepal","author":{"@type":"Person","name":"Sonu Kumar","url":"https://www.kumarsonu.com.np"},"datePublished":"2025-12-01","description":"Sonu Kumar's experience as L2 network support at WebSurfer Nepal covering BGP, MikroTik, Zabbix and ISP operations."}</script>
+</head>
+<body>
+<nav>
+  <span class="nav-logo">&gt; SONU_KUMAR.BLOG</span>
+  <a href="https://www.kumarsonu.com.np/">← Portfolio</a>
+  <a href="https://www.kumarsonu.com.np/blog/">All Posts</a>
+</nav>
+<div class="container">
+<article>
+<div class="hero">
+  <span class="cat">NETWORKING · WORK LOG</span>
+  <h1>Life as an L2 Network Support Engineer at WebSurfer Nepal</h1>
+  <div class="meta">
+    <span>By <strong>Sonu Kumar</strong></span>
+    <span>Sept 2025 – Dec 2025</span>
+    <span>WebSurfer Nepal Pvt. Ltd.</span>
+    <span>Kathmandu, Nepal</span>
+  </div>
+</div>
+
+<p>When I first walked into the WebSurfer Network Operations Centre in September 2025, I carried a laptop bag in one hand and four years of academic and self-taught networking theory in the other. I had studied IP addressing, routing protocols, subnetting, and OSI layers until they felt like second nature on paper. But paper and production are entirely different worlds, and WebSurfer — one of Nepal's most established Internet Service Providers — wasted no time in showing me exactly where my textbook knowledge ended and real engineering began. The four months I spent as a Level 2 (L2) Network Support Engineer at WebSurfer were, without any exaggeration, the most technically intense and professionally formative months of my life so far.</p>
+
+<h2>Understanding WebSurfer and the Nepali ISP Landscape</h2>
+<p>WebSurfer Nepal Pvt. Ltd. is a significant player in Nepal's telecommunications landscape, providing broadband internet services to residential, commercial, and enterprise clients across the Kathmandu Valley and several other urban centres. The company operates its own backbone infrastructure, peering with upstream providers via international gateways, and serves thousands of concurrent users at any given time. Understanding the scale of the operation is important context for understanding what L2 support actually involves. When something breaks at WebSurfer, it does not affect one person — it can affect entire neighbourhoods, hospitals, banks, schools, and businesses simultaneously. That reality defined the urgency of every shift I worked there.</p>
+
+<h2>What L2 Support Actually Means</h2>
+<p>At WebSurfer, technical support operates in a tiered model. Level 1 (L1) engineers handle the first point of contact — basic triage, rebooting customer premises equipment (CPE), verifying physical connections, and resolving straightforward configuration issues. When a ticket was too complex, too persistent, or too deep in the network stack for L1 to handle confidently, it escalated to the L2 team — my team. We operated with a fundamentally different toolkit and a fundamentally different mindset. Where L1 asks "Is the cable plugged in?", L2 asks "Why is this BGP session flapping and why has it been doing so for the past forty minutes?" My responsibilities at L2 spanned a wide and demanding range: diagnosing routing anomalies, handling escalated enterprise client tickets, working with network monitoring dashboards, troubleshooting VLAN misconfigurations, tracing packet loss across the backbone, coordinating with the NOC during major outages, and maintaining accurate incident documentation.</p>
+
+<h2>Daily Life in the NOC</h2>
+<p>A typical shift at WebSurfer began with reviewing the overnight alert queue. We used a combination of Zabbix for infrastructure monitoring and a custom-built ticketing system for customer complaints. Alerts were colour-coded by severity — green for informational, yellow for warnings, red for critical. On a quiet morning, the queue might have six or seven yellow alerts requiring investigation. On a bad day — particularly after heavy rain, which accelerates corrosion in Nepal's often-aging fiber ducts — the dashboard would look like a fire had swept through the city. Fiber breaks were among the most common physical issues: a splice damaged by moisture, a cable accidentally cut during road construction (a distressingly frequent occurrence in Kathmandu's perpetually under-construction urban environment), or a connector oxidised enough to push signal loss above the acceptable threshold. Each one required coordinating with the field team, identifying the break location on the network map, and estimating restoration time for affected clients — all while the phones kept ringing.</p>
+
+<h2>The BGP Incident That Taught Me the Most</h2>
+<p>Approximately six weeks into my tenure, I was assigned a Priority 1 ticket at 10:47 PM. A major enterprise client — a hospital group operating across multiple sites — had reported intermittent connectivity loss affecting their electronic patient records system, internal VoIP, and remote diagnostic equipment. The L1 team had already confirmed that physical connectivity at the premises was intact. When the ticket landed on my desk, I immediately ran a traceroute from the WebSurfer edge router toward the hospital's gateway IP. The result was immediately diagnostic: the path was flapping, alternating between two routes every few seconds. This is a classic symptom of BGP instability. I cross-referenced the path information with our Zabbix alerts and found that one of our upstream peering sessions had been generating a high volume of prefix withdrawal and re-advertisement events for approximately two hours — far longer than the automated alert threshold before it should have paged someone senior. A BGP peer on our upstream was route-flapping, and its instability was poisoning our routing table with constantly changing best-path selections, which manifested as the intermittent connectivity the hospital was experiencing. I escalated to the senior NOC engineer, documented my analysis precisely, and together we applied a BGP route dampening policy to the affected peer — a mechanism that penalises peers for frequent route changes and temporarily suppresses their advertisements until stability is demonstrated. Within twenty-two minutes of my initial traceroute, the hospital's connectivity was fully stable. That single incident taught me more about production BGP behaviour than any number of lab simulations could have. It also taught me that calm, methodical analysis under pressure is a skill that must be deliberately cultivated.</p>
+
+<h2>Tools and Technologies I Used Every Day</h2>
+<p>The WebSurfer technology stack was enterprise-grade and diverse. MikroTik RouterOS formed the foundation of most CPE configurations and many edge routing nodes — I became deeply comfortable with MikroTik's terminal interface, Winbox GUI, and scripting capabilities. Cisco IOS powered the core and aggregation switches, and I developed genuine proficiency in Cisco's command-line interface for VLAN configuration, spanning-tree troubleshooting, and interface diagnostics. Zabbix was our primary monitoring platform, and I learned to create custom monitoring templates, configure SNMP traps for specific device types, and write trigger expressions that reduced false-positive alert noise. LibreNMS complemented Zabbix for device inventory management and historical traffic graphing. Wireshark was my go-to tool for packet-level diagnostics — capturing traffic at specific points in the path and analysing it frame by frame to identify anomalies. For authentication issues, I worked with our RADIUS server to troubleshoot PPPoE session establishment failures. I also gained practical exposure to MPLS tunnel configurations used to isolate enterprise clients from residential traffic on our shared infrastructure.</p>
+
+<h2>Documentation and Knowledge Base Contribution</h2>
+<p>One of the most impactful contributions I made during my time at WebSurfer was to the team's internal knowledge base. When I joined, the documentation for certain recurring issue types was either absent or outdated — a common problem in fast-moving operations teams where writing documentation feels like a luxury when tickets are piling up. I made a deliberate effort to document each novel issue I encountered in a structured runbook format: problem description, diagnostic steps, resolution steps, and prevention recommendations. By the end of my tenure, I had contributed fourteen runbooks covering everything from PPPoE authentication failures to OSPF neighbour adjacency drops. These runbooks were adopted by the L1 team and measurably reduced escalation rates for the documented issue types. It was a small contribution in the grand scheme of the company's operations, but it reinforced something I believe deeply: knowledge that stays in one person's head is fragile; knowledge that is written down and shared is resilient.</p>
+
+<h2>Night Shifts and Learning Under Pressure</h2>
+<p>The internet does not observe business hours, and neither does a serious ISP support role. I rotated through night shifts where the NOC room was quiet, the city outside was dark, but the monitoring dashboard was never still. Some of my most significant learning happened between midnight and 5 AM, when skeleton-crew staffing meant that complex problems landed on whoever was present regardless of seniority. A major fiber cut on the Kathmandu ring at 2:30 AM once required me to coordinate traffic rerouting through a backup path before morning peak traffic began — a task that involved identifying which aggregation routers were currently routing traffic through the failed segment, modifying OSPF metrics to prefer the backup path, confirming that the backup path had sufficient capacity, and monitoring the reroute for stability. Completing that task successfully, alone, at 3 AM, was one of the most confidence-building moments of my professional life.</p>
+
+<h2>How Working at an ISP Sharpened My Cybersecurity Thinking</h2>
+<p>Perhaps the most valuable and unexpected outcome of my time at WebSurfer was the profound upgrade it delivered to my cybersecurity thinking. When you work inside an ISP, you see the internet at a layer of abstraction that most security practitioners never access. I could observe DNS queries at scale and understand precisely how DNS hijacking at the ISP level would work — and how difficult it would be to detect from the client side. I watched DDoS attacks arrive as massive, sudden traffic spikes against specific destination addresses — seeing the shape of an attack from the upstream perspective gave me insights that packet captures at the target endpoint simply cannot provide. I understood ARP spoofing not as a theoretical attack but as something I had seen cause real disruption on customer subnets before proper layer 2 security policies were enforced. This ISP-level vantage point — inside the literal plumbing of the internet — gave me a uniquely concrete mental model of how data flows, where it can be intercepted, where it can be redirected, and where it is most vulnerable. That model informs every security assessment I conduct today.</p>
+
+<h2>Key Professional Skills Developed</h2>
+<p>Across four months at WebSurfer, I developed a set of skills that no academic programme could fully replicate. Systematic diagnostic thinking — the ability to isolate variables, form hypotheses, and test them efficiently under time pressure — became a reflex rather than a deliberate process. Stakeholder communication under pressure — explaining a complex BGP issue to a hospital's IT manager who needs to update their administrators and medical staff — taught me to translate technical reality into actionable information for non-technical audiences. Team coordination during incidents — knowing when to escalate, when to hold the line, and how to keep the senior engineer focused on resolution rather than explanation — is a social and organisational skill as important as any technical one.</p>
+
+<h2>Final Reflection</h2>
+<p>My four months at WebSurfer were among the richest of my professional life. Every shift delivered something new to learn, some tool to master more deeply, some scenario to add to my mental library of production incidents. I am deeply grateful to the senior engineers who mentored me, to the NOC team who trusted me with critical escalations, and to the enterprise clients whose patience during outages drove me to resolve issues faster than I believed possible. If you are a student of networking or cybersecurity in Nepal and you have the opportunity to work inside an ISP — any ISP — take it without hesitation. It is where theory becomes reality, and where you discover whether you truly love this field or merely find it interesting. I discovered that I love it.</p>
+
+</article>
+
+<div class="author-box">
+  <h3>&gt; ABOUT SONU KUMAR</h3>
+  <p style="margin-top:10px">Sonu Kumar is a cybersecurity specialist and web developer based in Kathmandu, Nepal. He holds a BSc (Hons) Computing from Islington College (London Metropolitan University) and has professional experience in ISP network engineering, offensive security, and graphic design. Top 1% globally on TryHackMe.</p>
+  <p style="margin-top:10px"><a href="https://www.kumarsonu.com.np">Visit Portfolio →</a></p>
+</div>
+<div class="related">
+  <h3>&gt; RELATED POSTS</h3>
+  <div class="related-list">
+    <a href="sonu-kumar-cybersecurity-journey-red-team-nepal.html">🔐 My Cybersecurity Journey — From Nepal to Red Team Ops</a>
+    <a href="sonu-kumar-tryhackme-top-1-percent-nepal.html">🏆 Reaching TryHackMe Top 1% from Kathmandu, Nepal</a>
+    <a href="sonu-kumar-aws-cloud-security-nepal.html">☁️ AWS Cloud Security from a Nepali Developer's Perspective</a>
+    <a href="sonu-kumar-islington-college-bsc-computing-kathmandu.html">🎓 Inside Islington College Kathmandu</a>
+  </div>
+</div>
+</div>
+<footer>© 2025 Sonu Kumar · <a href="https://www.kumarsonu.com.np">kumarsonu.com.np</a> · Kathmandu, Nepal</footer>
+</body>
+</html>

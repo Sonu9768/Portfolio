@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sonu Kumar | Cybersecurity Learner & Security Analyst Nepal</title>
+  <meta name="description" content="Security portfolio of Sonu Kumar — Cybersecurity learner, network analyst, and CTF participant based in Kathmandu, Nepal. Writeups, projects, and learning notes.">  
+  <meta name="keywords" content="Sonu Kumar, Cybersecurity Nepal, Security Analyst Nepal, Network Security Kathmandu, CTF Nepal, TryHackMe Nepal, Penetration Testing Nepal, Cybersecurity Learner">
+  <meta name="author" content="Sonu Kumar">
+  <link rel="canonical" href="https://kumarsonu.com.np/security/">
+  <link rel="icon" href="../sonu-kumar-cybersecurity-nepal.gif" type="image/gif">
+
+  <!-- Open Graph / Social Media SEO -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://kumarsonu.com.np/security/">
+  <meta property="og:title" content="Sonu Kumar | Cybersecurity Learner & Security Analyst Nepal">
+  <meta property="og:description" content="Security portfolio of Sonu Kumar — Cybersecurity learner, network analyst, and CTF participant based in Kathmandu, Nepal.">
+  <meta property="og:image" content="https://kumarsonu.com.np/sonu-kumar-cybersecurity-nepal.gif">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Sonu Kumar | Cybersecurity Learner Nepal">
+  <meta name="twitter:description" content="Security portfolio of Sonu Kumar — Network security, CTF challenges, and vulnerability research from Kathmandu, Nepal.">
+
+  <!-- Preload fonts to eliminate render-blocking -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="style.css">
+  
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script defer src="script.js"></script>
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "mainEntity": {
+      "@type": "Person",
+      "name": "Sonu Kumar",
+      "alternateName": ["Sonu Zaiswal", "Sonu Jaiswal", "Kumar Sonu"],
+      "jobTitle": "Security Analyst & Network Engineer",
+      "alumniOf": {
+        "@type": "CollegeOrUniversity",
+        "name": "Islington College"
+      },
+      "url": "https://kumarsonu.com.np/security/",
+      "sameAs": [
+        "https://github.com/Sonu9768",
+        "https://www.linkedin.com/in/sonu-zaiswal-580360240/",
+        "https://www.instagram.com/sonu_zaiswal",
+        "https://x.com/sonuzaiswal",
+        "https://tryhackme.com/p/Sonu8889",
+        "https://blueteamlabs.online/public/user/b09769999ce243bac73f41"
+      ]
+    }
+  }
+  </script>
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+
+  <!-- Facebook Pixel Code -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', 'XXXXXXXXXXXXXXX');
+    fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=XXXXXXXXXXXXXXX&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Facebook Pixel Code -->
+
+  <!-- Force Clean URLs -->
+  <script>
+    if (window.location.pathname.endsWith('index.html')) {
+      var newUrl = window.location.href.replace(/index\.html/i, '');
+      window.history.replaceState({}, document.title, newUrl);
+    }
+  </script>
+</head>
+<body>
+  
+  <div class="scanlines"></div>
+  <canvas id="matrix-canvas"></canvas>
+
+  <nav class="navbar">
+    <div class="logo"><a href="../" style="color:var(--green);text-decoration:none;">root@sonu:~#</a></div>
+    <div class="menu-toggle" id="mobile-menu">
+      <i class="fas fa-bars"></i>
+    </div>
+    <div class="nav-links" id="nav-links">
+      <a href="#terminal">./profile.sh</a>
+      <a href="#skills">./skills.sh</a>
+      <a href="#writeups">./writeups.sh</a>
+      <a href="#projects">./projects.sh</a>
+      <a href="#experience">./experience.sh</a>
+      <a href="../" class="btn-sys" style="margin-left: 20px;">EXIT</a>
+    </div>
+  </nav>
+
+  <!-- Live Terminal Block -->
+  <section class="terminal-section section" id="terminal">
+    <div class="profile-layout">
+      <div class="profile-img-container">
+        <h1 style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0;">Sonu Zaiswal | Offensive Security & Cybersecurity Expert</h1>
+        <img src="../sonu-kumar-cybersecurity-nepal.gif" alt="Sonu Zaiswal Cybersecurity Profile Animated Portrait" loading="lazy" width="380">
+        <div class="img-glitch-overlay"></div>
+      </div>
+      
+      <div class="terminal-window">
+        <div class="terminal-header">
+          <div class="btn-red"></div>
+          <div class="btn-yellow"></div>
+          <div class="btn-green"></div>
+          <span>bash - root@sonu: ~</span>
+        </div>
+        <div class="terminal-body" id="typewriter">
+          <span class="prompt">root@sonu:~#</span> cat profile.txt<br>
+          <br>
+          NAME: Sonu Kumar<br>
+          ROLE: Security Analyst / Network Engineer<br>
+          LOC : Kathmandu, Nepal<br>
+          <br>
+          > Cybersecurity learner focused on network security and vulnerability assessment.<br>
+          > Hands-on experience in network support at WebSurfer Nepal (ISP).<br>
+          > Actively building skills through CTF challenges and labs on TryHackMe.<br>
+          <br>
+          <span class="prompt">root@sonu:~#</span> _
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Animated Skill Bars -->
+  <section class="skills section" id="skills">
+    <h2 class="section-title">> SKILL_LEVELS</h2>
+    <div class="metrics-container">
+
+      <div class="skill-wrap">
+        <div class="skill-label"><span>NETWORK_SECURITY (VLAN, OSPF, BGP)</span><span>[82%]</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="82%"></div></div>
+      </div>
+
+      <div class="skill-wrap">
+        <div class="skill-label"><span>VULNERABILITY_ASSESSMENT</span><span>[75%]</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="75%"></div></div>
+      </div>
+
+      <div class="skill-wrap">
+        <div class="skill-label"><span>OSINT_&_RECONNAISSANCE</span><span>[78%]</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="78%"></div></div>
+      </div>
+
+      <div class="skill-wrap">
+        <div class="skill-label"><span>PYTHON_AUTOMATION</span><span>[72%]</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="72%"></div></div>
+      </div>
+
+      <div class="skill-wrap">
+        <div class="skill-label"><span>WEB_APPLICATION_SECURITY</span><span>[68%]</span></div>
+        <div class="skill-bar"><div class="skill-fill" data-width="68%"></div></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Security Writeups & Learning Notes -->
+  <section class="writeups section" id="writeups">
+    <h2 class="section-title">> WRITEUPS_&_LEARNING</h2>
+    <p style="color:#888; margin-bottom:30px; font-size:0.95rem;">Notes and writeups from CTF challenges, security labs, and real-world networking experience.</p>
+    <div class="project-grid">
+
+      <div class="proj-card">
+        <h3>How to Secure Your Home Network</h3>
+        <p>A practical guide to securing routers, segmenting networks with VLANs, and reducing your attack surface at home.</p>
+        <div class="links">
+          <a href="../blog/how-to-secure-home-network-nepal-2026.html" class="btn-sys">[READ]</a>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <h3>AWS Cloud Security Basics</h3>
+        <p>Learning notes from the AWS Academy Cloud Security course — IAM policies, S3 bucket security, and common misconfigurations.</p>
+        <div class="links">
+          <a href="../blog/sonu-kumar-aws-cloud-security-nepal.html" class="btn-sys">[READ]</a>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <h3>Red Team Learning Path</h3>
+        <p>My journey through offensive security training — privilege escalation, AD exploitation, and web application attacks.</p>
+        <div class="links">
+          <a href="../blog/sonu-kumar-cybersecurity-journey-red-team-nepal.html" class="btn-sys">[READ]</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Project Cards -->
+  <section class="projects section" id="projects">
+    <h2 class="section-title">> TOOLS_&_PROJECTS</h2>
+    <div class="project-grid">
+
+      <!-- ══ SecureGuard Ecosystem — Flagship Final Year Project ══ -->
+      <div class="proj-card proj-card--flagship" id="secureguard-proj">
+
+        <div class="flagship-top">
+          <div class="flagship-badges">
+            <span class="proj-badge proj-badge--gold"><i class="fas fa-graduation-cap"></i> Final Year Project</span>
+            <span class="proj-badge proj-badge--red">Offensive + Defensive AI</span>
+            <span class="proj-badge proj-badge--lock"><i class="fas fa-lock"></i> Private / Academic</span>
+          </div>
+
+          <div class="flagship-title-row">
+            <div class="flagship-shield-icon">
+              <i class="fas fa-shield-halved"></i>
+            </div>
+            <div>
+              <h3 class="flagship-title">SecureGuard Ecosystem <span class="proj-new-tag">v2.0 Alpha</span></h3>
+              <p class="flagship-subtitle">Distributed Microservices Security Suite — React Frontend · FastAPI Backend · Chrome Extension</p>
+            </div>
+          </div>
+
+          <p class="flagship-desc">
+            A full-stack, AI/ML-powered cybersecurity ecosystem built as a final year project. Combines offensive vulnerability scanning with real-time defensive browser protection — phishing detection, ad blocking (including YouTube ads), a RAG-powered AI chatbot, and auto-generated PDF security reports. All three components (website, backend, extension) are deeply interconnected via REST APIs, WebSockets, and Chrome Messaging.
+          </p>
+        </div>
+
+        <!-- Architecture Flow -->
+        <div class="flagship-arch">
+          <div class="arch-label"><i class="fas fa-diagram-project"></i> Architecture</div>
+          <div class="arch-flow">
+            <div class="arch-node">
+              <i class="fab fa-react"></i>
+              <span>React Frontend</span>
+            </div>
+            <div class="arch-arrow">⟷</div>
+            <div class="arch-node arch-node--center">
+              <i class="fas fa-server"></i>
+              <span>FastAPI Backend</span>
+            </div>
+            <div class="arch-arrow">⟷</div>
+            <div class="arch-node">
+              <i class="fas fa-puzzle-piece"></i>
+              <span>Chrome Extension</span>
+            </div>
+          </div>
+          <div class="arch-sub">REST API &nbsp;·&nbsp; WebSocket &nbsp;·&nbsp; Chrome Messaging &nbsp;·&nbsp; SQLite + SQLAlchemy &nbsp;·&nbsp; Google OAuth &nbsp;·&nbsp; JWT</div>
+        </div>
+
+        <!-- Feature Modules -->
+        <div class="flagship-modules">
+          <div class="module-card">
+            <div class="module-icon mod-red"><i class="fas fa-crosshairs"></i></div>
+            <div class="module-body">
+              <strong>Nuclear Vulnerability Scanner</strong>
+              <span>Crawls target sites with BeautifulSoup, injects SQLi / XSS / SSTI payloads, scans all 65,535 ports in parallel async batches, deduplicates via ResultCorrelator, and exports PDF reports via ReportLab.</span>
+            </div>
+          </div>
+          <div class="module-card">
+            <div class="module-icon mod-blue"><i class="fas fa-shield-virus"></i></div>
+            <div class="module-body">
+              <strong>Real-Time Browser Guard</strong>
+              <span>Chrome Extension intercepts every URL via <code>chrome.tabs.onUpdated</code>. Checks against local betting/custom blocklists and remote phishing API. Blocks popup ads, YouTube ads, and malicious sites before they load.</span>
+            </div>
+          </div>
+          <div class="module-card">
+            <div class="module-icon mod-green"><i class="fas fa-robot"></i></div>
+            <div class="module-body">
+              <strong>AI Security Chatbot (RAG)</strong>
+              <span>Retrieval-Augmented Generation: injects user's latest scan context into the Gemini Flash 1.5 prompt. Provides fix recommendations specific to the found vulnerabilities — not generic advice.</span>
+            </div>
+          </div>
+          <div class="module-card">
+            <div class="module-icon mod-purple"><i class="fas fa-id-badge"></i></div>
+            <div class="module-body">
+              <strong>Auth & Cross-Component Sync</strong>
+              <span>Google OAuth → custom JWT minted by backend. Website injects a hidden <code>syncAuth.js</code> that fires <code>chrome.runtime.sendMessage</code> to sync the token and unlock Premium tier in the extension live.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tech Stack Grid -->
+        <div class="flagship-stack-label"><i class="fas fa-layer-group"></i> Full Tech Stack</div>
+        <div class="flagship-stack">
+          <span><i class="fab fa-react"></i> React + Vite</span>
+          <span><i class="fas fa-wind"></i> Tailwind CSS</span>
+          <span><i class="fab fa-python"></i> FastAPI</span>
+          <span><i class="fas fa-database"></i> SQLite / SQLAlchemy</span>
+          <span><i class="fas fa-robot"></i> Gemini Flash 1.5</span>
+          <span><i class="fas fa-puzzle-piece"></i> Chrome Extension MV3</span>
+          <span><i class="fas fa-file-pdf"></i> ReportLab PDF</span>
+          <span><i class="fas fa-spider"></i> BeautifulSoup Crawler</span>
+          <span><i class="fas fa-network-wired"></i> Async Port Scanner</span>
+          <span><i class="fas fa-key"></i> JWT + Google OAuth</span>
+          <span><i class="fas fa-plug"></i> REST + WebSocket</span>
+          <span><i class="fas fa-code-branch"></i> Nuclei Templates</span>
+        </div>
+
+        <div class="flagship-footer">
+          <div class="flagship-private-note">
+            <i class="fas fa-lock"></i>
+            Source code is private for security and academic integrity reasons. Available for review upon request.
+          </div>
+        </div>
+      </div>
+      <!-- ══ End SecureGuard ══ -->
+
+      <div class="proj-card proj-card--featured" id="kushwaha-motors-proj">
+        <div class="proj-card-header">
+          <span class="proj-badge">Client Work · Live</span>
+          <span class="proj-ai-badge"><i class="fas fa-robot"></i> AI-Powered</span>
+        </div>
+        <h3>Kushwaha Motors Website</h3>
+        <p>Full-featured automotive dealership website built for a real client. Includes a custom-trained AI assistant (fine-tuned on vehicles, services & FAQs), rich GSAP scroll animations, and a responsive React frontend.</p>
+        <div class="proj-tech-row">
+          <span><i class="fab fa-react"></i> React</span>
+          <span><i class="fab fa-html5"></i> HTML5</span>
+          <span><i class="fab fa-js"></i> JavaScript</span>
+          <span><i class="fas fa-robot"></i> Custom AI</span>
+        </div>
+        <div class="links">
+          <a href="https://www.kushwahamotors.com.np/" target="_blank" rel="noopener" class="btn-sys btn-sys--accent">[VISIT SITE ↗]</a>
+        </div>
+      </div>
+
+      <div class="proj-card proj-card--highlight" id="pka-unlocker-proj">
+        <div class="proj-card-header">
+          <span class="proj-badge proj-badge--red">Reverse Engineering</span>
+          <span class="proj-badge proj-badge--blue"><i class="fas fa-lock-open"></i> Open Source</span>
+        </div>
+        <h3>PKA Unlocker <span class="proj-new-tag">NEW</span></h3>
+        <p>Reverse-engineered Cisco Packet Tracer's 4-stage encryption pipeline (XOR byte obfuscation → Twofish EAX decryption → zlib decompression → XML patching) to unlock .pka/.pkt activity files. Students can now view their own progress, answers, and scores — 100% local, no data leaves your machine.</p>
+        <div class="proj-pipeline">
+          <span><i class="fas fa-shuffle"></i> XOR Obfuscation</span>
+          <span class="pipe-arrow">→</span>
+          <span><i class="fas fa-key"></i> Twofish EAX</span>
+          <span class="pipe-arrow">→</span>
+          <span><i class="fas fa-file-zipper"></i> zlib</span>
+          <span class="pipe-arrow">→</span>
+          <span><i class="fas fa-code"></i> XML Patch</span>
+        </div>
+        <div class="proj-tech-row">
+          <span><i class="fab fa-python"></i> Python</span>
+          <span><i class="fas fa-desktop"></i> Tkinter GUI</span>
+          <span><i class="fas fa-shield-halved"></i> Pure-Python Twofish</span>
+          <span><i class="fas fa-lock-open"></i> CMAC / CTR</span>
+        </div>
+        <div class="links">
+          <a href="https://github.com/Sonu9768/pka-file-unlock" target="_blank" rel="noopener" class="btn-sys btn-sys--accent">[GITHUB ↗]</a>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <h3>S.K_Analyzer</h3>
+        <p>All-in-one offensive security toolkit featuring port scanning, traffic analysis, password auditing, vulnerability scanning, and more. Built with Python.</p>
+        <div class="links">
+          <a href="https://github.com/Sonu9768/S.K_Analyzer" target="_blank" rel="noopener" class="btn-sys">[GITHUB]</a>
+        </div>
+      </div>
+
+
+      <div class="proj-card">
+        <h3>PacketSniff_Analyzer</h3>
+        <p>Lightweight Python-based network packet sniffer using Scapy. Captures live traffic, logs key metadata, and provides a simple CSV output for analysis.</p>
+        <div class="links">
+          <a href="https://github.com/Sonu9768/PacketSniff_Analyzer" target="_blank" rel="noopener" class="btn-sys">[GITHUB]</a>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <h3>Rental-System-python-</h3>
+        <p>Python land Rental System CLI based.</p>
+        <div class="links">
+          <a href="https://github.com/Sonu9768/Rental-System-python-" target="_blank" rel="noopener" class="btn-sys">[GITHUB]</a>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <h3>2048-Game-in-Python</h3>
+        <p>A Python implementation of the classic 2048 sliding block puzzle game.</p>
+        <div class="links">
+          <a href="https://github.com/Sonu9768/2048-Game-in-Python" target="_blank" rel="noopener" class="btn-sys">[GITHUB]</a>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <h3>Alarm-Clock-in-Python</h3>
+        <p>A functional alarm clock script written in Python for time management and alerts.</p>
+        <div class="links">
+          <a href="https://github.com/Sonu9768/Alarm-Clock-in-Python" target="_blank" rel="noopener" class="btn-sys">[GITHUB]</a>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <h3>Website</h3>
+        <p>E-commerce frontend Website for Printer.</p>
+        <div class="links">
+          <a href="https://github.com/Sonu9768/Website" target="_blank" rel="noopener" class="btn-sys">[GITHUB]</a>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <h3>Binary-Search-in-Python</h3>
+        <p>A Python implementation of the binary search algorithm for efficient searching in sorted lists.</p>
+        <div class="links">
+          <a href="https://github.com/Sonu9768/Binary-Search-in-Python" target="_blank" rel="noopener" class="btn-sys">[GITHUB]</a>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <h3>Countdown-Timer-in-Python</h3>
+        <p>A simple and customizable countdown timer application built with Python.</p>
+        <div class="links">
+          <a href="https://github.com/Sonu9768/Countdown-Timer-in-Python" target="_blank" rel="noopener" class="btn-sys">[GITHUB]</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Detailed Experience -->
+  <section class="experience section" id="experience">
+    <h2 class="section-title">> OPERATION_LOGS</h2>
+    
+    <div class="log-entry">
+      <div class="log-time">[2025-08 TO 2026-02]</div>
+      <h3>L2 Network Support Engineer @ WebSurfer</h3>
+      <p>Handled escalated network incidents for one of Nepal's largest ISPs. Resolved complex routing anomalies, DHCP exhaustion events, and fiber outages.</p>
+      <div class="incident-block">
+        <strong>INCIDENT_REPORT #BGP-442:</strong> Diagnosed a flapping BGP peering session that caused intermittent connectivity for a major hospital group. Coordinated with the NOC to apply dampening policies, restoring stability within 22 minutes.
+      </div>
+    </div>
+
+    <div class="log-entry">
+      <div class="log-time">[2022-01 TO PRESENT]</div>
+      <h3>Security Learner &amp; CTF Participant</h3>
+      <p>Independent study through CTF platforms, security labs, and guided learning paths. Active on TryHackMe and Blue Team Labs Online.</p>
+      <div class="incident-block">
+        <strong>FOCUS_AREAS:</strong> Network security, vulnerability scanning, web application basics, Linux privilege escalation, and cloud security fundamentals.
+      </div>
+    </div>
+  </section>
+
+  <!-- Certificates -->
+  <section class="certs section">
+    <h2 class="section-title">> CERTIFICATES.DAT</h2>
+    <ul class="cert-list">
+      <li><i class="fas fa-check-circle"></i> AWS Academy Cloud Security</li>
+      <li>
+        <i class="fas fa-check-circle"></i>
+        <a href="https://tryhackme.com/p/Sonu8889" target="_blank" rel="noopener" style="color:var(--green);text-decoration:none;">
+          TryHackMe &mdash; Active CTF Learner &nbsp;<span style="font-size:0.75rem;opacity:0.6;">[View Profile &#8599;]</span>
+        </a>
+      </li>
+      <li>
+        <i class="fas fa-check-circle"></i>
+        <a href="https://blueteamlabs.online/public/user/b09769999ce243bac73f41" target="_blank" rel="noopener" style="color:var(--green);text-decoration:none;">
+          Blue Team Labs Online &nbsp;<span style="font-size:0.75rem;opacity:0.6;">[View Profile &#8599;]</span>
+        </a>
+      </li>
+      <li><i class="fas fa-check-circle"></i> Intro to PenTesting & Offensive Security</li>
+      <li><i class="fas fa-check-circle"></i> BSc (Hons) Computer Networking & IT Security</li>
+    </ul>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact section">
+    <h2 class="section-title">> INITIATE_HANDSHAKE</h2>
+    <div class="terminal-window form-window">
+      <div class="terminal-header">
+        <div class="btn-red"></div>
+        <div class="btn-yellow"></div>
+        <div class="btn-green"></div>
+        <span>secure_channel.sh</span>
+      </div>
+      <div class="terminal-body">
+        <p style="color: var(--green); margin-bottom: 20px;">> Secure communications channel open. Awaiting payload...</p>
+        
+        <form class="cyber-form" action="https://formsubmit.co/sonuzaiswal@gmail.com" method="POST">
+          <div class="form-row">
+            <span class="prompt">NAME=</span>
+            <input type="text" name="name" required>
+          </div>
+          <div class="form-row">
+            <span class="prompt">EMAIL=</span>
+            <input type="email" name="email" required>
+          </div>
+          <div class="form-row" style="align-items: flex-start;">
+            <span class="prompt">MSG=</span>
+            <textarea name="message" rows="4" required></textarea>
+          </div>
+          
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="table">
+          
+          <div class="form-actions" style="margin-top: 20px;">
+            <button type="submit" class="btn-sys">[ TRANSMIT_PAYLOAD ]</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <div class="sr-only">
+    <h2>Sonu Zaiswal - Cybersecurity Expert & Offensive Security Researcher in Nepal</h2>
+    <p>Sonu Zaiswal is a prominent **Cybersecurity Specialist in Nepal**, known for his Global Top 1% ranking on TryHackMe. As a student at **Islington College Kathmandu**, he has mastered advanced penetration testing, red team operations, and network security methodologies. His professional experience as an L2 Network Support Engineer at WebSurfer Nepal provides him with deep insights into ISP-level infrastructure and defense.</p>
+    
+    <h3>Best Cybersecurity Training & Expertise in Kathmandu</h3>
+    <p>Searching for the **best cybersecurity expert in Kathmandu**? Sonu Zaiswal provides expert-level vulnerability assessments, security audits, and offensive security research. He is a key figure in the **Islington College Kathmandu** technical community, contributing to the development of next-generation security practitioners in Nepal.</p>
+    
+    <h3>Offensive Security & Red Teaming</h3>
+    <p>Sonu specializes in Active Directory exploitation, privilege escalation, and web application security. He is proficient in the latest security tools including Nmap, Metasploit, Burp Suite, and Kali Linux. His work is dedicated to securing Nepal's digital infrastructure against sophisticated cyber threats.</p>
+    
+    <p>Keywords: Cybersecurity Nepal, Best Ethical Hacker Kathmandu, Islington College Kathmandu Review, Offensive Security Nepal, Sonu Kumar Security, Red Team Nepal, Penetration Testing Kathmandu, WebSurfer Nepal Engineer.</p>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Sonu Kumar &mdash; <a href="../" style="color:var(--green);text-decoration:none;">kumarsonu.com.np</a> &bull; Kathmandu, Nepal</p>
+  </footer>
+
+</body>
+</html>

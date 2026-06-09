@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Ultimate Guide to Securing Your Home Network in Nepal (2026 Edition) | Sonu Zaiswal</title>
+<meta name="description" content="A comprehensive, 1000+ word guide on securing your home Wi-Fi and digital life in Nepal. Covering router security, ISP-specific tips for WorldLink/Vianet, IoT safety, and preventing local cyber threats.">
+<meta name="keywords" content="Cybersecurity Nepal, Home Network Security Nepal, WiFi security Kathmandu, WorldLink router settings, Vianet router security, Nepal internet safety, Sonu Zaiswal cybersecurity">
+<meta name="author" content="Sonu Zaiswal">
+<meta property="og:title" content="The Ultimate Guide to Securing Your Home Network in Nepal (2026 Edition)">
+<meta property="og:description" content="Secure your home network against local and global threats with this in-depth guide by Sonu Zaiswal.">
+<meta property="og:image" content="https://kumarsonu.com.np/sonu-kumar-cybersecurity-nepal.gif">
+<meta property="og:url" content="https://kumarsonu.com.np/blog/how-to-secure-home-network-nepal-2026.html">
+<link rel="canonical" href="https://kumarsonu.com.np/blog/how-to-secure-home-network-nepal-2026.html">
+<link rel="stylesheet" href="blog.css">
+</head>
+<body>
+<nav>
+  <span class="nav-logo">&gt; SONU_ZAISWAL.BLOG</span>
+  <a href="../">← Portfolio</a>
+  <a href="./">All Posts</a>
+</nav>
+<div class="container">
+<article>
+<div class="hero">
+  <span class="cat" style="background:#007bff">CYBERSECURITY · STEP-BY-STEP GUIDE</span>
+  <h1>The Ultimate Guide to Securing Your Home Network in Nepal (2026 Edition)</h1>
+  <div class="meta">
+    <span>By <strong>Sonu Zaiswal</strong></span>
+    <span>May 2026</span>
+    <span>Kathmandu, Nepal</span>
+    <span>Offensive Security Specialist</span>
+  </div>
+</div>
+
+<p>In 2026, the digital landscape in Nepal has evolved rapidly. With high-speed fiber internet now reaching even remote corners of the country and the proliferation of affordable IoT (Internet of Things) devices, the average Nepali household is more connected than ever. However, this convenience comes with a significant trade-off: **security**. As an Offensive Security Specialist, I see firsthand how simple misconfigurations in home networks lead to compromised data, identity theft, and financial loss. This guide is designed to provide you with a comprehensive, "zero-trust" approach to securing your home network specifically within the context of Nepal's ISP ecosystem.</p>
+
+<h2>1. The Foundation: Securing Your ISP-Provided Router</h2>
+<p>Most internet users in Nepal use routers provided by ISPs like WorldLink, Vianet, ClassicTech, or DishHome. These devices are often the weakest link in your security chain. By default, many of these routers are configured for "ease of use" rather than "security."</p>
+
+<h3>Change the Default Admin Credentials</h3>
+<p>Almost every router in Nepal comes with a default username and password (often `admin/admin` or `admin/password`). Hackers can use automated scripts to scan the internet for these default settings. The moment your router is plugged in, you must change the administrative login. Use a passphrase—a string of four or more random words—that is unique and not used for any other account.</p>
+
+<h3>Update Your Firmware Regularly</h3>
+<p>Firmware is the "brain" of your router. Manufacturers and ISPs release updates to patch security vulnerabilities. In Nepal, some ISPs push these updates automatically, but many older "Onu" or "Nokia" routers require manual checks. Log into your router’s interface (usually at `192.168.1.1` or `192.168.100.1`) and look for the "Firmware Update" section.</p>
+
+<h2>2. Wi-Fi Security: Beyond Just a Strong Password</h2>
+<p>Having a long Wi-Fi password is important, but the *type* of encryption you use matters just as much.</p>
+
+<h3>Use WPA3 Whenever Possible</h3>
+<p>As of 2026, WPA3 is the gold standard for Wi-Fi security. It provides much stronger protection against "brute-force" attacks where a hacker tries millions of passwords to get into your network. If your router is older and only supports WPA2, ensure it is set to **WPA2-AES**, not WPA2-TKIP (which is obsolete and insecure).</p>
+
+<h3>Disable WPS (Wi-Fi Protected Setup)</h3>
+<p>WPS allows you to connect devices by pressing a button or entering a 8-digit PIN. This PIN is notoriously easy to "crack" using tools like Reaver. Go into your router settings and **Disable WPS** immediately. It is a major security hole that serves little purpose in a modern home.</p>
+
+<h2>3. DNS: The Internet's Phonebook</h2>
+<p>By default, your router uses the DNS servers provided by your Nepali ISP. While functional, these servers can be slow and are often used for "DNS hijacking" or tracking your browsing habits. Worse, they offer no protection against malicious websites.</p>
+
+<h3>Switch to Encrypted DNS (DoH/DoT)</h3>
+<p>I recommend switching your router's primary and secondary DNS to a privacy-focused provider like **Cloudflare (1.1.1.1)** or **Quad9 (9.9.9.9)**. Quad9, in particular, automatically blocks known malicious domains at the network level. In 2026, you should also enable **DNS over HTTPS (DoH)** on your browsers (Chrome/Firefox) to encrypt your DNS queries, preventing your ISP or local attackers from seeing which websites you are visiting.</p>
+
+<h2>4. The Silent Threat: IoT and Smart Devices</h2>
+<p>From smart bulbs to CCTV cameras bought from Daraz or local markets, "Smart Home" devices are often built with zero security in mind. They frequently have "hardcoded" passwords that cannot be changed and communicate with unencrypted servers.</p>
+
+<h3>Isolate Your IoT Devices (Guest Network)</h3>
+<p>The best way to handle insecure smart devices is to put them in a "digital quarantine." Most modern routers allow you to create a **Guest Network**. Connect all your smart TVs, cameras, and bulbs to the Guest Network, and keep your primary computers and phones on the main network. This way, if a cheap smart bulb is hacked, the attacker cannot "jump" to your laptop where your banking info is stored.</p>
+
+<h2>5. Local Threats: Public Wi-Fi and Phishing in Nepal</h2>
+<p>Nepal has seen a massive surge in "Free Wi-Fi" zones in parks and cafes. These are prime hunting grounds for attackers using "Evil Twin" attacks—where they set up a fake Wi-Fi network with the same name as the legitimate one to steal your data.</p>
+
+<h3>The Rule of Public Wi-Fi</h3>
+<p>Never log into your bank, email, or social media accounts while on public Wi-Fi without a **VPN (Virtual Private Network)**. A VPN creates an encrypted tunnel for your data, making it unreadable to anyone else on the network. For users in Nepal, a reputable VPN also helps bypass local routing issues and protects your privacy from state-level or ISP-level logging.</p>
+
+<h3>Phishing via SMS and WhatsApp</h3>
+<p>In Kathmandu, we often see SMS phishing (Smishing) where users get messages about "Prize winnings" or "Bank account blocks." Always remember: **Your bank will NEVER ask for your password or OTP via a call or message.** If a message feels urgent, it is likely a scam.</p>
+
+<h2>6. Advanced Tip: Use a Network Firewall</h2>
+<p>For those who want to go the extra mile, consider setting up a dedicated firewall like **Pi-hole** or **AdGuard Home** on a small computer like a Raspberry Pi. These tools sit between your devices and the internet, stripping away ads and trackers before they even reach your phone. It significantly improves browsing speed and security for every device in the house.</p>
+
+<h2>7. Regular Audits: The Hacker Mindset</h2>
+<p>Security is not a "set it and forget it" task. Once a month, you should "audit" your network:</p>
+<ul>
+  <li>Check the "Connected Devices" list in your router. If you see a device you don't recognize, block it.</li>
+  <li>Run a scan with a tool like **Fing** on your phone to see all active IP addresses in your home.</li>
+  <li>Change your Wi-Fi password if you've shared it with many guests recently.</li>
+</ul>
+
+<h2>Conclusion</h2>
+<p>Securing your home network in Nepal doesn't require a PhD in Computer Science. It requires a few hours of focused effort and a shift in mindset. By treating your network as a castle that needs constant defense, you can enjoy the benefits of the digital age without the fear of becoming the next victim of a cyberattack. Stay safe, stay secure, and keep your data where it belongs: with you.</p>
+
+</article>
+
+<div class="author-box">
+  <h3>&gt; ABOUT SONU ZAISWAL</h3>
+  <p style="margin-top:10px">Sonu Zaiswal is an Offensive Security Specialist and Red Team Practitioner based in Kathmandu. He specializes in vulnerability assessment, network penetration testing, and digital forensics. When not breaking things (legally), he designs high-end visual identities for global brands.</p>
+  <p style="margin-top:10px"><a href="../">Visit Portfolio →</a></p>
+</div>
+
+<div class="related">
+  <h3>&gt; RELATED POSTS</h3>
+  <div class="related-list">
+    <a href="sonu-kumar-red-team-offensive-security-nepal.html">🛡️ Red Team Operations — Offensive Security Methodology</a>
+    <a href="sonu-kumar-cybersecurity-journey-red-team-nepal.html">🚀 My Cybersecurity Journey from Nepal</a>
+    <a href="sonu-kumar-aws-cloud-security-nepal.html">☁️ AWS Cloud Security from Nepal</a>
+    <a href="sonu-kumar-tryhackme-top-1-percent-nepal.html">🏆 Reaching TryHackMe Top 1% from Kathmandu</a>
+  </div>
+</div>
+</div>
+<footer>© 2026 Sonu Zaiswal · <a href="../">kumarsonu.com.np</a> · Kathmandu, Nepal</footer>
+</body>
+</html>
