@@ -142,6 +142,49 @@
       transform: translateY(-3px);
     }
 
+    /* Explore Graphics button */
+    .btn-explore {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--text-primary);
+      text-decoration: none;
+      padding: 0.9rem 2.2rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
+      border: 1px solid rgba(255,255,255,0.25);
+      cursor: none;
+      transition: all 0.35s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-explore::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,74,0,0.12), rgba(255,74,0,0.04));
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+    .btn-explore:hover::before { opacity: 1; }
+    .btn-explore:hover {
+      border-color: var(--accent);
+      color: #fff;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(255,74,0,0.2);
+    }
+    .explore-arrow {
+      display: inline-block;
+      transition: transform 0.3s ease;
+      font-style: normal;
+    }
+    .btn-explore:hover .explore-arrow {
+      transform: translateX(5px);
+    }
+
     /* Scroll indicator */
     .hero-scroll-hint {
       position: absolute;
@@ -249,8 +292,8 @@
       <button class="btn-projects" id="show-projects-btn">
         <i class="fas fa-briefcase"></i> View Projects
       </button>
-      <a href="../graphics/" class="btn-graphics">
-        <i class="fas fa-image"></i> Poster Gallery
+      <a href="../graphics/" class="btn-explore" id="explore-graphics-btn">
+        Explore Graphics &nbsp;<span class="explore-arrow">→</span>
       </a>
     </div>
 
