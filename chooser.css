@@ -114,6 +114,45 @@ body {
 
 
 /* ── Design Panel Typography ─────────────────── */
+.design-panel .enter-btn {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 12px 32px;
+  border: 1px solid var(--orange);
+  color: var(--orange);
+  font-family: 'Playfair Display', serif;
+  font-size: 0.9rem;
+  letter-spacing: 1.5px;
+  text-decoration: none !important;
+  transition: background 0.3s, color 0.3s;
+  cursor: none;
+}
+.design-panel:hover .enter-btn,
+.design-panel .enter-btn:hover {
+  background: var(--orange);
+  color: #fff8f0;
+}
+.security-panel .enter-btn {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 12px 32px;
+  border: 1px solid var(--green);
+  color: var(--green);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none !important;
+  transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+  box-shadow: 0 0 14px rgba(0,255,157,0.2);
+  cursor: none;
+}
+.security-panel:hover .enter-btn,
+.security-panel .enter-btn:hover {
+  background: var(--green);
+  color: #000;
+  box-shadow: 0 0 30px rgba(0,255,157,0.55);
+}
 .design-panel h2 {
   font-family: 'Playfair Display', serif;
   font-size: 3.5rem;
@@ -129,60 +168,7 @@ body {
   margin-bottom: 28px;
   line-height: 1.6;
 }
-.design-panel .enter-btn {
-  display: inline-block;
-  padding: 12px 32px;
-  border: 1px solid var(--orange);
-  color: var(--orange);
-  font-family: 'Playfair Display', serif;
-  font-size: 0.9rem;
-  letter-spacing: 1.5px;
-  text-decoration: none;
-  transition: background 0.3s, color 0.3s;
-  cursor: none;
-}
-.design-panel:hover .enter-btn,
-.design-panel a.enter-btn:hover {
-  background: var(--orange);
-  color: #fff8f0;
-}
 
-/* ── Security Panel Typography ───────────────── */
-.security-panel h2 {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 3rem;
-  font-weight: 700;
-  color: var(--green);
-  margin-bottom: 18px;
-  line-height: 1.15;
-  text-shadow: 0 0 18px rgba(0,255,157,0.45);
-}
-.security-panel p {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.95rem;
-  color: #888;
-  margin-bottom: 28px;
-  line-height: 1.7;
-}
-.security-panel .enter-btn {
-  display: inline-block;
-  padding: 12px 32px;
-  border: 1px solid var(--green);
-  color: var(--green);
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.8rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: background 0.3s, color 0.3s, box-shadow 0.3s;
-  box-shadow: 0 0 14px rgba(0,255,157,0.2);
-  cursor: none;
-}
-.security-panel:hover .enter-btn {
-  background: var(--green);
-  color: #000;
-  box-shadow: 0 0 30px rgba(0,255,157,0.55);
-}
 
 /* ── Tagline Boxes ───────────────────────────── */
 /* Positioned inside each panel (which has position:relative) */
