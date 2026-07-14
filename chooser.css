@@ -100,17 +100,38 @@ a.split-panel { display: flex; }
 /* ── Split Hero ──────────────────────────────── */
 .split-container {
   position: relative;
-  display: flex;
+  display: flex !important;
+  flex-direction: row !important;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
 }
 
+/* Force anchor tags used as panels to behave like flex children */
+a.split-panel {
+  display: flex !important;
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  text-decoration: none;
+  transition: flex 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+a.split-panel:hover { flex: 1.5; }
+a.split-panel:hover .panel-content { opacity: 1; transform: scale(1.05); }
+
 /* ── Split Tagline Boxes ───────────────────────────── */
-/* Each tagline is positioned relative to its own panel */
+/* Positioned inside each panel (panel has position:relative) */
 .tagline-box {
   position: absolute;
   left: 50%;
+  bottom: 15%;
   transform: translateX(-50%);
   z-index: 20;
   padding: 12px 24px;
@@ -122,7 +143,6 @@ a.split-panel { display: flex; }
 }
 
 .design-tagline {
-  bottom: 15%;
   background: var(--light-bg);
   color: var(--orange);
   font-family: 'Playfair Display', serif;
@@ -131,7 +151,6 @@ a.split-panel { display: flex; }
 }
 
 .security-tagline {
-  bottom: 15%;
   background: #0a0a0a;
   color: var(--green);
   font-family: 'JetBrains Mono', monospace;
@@ -145,10 +164,12 @@ a.split-panel { display: flex; }
   .tagline-box { display: none; }
 }
 
+/* Kept for non-anchor usage compatibility */
 .split-panel {
   position: relative;
   flex: 1;
   height: 100%;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -169,45 +190,78 @@ a.split-panel { display: flex; }
   text-align: center;
   opacity: 0.8;
   transition: opacity 0.4s, transform 0.4s;
-  padding: 0 20px;
+  padding: 0 40px;
+  max-width: 500px;
+  width: 100%;
+  z-index: 5;
+  position: relative;
 }
 
 .split-panel:hover { flex: 1.5; }
 .split-panel:hover .panel-content { opacity: 1; transform: scale(1.05); }
 
 /* Design Panel */
-.design-panel { background: #fff8f0; color: var(--orange); }
+.design-panel {
+  background: #fff8f0 !important;
+  color: var(--orange);
+}
 .design-panel h2 {
   font-family: 'Playfair Display', serif;
-  font-size: 3.5rem; font-weight: 700; margin-bottom: 20px;
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: var(--orange);
 }
 .design-panel p {
   font-family: 'Playfair Display', serif;
-  font-size: 1.2rem; margin-bottom: 30px; color: #4a3b32;
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+  color: #4a3b32;
+  line-height: 1.6;
 }
 .design-panel .enter-btn {
-  display: inline-block; padding: 12px 30px;
-  border: 1px solid var(--orange); color: var(--orange);
-  font-family: 'Playfair Display', serif; letter-spacing: 2px; transition: 0.3s;
+  display: inline-block;
+  padding: 12px 30px;
+  border: 1px solid var(--orange);
+  color: var(--orange);
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 2px;
+  transition: 0.3s;
+  font-size: 0.85rem;
 }
 .design-panel:hover .enter-btn { background: var(--orange); color: #fff8f0; }
 
 /* Security Panel */
-.security-panel { background: var(--dark); color: var(--green); border-left: 2px solid #111; }
+.security-panel {
+  background: var(--dark) !important;
+  color: var(--green);
+  border-left: 2px solid #111;
+}
 .security-panel h2 {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 3rem; font-weight: 700; margin-bottom: 20px;
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: var(--green);
   text-shadow: 0 0 10px rgba(0,255,157,0.4);
 }
 .security-panel p {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 1rem; margin-bottom: 30px; color: #888;
+  font-size: 0.95rem;
+  margin-bottom: 30px;
+  color: #888;
+  line-height: 1.7;
 }
 .security-panel .enter-btn {
-  display: inline-block; padding: 12px 30px;
-  border: 1px solid var(--green); color: var(--green);
-  font-family: 'JetBrains Mono', monospace; letter-spacing: 2px; transition: 0.3s;
+  display: inline-block;
+  padding: 12px 30px;
+  border: 1px solid var(--green);
+  color: var(--green);
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 2px;
+  transition: 0.3s;
   box-shadow: 0 0 15px rgba(0,255,157,0.2);
+  font-size: 0.8rem;
 }
 .security-panel:hover .enter-btn {
   background: var(--green); color: #000; box-shadow: 0 0 30px rgba(0,255,157,0.6);
