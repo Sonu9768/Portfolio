@@ -80,7 +80,7 @@ body {
   text-decoration: none;
   overflow: hidden;
   z-index: 2;
-  cursor: none;
+  cursor: pointer;
 }
 
 /* Security panel — always RIGHT 50% */

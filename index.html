@@ -24,7 +24,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="chooser.css?v=5.0">
+  <link rel="stylesheet" href="chooser.css?v=6.0">
 
   <!-- Structured Data (JSON-LD) -->
   <script type="application/ld+json">
@@ -135,17 +135,17 @@
 
   <!-- ── Split Hero ── -->
   <div class="split-container">
-    <a href="design/" id="panel-design" class="split-panel design-panel" onmouseenter="changeCursor('design')" onmouseleave="resetCursor()">
+    <div id="panel-design" class="split-panel design-panel" onclick="window.location.href='design/'" onmouseenter="changeCursor('design')" onmouseleave="resetCursor()">
       <div class="panel-content">
         <h2>Web Developer</h2>
         <p>Brand identities, editorial layouts, and visual storytelling.</p>
-        <a href="https://kumarsonu.com.np/graphics/" onclick="event.stopPropagation();" class="enter-btn" style="text-decoration:none;">Explore Now</a>
+        <a href="https://kumarsonu.com.np/graphics/" onclick="event.stopPropagation();" class="enter-btn">Explore Now</a>
       </div>
       <!-- ── Tagline box (Design) ── -->
       <div class="tagline-box design-tagline">
         Design that communicates.
       </div>
-    </a>
+    </div>
 
     <a href="security/" id="panel-security" class="split-panel security-panel" onmouseenter="changeCursor('security')" onmouseleave="resetCursor()">
       <div class="panel-content">
