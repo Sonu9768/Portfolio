@@ -56,53 +56,40 @@ body {
 }
 
 /* ═══════════════════════════════════════════════
-   SPLIT HERO — Guaranteed 50/50 layout
+   SPLIT HERO — CSS GRID (bulletproof for <a> tags)
    ═══════════════════════════════════════════════ */
 .split-container {
   position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   width: 100vw;
   height: 100vh;
-  display: flex;
-  flex-direction: row;
   overflow: hidden;
 }
 
 /* Both panels share these rules */
 .split-panel,
 a.split-panel {
-  /* Override <a> inline default */
   display: flex !important;
-  flex: 1 1 50%;
-  min-width: 0;
-  height: 100vh;
-  position: relative;
   align-items: center;
   justify-content: center;
+  position: relative;
   overflow: hidden;
   text-decoration: none;
-  transition: flex 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  min-height: 100vh;
   z-index: 2;
   cursor: none;
+  transition: none;
 }
-
-.split-panel:hover,
-a.split-panel:hover { flex: 1.5 1 50%; }
 
 /* ── Panel Content ───────────────────────────── */
 .panel-content {
   position: relative;
   z-index: 5;
   text-align: center;
-  opacity: 0.85;
-  transition: opacity 0.4s ease, transform 0.4s ease;
   padding: 0 40px;
   max-width: 480px;
   width: 100%;
-}
-.split-panel:hover .panel-content,
-a.split-panel:hover .panel-content {
-  opacity: 1;
-  transform: scale(1.03);
 }
 
 /* ── Design Panel (Left — cream) ─────────────── */
@@ -245,9 +232,9 @@ a.split-panel:hover .panel-content {
 
 /* ── Responsive ──────────────────────────────── */
 @media (max-width: 800px) {
-  .split-container   { flex-direction: column; }
+  .split-container   { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; height: auto; }
   .split-panel,
-  a.split-panel      { flex: 1 1 50%; height: 50vh; min-height: 50vh; }
+  a.split-panel      { min-height: 50vh; }
   .security-panel    { border-left: none; border-top: 2px solid #111; }
   .design-panel h2,
   .security-panel h2 { font-size: 2.4rem; }
