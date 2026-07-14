@@ -56,30 +56,50 @@ body {
 }
 
 /* ═══════════════════════════════════════════════
-   SPLIT HERO — CSS GRID (bulletproof for <a> tags)
+   SPLIT HERO — Absolute positioning (most reliable)
    ═══════════════════════════════════════════════ */
 .split-container {
   position: relative;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
 }
 
-/* Both panels share these rules */
-.split-panel,
-a.split-panel {
+/* Design panel — always LEFT 50% */
+.design-panel {
+  position: absolute !important;
+  top: 0; left: 0;
+  width: 50vw !important;
+  height: 100vh !important;
+  background-color: #fff8f0 !important;
+  color: var(--orange);
   display: flex !important;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  position: relative;
-  overflow: hidden;
   text-decoration: none;
-  min-height: 100vh;
+  overflow: hidden;
   z-index: 2;
   cursor: none;
-  transition: none;
+}
+
+/* Security panel — always RIGHT 50% */
+.security-panel {
+  position: absolute !important;
+  top: 0; right: 0;
+  width: 50vw !important;
+  height: 100vh !important;
+  background-color: #050505 !important;
+  color: var(--green);
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  overflow: hidden;
+  border-left: 2px solid #111;
+  z-index: 2;
+  cursor: none;
 }
 
 /* ── Panel Content ───────────────────────────── */
@@ -88,15 +108,12 @@ a.split-panel {
   z-index: 5;
   text-align: center;
   padding: 0 40px;
-  max-width: 480px;
+  max-width: 420px;
   width: 100%;
 }
 
-/* ── Design Panel (Left — cream) ─────────────── */
-.design-panel {
-  background-color: #fff8f0;
-  color: var(--orange);
-}
+
+/* ── Design Panel Typography ─────────────────── */
 .design-panel h2 {
   font-family: 'Playfair Display', serif;
   font-size: 3.5rem;
@@ -130,12 +147,7 @@ a.split-panel {
   color: #fff8f0;
 }
 
-/* ── Security Panel (Right — dark) ───────────── */
-.security-panel {
-  background-color: #050505;
-  color: var(--green);
-  border-left: 2px solid #111;
-}
+/* ── Security Panel Typography ───────────────── */
 .security-panel h2 {
   font-family: 'JetBrains Mono', monospace;
   font-size: 3rem;
@@ -439,11 +451,31 @@ a.split-panel {
   .about-section, .contact-section { grid-template-columns: 1fr; gap: 40px; }
 }
 @media (max-width: 800px) {
+  /* Stack panels vertically on mobile */
+  .split-container     { height: 100svh; }
+  .design-panel  {
+    width: 100vw !important;
+    height: 50vh !important;
+    bottom: auto; left: 0;
+  }
+  .security-panel {
+    width: 100vw !important;
+    height: 50vh !important;
+    top: 50vh !important; right: auto; left: 0;
+    border-left: none;
+    border-top: 2px solid #111;
+  }
+  .design-panel h2,
+  .security-panel h2   { font-size: 2.2rem; }
+  .tagline-box         { display: none; }
   .about-section, .contact-section { padding: 70px 5vw; }
 }
 @media (max-width: 480px) {
-  .about-text h2    { font-size: 2rem; }
-  .contact-info h2  { font-size: 1.8rem; }
-  .about-ctas       { flex-direction: column; }
-  .cta-btn          { text-align: center; }
+  .design-panel h2,
+  .security-panel h2   { font-size: 1.9rem; }
+  .panel-content       { padding: 0 24px; }
+  .about-text h2       { font-size: 2rem; }
+  .contact-info h2     { font-size: 1.8rem; }
+  .about-ctas          { flex-direction: column; }
+  .cta-btn             { text-align: center; }
 }
